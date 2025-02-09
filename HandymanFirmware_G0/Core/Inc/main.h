@@ -57,9 +57,23 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define TUNER_MODE_IN_Pin GPIO_PIN_1
+#define TUNER_MODE_IN_GPIO_Port GPIOA
+#define OPEN_IN_Pin GPIO_PIN_2
+#define OPEN_IN_GPIO_Port GPIOA
+#define OPEN_IN_EXTI_IRQn EXTI2_3_IRQn
+#define TUNE_IN_Pin GPIO_PIN_3
+#define TUNE_IN_GPIO_Port GPIOA
+#define TUNE_IN_EXTI_IRQn EXTI2_3_IRQn
+#define CLOSED_OUT_Pin GPIO_PIN_4
+#define CLOSED_OUT_GPIO_Port GPIOA
+#define GATE_LED_OUT_Pin GPIO_PIN_6
+#define GATE_LED_OUT_GPIO_Port GPIOA
+#define GATE_BYP_IN_Pin GPIO_PIN_7
+#define GATE_BYP_IN_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
-
+extern uint32_t* TICK_COUNT;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
