@@ -2953,7 +2953,7 @@
 			)
 		)
 	)
-	(global_label "OPEN_OUT"
+	(global_label "CLOSED_OUT"
 		(shape output)
 		(at 179.07 67.31 0)
 		(fields_autoplaced yes)
