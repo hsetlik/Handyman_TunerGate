@@ -43,6 +43,44 @@
 			)
 		)
 	)
+	(sheet
+		(at 70.104 20.574)
+		(size 46.228 30.734)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "887caaef-7a77-44c5-aff2-1e54e61c47e4")
+		(property "Sheetname" "Digital"
+			(at 70.104 19.8624 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Digital.kicad_sch"
+			(at 70.104 51.8926 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "HandymanSchematic_G0"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff"
+					(page "3")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

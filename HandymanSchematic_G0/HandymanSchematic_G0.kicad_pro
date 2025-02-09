@@ -390,6 +390,10 @@
     [
       "3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d",
       "Analog"
+    ],
+    [
+      "887caaef-7a77-44c5-aff2-1e54e61c47e4",
+      "Digital"
     ]
   ],
   "text_variables": {}
