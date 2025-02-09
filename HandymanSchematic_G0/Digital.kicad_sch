@@ -5403,6 +5403,7 @@
 	)
 	(label "SCL"
 		(at 265.43 55.88 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5413,6 +5414,7 @@
 	)
 	(label "SCL"
 		(at 59.69 73.66 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5423,6 +5425,7 @@
 	)
 	(label "TunerModeIn"
 		(at 106.68 60.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5433,6 +5436,7 @@
 	)
 	(label "GateByp"
 		(at 125.73 76.2 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5443,6 +5447,7 @@
 	)
 	(label "SDA"
 		(at 59.69 76.2 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5453,6 +5458,7 @@
 	)
 	(label "SDA"
 		(at 255.27 52.07 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5463,6 +5469,7 @@
 	)
 	(label "GateLED"
 		(at 101.6 73.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5473,6 +5480,7 @@
 	)
 	(label "TunerModeIn"
 		(at 200.66 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5483,6 +5491,7 @@
 	)
 	(label "GateLED"
 		(at 195.58 60.96 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6679,7 +6688,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 28.448 160.02 90)
 			(effects
 				(font
@@ -7221,7 +7230,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 166.624 67.056 90)
 			(effects
 				(font
@@ -7710,7 +7719,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 178.816 40.894 90)
 			(effects
 				(font
@@ -7985,7 +7994,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 121.92 82.55 0)
 			(effects
 				(font
@@ -8659,7 +8668,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 209.296 40.894 90)
 			(effects
 				(font
@@ -8863,7 +8872,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 122.936 68.834 90)
 			(effects
 				(font
@@ -8933,7 +8942,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 256.286 43.434 90)
 			(effects
 				(font
@@ -9209,7 +9218,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 103.886 53.594 90)
 			(effects
 				(font
@@ -10031,7 +10040,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 266.446 43.434 90)
 			(effects
 				(font
@@ -10520,7 +10529,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 197.104 67.056 90)
 			(effects
 				(font

@@ -647,6 +647,108 @@
 				)
 			)
 		)
+		(symbol "Connector:TestPoint"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.762) hide)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:C"
 			(pin_numbers hide)
 			(pin_names
@@ -2223,6 +2325,16 @@
 	)
 	(wire
 		(pts
+			(xy 241.3 148.082) (xy 246.126 148.082)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28e38935-cd05-4499-9a98-09bdac01d561")
+	)
+	(wire
+		(pts
 			(xy 149.86 53.34) (xy 149.86 54.61)
 		)
 		(stroke
@@ -2240,6 +2352,16 @@
 			(type default)
 		)
 		(uuid "2e22a4f0-5e2d-48e1-bec9-0a2ec998648a")
+	)
+	(wire
+		(pts
+			(xy 241.3 133.604) (xy 246.126 133.604)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30fea118-ef27-4336-92ab-a27a998b0da0")
 	)
 	(wire
 		(pts
@@ -3213,6 +3335,16 @@
 	)
 	(wire
 		(pts
+			(xy 241.3 126.746) (xy 246.126 126.746)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9b7e908-c729-4137-a789-3659e86a1779")
+	)
+	(wire
+		(pts
 			(xy 127 187.96) (xy 130.81 187.96)
 		)
 		(stroke
@@ -3513,6 +3645,16 @@
 	)
 	(wire
 		(pts
+			(xy 241.3 154.686) (xy 246.126 154.686)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6473a46-78f2-42dc-935a-0fb15e9f52a3")
+	)
+	(wire
+		(pts
 			(xy 95.25 163.83) (xy 107.95 163.83)
 		)
 		(stroke
@@ -3543,6 +3685,16 @@
 	)
 	(wire
 		(pts
+			(xy 241.3 141.224) (xy 246.126 141.224)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc5e5ec2-2d52-437c-b3a3-40ae6d1bbac2")
+	)
+	(wire
+		(pts
 			(xy 107.95 163.83) (xy 111.76 163.83)
 		)
 		(stroke
@@ -3562,6 +3714,18 @@
 			(type none)
 		)
 		(uuid 394430de-aac9-4a0d-be28-b6ab340da71e)
+	)
+	(rectangle
+		(start 236.474 119.126)
+		(end 265.938 158.75)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 5feb7541-532a-4c39-8b00-97989b514dea)
 	)
 	(rectangle
 		(start 19.812 20.828)
@@ -3636,8 +3800,22 @@
 		)
 		(uuid "bf361ea8-1305-426d-90ab-c9aaea9b29ae")
 	)
+	(text "Test Points"
+		(exclude_from_sim no)
+		(at 236.474 116.332 0)
+		(effects
+			(font
+				(size 3.81 3.81)
+				(thickness 0.762)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "bf53395b-5ad5-44a5-92f1-792a1590b1f2")
+	)
 	(label "VG"
 		(at 123.19 168.91 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3649,6 +3827,7 @@
 	)
 	(label "VG"
 		(at 135.89 81.28 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3657,8 +3836,20 @@
 		)
 		(uuid "08393338-a25b-4d15-b678-2bb00cb53a0a")
 	)
+	(label "AmpAnode"
+		(at 246.126 133.604 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ba76c92-abc1-46bb-8f46-45a3c2e2ac3c")
+	)
 	(label "VG"
 		(at 95.25 177.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3669,6 +3860,7 @@
 	)
 	(label "VG"
 		(at 50.8 72.39 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3679,6 +3871,7 @@
 	)
 	(label "Env"
 		(at 142.24 67.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3689,6 +3882,7 @@
 	)
 	(label "HalfRect"
 		(at 80.01 60.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3699,6 +3893,7 @@
 	)
 	(label "VG"
 		(at 142.24 90.17 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3709,6 +3904,7 @@
 	)
 	(label "VG"
 		(at 95.25 82.55 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3719,6 +3915,7 @@
 	)
 	(label "Thresh"
 		(at 154.94 45.72 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3729,6 +3926,7 @@
 	)
 	(label "AmpAnode"
 		(at 153.67 217.17 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3740,6 +3938,7 @@
 	)
 	(label "AmpCathode"
 		(at 142.24 166.37 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3750,6 +3949,7 @@
 	)
 	(label "VG"
 		(at 276.352 64.77 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3759,8 +3959,20 @@
 		)
 		(uuid "a83ef112-4730-416f-b78a-d426dc60278c")
 	)
+	(label "SumPt"
+		(at 140.97 198.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b013d761-f537-402e-9c85-1865e0d89c16")
+	)
 	(label "VG"
 		(at 166.37 203.2 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3771,6 +3983,7 @@
 	)
 	(label "VG"
 		(at 166.37 171.45 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3780,7 +3993,19 @@
 		(uuid "bb03daaa-622d-49a6-9c55-a462d23c78d4")
 	)
 	(label "VG"
+		(at 246.126 148.082 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bee1a0b1-25d1-4c59-8baa-d57d75fbbcfa")
+	)
+	(label "VG"
 		(at 317.246 67.31 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3789,8 +4014,20 @@
 		)
 		(uuid "c49f711c-1d4a-41a5-ba18-58fa45dbb0f9")
 	)
+	(label "Env"
+		(at 246.126 154.686 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d0ee7666-beb1-4352-b004-ac9c75de2f99")
+	)
 	(label "VG"
 		(at 125.73 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3801,6 +4038,7 @@
 	)
 	(label "VG"
 		(at 115.57 200.66 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3809,8 +4047,20 @@
 		)
 		(uuid "dc99d107-e167-4ab3-84a2-59001866a108")
 	)
+	(label "Thresh"
+		(at 246.126 141.224 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e06f466c-0e2f-40d2-b0f0-6174d5279ce4")
+	)
 	(label "VG"
 		(at 304.546 72.644 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3818,6 +4068,17 @@
 			(justify right bottom)
 		)
 		(uuid "e0ab82c1-b6fd-4d15-8be4-7f0ad8fe448b")
+	)
+	(label "AmpCathode"
+		(at 246.126 126.746 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f0c70632-f396-4cc7-933a-a65db0045c61")
 	)
 	(global_label "OPEN_IN"
 		(shape output)
@@ -4060,6 +4321,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 241.3 133.604 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0176195e-3ff8-4090-8a53-b17acc6a06fb")
+		(property "Reference" "TP202"
+			(at 242.824 129.0319 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "AA"
+			(at 242.824 131.5719 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
+			(at 246.38 133.604 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 246.38 133.604 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 241.3 133.604 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fa617a2f-dbec-48bd-887f-c9efc664b1e2")
+		)
+		(instances
+			(project "HandymanSchematic_G0"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
+					(reference "TP202")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4148W")
 		(at 58.42 59.69 0)
 		(mirror y)
@@ -4171,7 +4499,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 156.464 197.104 90)
 			(effects
 				(font
@@ -4412,7 +4740,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 97.536 98.044 90)
 			(effects
 				(font
@@ -4480,7 +4808,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 337.566 63.754 90)
 			(effects
 				(font
@@ -4523,6 +4851,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 241.3 126.746 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "11e1b4fc-eac4-4cd0-a67f-919b98546f12")
+		(property "Reference" "TP201"
+			(at 242.824 122.1739 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "AC"
+			(at 242.824 124.7139 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
+			(at 246.38 126.746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 246.38 126.746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 241.3 126.746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f6d9bca3-dc73-41b2-a93a-26c511d246af")
+		)
+		(instances
+			(project "HandymanSchematic_G0"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
+					(reference "TP201")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 76.2 160.02 0)
 		(unit 1)
@@ -4550,7 +4945,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 77.216 160.274 90)
 			(effects
 				(font
@@ -4618,7 +5013,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 156.464 165.354 90)
 			(effects
 				(font
@@ -4688,7 +5083,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 64.4652 179.07 0)
 			(effects
 				(font
@@ -4823,7 +5218,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 129.54 168.91 0)
 			(effects
 				(font
@@ -4929,7 +5324,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 261.5692 89.408 0)
 			(effects
 				(font
@@ -4999,7 +5394,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 65.7352 214.63 0)
 			(effects
 				(font
@@ -5069,7 +5464,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 96.2152 81.28 0)
 			(effects
 				(font
@@ -5139,7 +5534,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 92.4052 114.3 0)
 			(effects
 				(font
@@ -5341,7 +5736,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 282.956 51.054 90)
 			(effects
 				(font
@@ -5409,7 +5804,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 105.664 194.564 90)
 			(effects
 				(font
@@ -5477,7 +5872,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 54.864 169.164 90)
 			(effects
 				(font
@@ -5547,7 +5942,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Potentiometer_THT:Potentiometer_Alpha_RV16AF_42_Single_Long"
 			(at 149.86 40.64 0)
 			(effects
 				(font
@@ -5685,7 +6080,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 299.974 61.214 90)
 			(effects
 				(font
@@ -5887,7 +6282,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 123.444 186.944 90)
 			(effects
 				(font
@@ -6024,7 +6419,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 150.876 49.784 90)
 			(effects
 				(font
@@ -6161,7 +6556,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 268.224 85.598 0)
 			(effects
 				(font
@@ -6249,7 +6644,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 144.4752 53.34 0)
 			(effects
 				(font
@@ -6319,7 +6714,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 97.536 109.474 90)
 			(effects
 				(font
@@ -6457,7 +6852,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Potentiometer_THT:Potentiometer_Alpha_RV16AF_42_Single_Long"
 			(at 142.24 83.82 0)
 			(effects
 				(font
@@ -6861,7 +7256,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 172.72 171.45 0)
 			(effects
 				(font
@@ -6965,7 +7360,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 191.77 199.6948 0)
 			(effects
 				(font
@@ -7035,7 +7430,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 150.876 32.004 90)
 			(effects
 				(font
@@ -7171,7 +7566,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 71.12 208.28 0)
 			(effects
 				(font
@@ -7592,7 +7987,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 283.972 62.23 0)
 			(effects
 				(font
@@ -7889,7 +8284,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 143.256 75.184 90)
 			(effects
 				(font
@@ -7957,7 +8352,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 136.144 197.104 90)
 			(effects
 				(font
@@ -8025,7 +8420,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 174.244 189.484 90)
 			(effects
 				(font
@@ -8068,6 +8463,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 241.3 154.686 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7d1a6a39-8371-4649-aae5-2cf7e59dec09")
+		(property "Reference" "TP205"
+			(at 242.824 150.1139 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Env"
+			(at 242.824 152.6539 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
+			(at 246.38 154.686 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 246.38 154.686 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 241.3 154.686 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "39d696f1-c2ef-48e3-9cd0-b3bb68d61df5")
+		)
+		(instances
+			(project "HandymanSchematic_G0"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
+					(reference "TP205")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 342.646 70.866 180)
 		(unit 1)
@@ -8095,7 +8557,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 341.63 70.612 90)
 			(effects
 				(font
@@ -8163,7 +8625,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 324.866 64.77 0)
 			(effects
 				(font
@@ -8404,7 +8866,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 174.244 157.734 90)
 			(effects
 				(font
@@ -8542,7 +9004,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 197.8152 73.66 0)
 			(effects
 				(font
@@ -8786,7 +9248,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 96.266 160.274 90)
 			(effects
 				(font
@@ -8940,7 +9402,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 115.824 162.814 90)
 			(effects
 				(font
@@ -9008,7 +9470,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 172.72 203.2 0)
 			(effects
 				(font
@@ -9377,7 +9839,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 183.134 63.754 90)
 			(effects
 				(font
@@ -9447,7 +9909,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 136.8552 77.47 0)
 			(effects
 				(font
@@ -9515,7 +9977,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 263.652 58.7248 0)
 			(effects
 				(font
@@ -9583,7 +10045,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 268.986 58.674 90)
 			(effects
 				(font
@@ -9693,6 +10155,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 241.3 148.082 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ceba5daf-3303-4f5d-9e54-1b874777acf0")
+		(property "Reference" "TP204"
+			(at 242.824 143.5099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "VG"
+			(at 242.824 146.0499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
+			(at 246.38 148.082 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 246.38 148.082 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 241.3 148.082 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5983479a-9e78-4ac6-a0d4-6f541897de6b")
+		)
+		(instances
+			(project "HandymanSchematic_G0"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
+					(reference "TP204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 88.9 69.85 90)
 		(unit 1)
@@ -9718,7 +10247,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 89.154 68.834 90)
 			(effects
 				(font
@@ -9786,7 +10315,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 121.92 200.66 0)
 			(effects
 				(font
@@ -9865,6 +10394,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 241.3 141.224 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dc2460e8-9645-4e5d-81d7-fbffe74a341e")
+		(property "Reference" "TP203"
+			(at 242.824 136.6519 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Thr"
+			(at 242.824 139.1919 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
+			(at 246.38 141.224 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 246.38 141.224 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 241.3 141.224 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b9e58fe1-9654-461a-a20c-4c5780e92a19")
+		)
+		(instances
+			(project "HandymanSchematic_G0"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
+					(reference "TP203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 68.58 110.49 0)
 		(unit 1)
@@ -9892,7 +10488,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 69.5452 114.3 0)
 			(effects
 				(font
@@ -9962,7 +10558,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 303.5808 64.77 0)
 			(effects
 				(font
@@ -10201,7 +10797,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 99.06 194.6148 0)
 			(effects
 				(font
@@ -10347,7 +10943,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 108.9152 173.99 0)
 			(effects
 				(font
@@ -10415,7 +11011,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 129.794 155.194 90)
 			(effects
 				(font
@@ -10640,7 +11236,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 187.706 70.104 90)
 			(effects
 				(font
