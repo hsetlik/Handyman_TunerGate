@@ -5,6 +5,7 @@
  *      Author: hayden
  */
 #include "tuning.h"
+#include <math.h>
 
 // shared vars
 static uint32_t tuningBuf[TUNING_BUF_SIZE];

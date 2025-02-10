@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "tuning.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +47,15 @@ TIM_HandleTypeDef htim14;
 /* USER CODE BEGIN PV */
 uint32_t timerTick = 0;
 uint32_t* TICK_COUNT = &timerTick;
+
+// device state stuff
+uint8_t gateIsOpen = 0;
+uint8_t tunerMode = 0;
+uint8_t bypassGate = 0;
+
+tuning_error_t tuning;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,24 +64,57 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM14_Init(void);
 /* USER CODE BEGIN PFP */
+// call this to check the footswitch and bypass switch
+void checkSwitches();
+// helper to open/close the noise gate GPIO
+void setGate(uint8_t isOpen);
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void checkSwitches(){
+	//footswitch
+	uint8_t footswitch = (uint8_t)HAL_GPIO_ReadPin(GPIOA, TUNER_MODE_IN_Pin);
+	if(footswitch != tunerMode){
+		tunerMode = footswitch;
+		//TODO:handle switching the display on/off here
+	}
+	// gate bypass switch
+	uint8_t bp = (uint8_t)HAL_GPIO_ReadPin(GPIOA, GATE_BYP_IN_Pin);
+	if(bp != bypassGate){
+		bypassGate = bp;
+		uint8_t led = (bypassGate) ? 0 : 1;
+		HAL_GPIO_WritePin(GPIOA, GATE_LED_OUT_Pin, led);
+	}
+
+}
+
+void setGate(uint8_t value){
+	gateIsOpen = value;
+	GPIO_PinState state = gateIsOpen ? GPIO_PIN_RESET : GPIO_PIN_SET;
+	HAL_GPIO_WritePin(GPIOA, CLOSED_OUT_Pin, state);
+}
 
 // TIM14 callback for the timer
 	void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*){
 		++timerTick;
 	}
-// ISR for the
+// ISR for the tuning/threshold interrupts
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t pin){
+	if(pin == TUNE_IN_Pin && tunerMode){
+		tuning_rising_edge();
+	} else if (!bypassGate) {
+		setGate(1);
+	}
 
 }
 
-void HAL_GPIO_EXTI_Falling_Callback(uint16_t pin){
-
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t){
+	if(!bypassGate){
+		setGate(0);
+	}
 }
 /* USER CODE END 0 */
 
@@ -116,6 +158,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if(tunerMode){
+		  tuning_update_error(&tuning);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

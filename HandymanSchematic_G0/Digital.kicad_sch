@@ -5364,7 +5364,7 @@
 		)
 		(uuid "a747d214-4135-4bfd-a2b2-bcfc2cc710ae")
 	)
-	(text "High = Tuner on"
+	(text "Low = Tuner off"
 		(exclude_from_sim no)
 		(at 108.712 56.388 0)
 		(effects
