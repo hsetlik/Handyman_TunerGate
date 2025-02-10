@@ -5,7 +5,7 @@
  *      Author: hayden
  */
 #include "tuning.h"
-#include <math.h>
+
 
 // shared vars
 static uint32_t tuningBuf[TUNING_BUF_SIZE];
@@ -103,4 +103,51 @@ void tuning_update_error(tuning_error_t* err){
 	err->note = closestNote(pitch);
 	err->cents = getErrorHz(err->note, pitch);
 
+}
+
+
+void tuning_update_display(tuning_error_t* err){
+	static char* noteNames[] = {
+			"A",
+			"Bb",
+			"B",
+			"C",
+			"Db",
+			"D",
+			"Eb",
+			"E",
+			"F",
+			"Gb",
+			"G"
+	};
+
+	const uint8_t x = (128 - 16) / 2;
+	const uint8_t y = (64 - 26) / 2;
+
+	// draw the note name
+	ssd1306_SetCursor(x, y);
+	ssd1306_WriteString(noteNames[err->note % 12], Font_16x24, White);
+
+	//display the error
+	uint8_t x1, y1, x2, y2;
+	if(err->cents < (0 - IN_TUNE_THRESHOLD)) { // flat
+		x2 = SSD1306_WIDTH / 2;
+		float fDist = (float)(err->cents * -1) / 100.0f;
+		x1 = x2 - (uint8_t)(fDist * (float)x2);
+		y1 = 0;
+		y2 = SSD1306_HEIGHT;
+
+		ssd1306_InvertRectangle(x1, y1, x2, y2);
+	}
+	else if (err->cents > IN_TUNE_THRESHOLD){ // sharp
+		x1 = SSD1306_WIDTH / 2;
+		float fDist = (float)(err->cents) / 100.0f;
+		x2 = x1 + (uint8_t)(fDist * (float)x1);
+		y1 = 0;
+		y2 = SSD1306_HEIGHT;
+
+		ssd1306_InvertRectangle(x1, y1, x2, y2);
+
+	}
+	ssd1306_UpdateScreen();
 }

@@ -8,6 +8,9 @@
 #ifndef INC_TUNING_H_
 #define INC_TUNING_H_
 #include "main.h"
+#include <ssd1306_fonts.h>
+#include <math.h>
+#include <ssd1306.h>
 
 
 #ifdef __cplusplus
@@ -35,6 +38,7 @@ void tuning_rising_edge();
 
 void tuning_update_error(tuning_error_t* err);
 
+void tuning_update_display(tuning_error_t* err);
 
 
 
