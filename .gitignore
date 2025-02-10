@@ -3,6 +3,7 @@ bom
 Enclosure/*.ai
 Datasheets
 */Debug
+*/.DS_STORE
 HandymanSchematic_G0/*backups
 HandymanSchematic_G0/gerber
 HandymanSchematic_G0/*cache
