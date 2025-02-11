@@ -2033,6 +2033,10 @@
 		(color 0 0 0 0)
 		(uuid "fe8e9e7a-e918-43cd-b949-d84b3c679e23")
 	)
+	(no_connect
+		(at 124.46 107.95)
+		(uuid "0049044c-8f2a-43fe-9073-6742de59c054")
+	)
 	(wire
 		(pts
 			(xy 153.67 45.72) (xy 149.86 45.72)
@@ -4586,7 +4590,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:TL074")
-		(at 116.84 101.6 0)
+		(at 168.91 64.77 0)
 		(mirror x)
 		(unit 3)
 		(exclude_from_sim no)
@@ -4595,7 +4599,7 @@
 		(dnp no)
 		(uuid "0dd886fc-1bb8-4bcb-af02-7e1a2f68ff79")
 		(property "Reference" "U1"
-			(at 116.84 111.125 0)
+			(at 168.91 74.295 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4603,7 +4607,7 @@
 			)
 		)
 		(property "Value" "TL074"
-			(at 116.84 108.585 0)
+			(at 168.91 71.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4611,7 +4615,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
-			(at 115.57 104.14 0)
+			(at 167.64 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4620,7 +4624,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tl071.pdf"
-			(at 118.11 106.68 0)
+			(at 170.18 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4629,7 +4633,7 @@
 			)
 		)
 		(property "Description" "Quad Low-Noise JFET-Input Operational Amplifiers, DIP-14/SOIC-14"
-			(at 116.84 101.6 0)
+			(at 168.91 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8025,7 +8029,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:TL074")
-		(at 168.91 64.77 0)
+		(at 116.84 101.6 0)
 		(mirror x)
 		(unit 2)
 		(exclude_from_sim no)
@@ -8034,7 +8038,7 @@
 		(dnp no)
 		(uuid "75c44c75-4a2f-4e1d-b640-4bb2e2d134d6")
 		(property "Reference" "U1"
-			(at 168.91 74.93 0)
+			(at 116.84 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8042,7 +8046,7 @@
 			)
 		)
 		(property "Value" "TL074"
-			(at 168.91 72.39 0)
+			(at 116.84 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8050,7 +8054,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
-			(at 167.64 67.31 0)
+			(at 115.57 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8059,7 +8063,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tl071.pdf"
-			(at 170.18 69.85 0)
+			(at 118.11 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8068,7 +8072,7 @@
 			)
 		)
 		(property "Description" "Quad Low-Noise JFET-Input Operational Amplifiers, DIP-14/SOIC-14"
-			(at 168.91 64.77 0)
+			(at 116.84 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
