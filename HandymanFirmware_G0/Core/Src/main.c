@@ -102,9 +102,11 @@ void checkSwitches() {
 }
 
 void setGate(uint8_t value) {
+if(value != gateIsOpen){
 	gateIsOpen = value;
-	GPIO_PinState state = gateIsOpen ? GPIO_PIN_RESET : GPIO_PIN_SET;
+	GPIO_PinState state = gateIsOpen > 0 ? GPIO_PIN_RESET : GPIO_PIN_SET;
 	HAL_GPIO_WritePin(GPIOA, CLOSED_OUT_Pin, state);
+}
 }
 
 void updateTuningDisplay() {
@@ -129,14 +131,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*) {
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t pin) {
 	if (pin == TUNE_IN_Pin && tunerMode) {
 		tuning_rising_edge();
-	} else if (!bypassGate) {
+	} else if (!bypassGate && pin == OPEN_IN_Pin) {
 		setGate(1);
 	}
 
 }
 
-void HAL_GPIO_EXTI_Falling_Callback(uint16_t) {
-	if (!bypassGate) {
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t pin) {
+	if (!bypassGate && pin == OPEN_IN_Pin) {
 		setGate(0);
 	}
 }
