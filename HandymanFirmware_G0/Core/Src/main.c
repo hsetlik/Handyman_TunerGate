@@ -115,6 +115,7 @@ void updateTuningDisplay() {
 	uint32_t now = SysTick->VAL;
 	if ((now - lastUpdate) > minRefreshMs) {
 		lastUpdate = now;
+		tuning_update_error(&tuning);
 		tuning_update_display(&tuning);
 	}
 
@@ -175,7 +176,7 @@ int main(void) {
 	MX_I2C1_Init();
 	MX_TIM14_Init();
 	/* USER CODE BEGIN 2 */
-	//TODO: start the timer here
+	HAL_TIM_Base_Start_IT(&htim14);
 	// initialize the display
 	ssd1306_Init();
 	/* USER CODE END 2 */
@@ -187,6 +188,7 @@ int main(void) {
 			tuning_update_error(&tuning);
 			updateTuningDisplay();
 		}
+		checkSwitches();
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */

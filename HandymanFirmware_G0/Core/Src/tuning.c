@@ -39,7 +39,7 @@ float tuning_get_current_hz(){
 		current = tuningBuf[(head + i) % TUNING_BUF_SIZE];
 		totalMs += tick_distance_ms(prev, current);
 	}
-	return (totalMs / (float)(TUNING_BUF_SIZE - 1)) / 1000.0f;
+	return 1000.0f / (totalMs / (float)(TUNING_BUF_SIZE - 1));
 }
 
 // note/error stuff-------------------
