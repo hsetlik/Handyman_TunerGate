@@ -45,8 +45,8 @@ I2C_HandleTypeDef hi2c1;
 TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN PV */
-volatile uint32_t timerTick = 0;
-volatile uint32_t *TICK_COUNT = &timerTick;
+//volatile uint32_t timerTick = 0;
+//volatile uint32_t *TICK_COUNT = &timerTick;
 
 // device state stuff
 uint8_t gateIsOpen = 0;
@@ -122,9 +122,9 @@ void updateTuningDisplay() {
 //===============================================================
 
 // TIM14 callback for the timer
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*) {
-	++timerTick;
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*) {
+//	++timerTick;
+//}
 // ISR for the tuning/threshold interrupts
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t pin) {
@@ -175,7 +175,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
-	HAL_TIM_Base_Start_IT(&htim14);
+	//HAL_TIM_Base_Start_IT(&htim14);
 	// initialize the display
 	ssd1306_Init();
   /* USER CODE END 2 */

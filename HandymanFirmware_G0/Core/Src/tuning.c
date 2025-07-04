@@ -14,7 +14,7 @@ static uint8_t pitchesInitialized = 0;
 static float midiNotePitches[NUM_MIDI_NOTES];
 
 void tuning_rising_edge(){
-	tuningBuf[head] = *TICK_COUNT;
+	tuningBuf[head] = SysTick->VAL;
 	head = (head + 1) % TUNING_BUF_SIZE;
 }
 
