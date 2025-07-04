@@ -31,16 +31,26 @@ static float tick_distance_ms(uint32_t first, uint32_t second){
 #endif
 }
 
-float tuning_get_current_hz(){
+static float mean_distance_ms(){
 	float totalMs = 0.0f;
-	uint32_t current, prev;
-	for(uint16_t i = 1; i < TUNING_BUF_SIZE; i++){
-		prev = tuningBuf[(head + i - 1) % TUNING_BUF_SIZE];
-		current = tuningBuf[(head + i) % TUNING_BUF_SIZE];
-		totalMs += tick_distance_ms(prev, current);
+	float denom = 0.0f;
+	uint32_t prev;
+	uint32_t current;
+	for(uint16_t i = 1; i < TUNING_BUF_SIZE; ++i){
+		prev = tuningBuf[(head + i - 1)% TUNING_BUF_SIZE];
+		current = tuningBuf[(i + head) % TUNING_BUF_SIZE];
+		if(prev < current){
+			totalMs += tick_distance_ms(prev, current);
+			denom += 1.0f;
+		}
 	}
-	return 1000.0f / (totalMs / (float)(TUNING_BUF_SIZE - 1));
+	return totalMs / denom;
 }
+
+float tuning_get_current_hz(){
+	return 1000.0f / mean_distance_ms();
+}
+
 
 // note/error stuff-------------------
 void initMidiPitches(){
@@ -123,10 +133,11 @@ void tuning_update_display(tuning_error_t* err){
 
 	const uint8_t x = (128 - 16) / 2;
 	const uint8_t y = (64 - 26) / 2;
-
+	ssd1306_Fill(Black);
 	// draw the note name
 	ssd1306_SetCursor(x, y);
-	ssd1306_WriteString(noteNames[err->note % 12], Font_16x24, White);
+	char* name = noteNames[err->note % 12];
+	ssd1306_WriteString(name, Font_16x24, White);
 
 	//display the error
 	uint8_t x1, y1, x2, y2;
