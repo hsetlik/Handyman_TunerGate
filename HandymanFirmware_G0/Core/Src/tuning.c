@@ -13,8 +13,8 @@ static uint16_t head = 0;
 static uint8_t pitchesInitialized = 0;
 static float midiNotePitches[NUM_MIDI_NOTES];
 
-void tuning_rising_edge(){
-	tuningBuf[head] = SysTick->VAL;
+void tuning_rising_edge(uint32_t tick){
+	tuningBuf[head] = tick;
 	head = (head + 1) % TUNING_BUF_SIZE;
 }
 
@@ -57,7 +57,7 @@ void initMidiPitches(){
 	for(uint8_t note = 0; note < NUM_MIDI_NOTES; ++note){
 		midiNotePitches[note] = 440.0f * powf(SEMITONE_RATIO, (float)note - 69.0f);
 	}
-}
+	}
 
 // get the note nearest to a given pitch in hz
 uint8_t closestNote(float hz){

@@ -45,7 +45,7 @@ I2C_HandleTypeDef hi2c1;
 TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN PV */
-//volatile uint32_t timerTick = 0;
+volatile uint32_t timerTick = 0;
 //volatile uint32_t *TICK_COUNT = &timerTick;
 
 // device state stuff
@@ -122,14 +122,14 @@ void updateTuningDisplay() {
 //===============================================================
 
 // TIM14 callback for the timer
-//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*) {
-//	++timerTick;
-//}
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*) {
+	++timerTick;
+}
 // ISR for the tuning/threshold interrupts
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t pin) {
 	if (pin == TUNE_IN_Pin && tunerMode) {
-		tuning_rising_edge();
+		tuning_rising_edge(timerTick);
 	} else if (!bypassGate && pin == OPEN_IN_Pin) {
 		setGate(1);
 	}
@@ -175,7 +175,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
-	//HAL_TIM_Base_Start_IT(&htim14);
+  HAL_TIM_Base_Start_IT(&htim14);
 	// initialize the display
 	ssd1306_Init();
   /* USER CODE END 2 */
@@ -306,7 +306,7 @@ static void MX_TIM14_Init(void)
   htim14.Instance = TIM14;
   htim14.Init.Prescaler = 0;
   htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim14.Init.Period = 7999;
+  htim14.Init.Period = 15999;
   htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim14) != HAL_OK)

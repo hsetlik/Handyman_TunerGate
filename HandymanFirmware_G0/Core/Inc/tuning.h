@@ -20,7 +20,7 @@ extern "C" {
 #define TUNING_BUF_SIZE 200
 #define SEMITONE_RATIO 1.05946309436f
 #define IN_TUNE_THRESHOLD 4
-#define TICK_RATE 1000
+#define TICK_RATE 4000
 #define NUM_MIDI_NOTES 127
 
 #define TICK_OVERFLOW_SAFE
@@ -34,7 +34,7 @@ typedef struct {
 
 
 // call this on the rising edge interrupt for the TUNE_IN pin
-void tuning_rising_edge();
+void tuning_rising_edge(uint32_t tick);
 
 void tuning_update_error(tuning_error_t* err);
 
