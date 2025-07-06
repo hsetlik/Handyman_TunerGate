@@ -88,11 +88,19 @@ void checkSwitches() {
 			tunerMode = footswitch;
 			//switching the display on/off here
 			ssd1306_SetDisplayOn(tunerMode);
+			if(tunerMode){
+				setGate(0);
+			} else {
+				setGate(1);
+			}
 		}
 		// gate bypass switch
 		uint8_t bp = (uint8_t) HAL_GPIO_ReadPin(GPIOA, GATE_BYP_IN_Pin);
 		bypassGate = bp;
 		uint8_t led = (bypassGate) ? 0 : 1;
+		if(bypassGate){
+			setGate(1);
+		}
 			// turn the LED on/off as apropriate
 		HAL_GPIO_WritePin(GPIOA, GATE_LED_OUT_Pin, led);
 	}
