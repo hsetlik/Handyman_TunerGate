@@ -59,6 +59,9 @@ void initMidiPitches(){
 	}
 	}
 
+static float freq_diff_semitones(float freq1, float freq2){
+	return 12.0f * (logf(freq2 / freq1) / logf(2.0f));
+}
 // get the note nearest to a given pitch in hz
 uint8_t closestNote(float hz){
 	if(hz <= midiNotePitches[0])
@@ -74,14 +77,14 @@ uint8_t closestNote(float hz){
 		// check left half
 		if(hz < midiNotePitches[mid]) {
 			if(mid > 0 && hz >= midiNotePitches[mid - 1]) {
-				if(hz - midiNotePitches[mid - 1] >= midiNotePitches[mid] - hz)
+				if(hz - midiNotePitches[mid - 1] < midiNotePitches[mid] - hz)
 					return mid - 1;
 				return mid;
 			}
 			j = mid;
 		} else { // check right half
 			if(mid < (NUM_MIDI_NOTES - 1) && hz < midiNotePitches[mid + 1]) {
-				if(hz - midiNotePitches[mid] >= midiNotePitches[mid + 1] - hz)
+				if(hz - midiNotePitches[mid] < midiNotePitches[mid + 1] - hz)
 					return mid;
 				return mid + 1;
 			}
@@ -93,15 +96,8 @@ uint8_t closestNote(float hz){
 
 // get the error in cents between the note's pitch and the given frequency
 int16_t getErrorHz(uint8_t midiTarget, float hz){
-	if(hz <= midiNotePitches[midiTarget]){ // we're flat
-		float diff = midiNotePitches[midiTarget] - hz;
-		float halfstep = midiNotePitches[midiTarget] - midiNotePitches[midiTarget - 1];
-		return (int16_t)((diff / halfstep) * -100.0f);
-	} else {
-		float diff = hz - midiNotePitches[midiTarget];
-		float halfstep = midiNotePitches[midiTarget + 1] - midiNotePitches[midiTarget];
-		return (int16_t)((diff / halfstep) * 100.0f);
-	}
+	float targetHz = midiNotePitches[midiTarget];
+	return (int16_t)(freq_diff_semitones(hz, targetHz) * 100.0f);
 }
 
 void tuning_update_error(tuning_error_t* err){
@@ -144,7 +140,7 @@ void tuning_update_display(tuning_error_t* err){
 		ssd1306_SetCursor(x, y);
 		ssd1306_WriteString(name, Font_16x24, White);
 		x2 = SSD1306_WIDTH / 2;
-		float fDist = (float)(err->cents * -1) / 100.0f;
+		float fDist = (float)(err->cents * -1) / 50.0f;
 		x1 = x2 - (uint8_t)(fDist * (float)x2);
 		y1 = y + 25;
 		y2 = SSD1306_HEIGHT;
@@ -156,7 +152,7 @@ void tuning_update_display(tuning_error_t* err){
 		ssd1306_SetCursor(x, y);
 		ssd1306_WriteString(name, Font_16x24, White);
 		x1 = SSD1306_WIDTH / 2;
-		float fDist = (float)(err->cents) / 100.0f;
+		float fDist = (float)(err->cents) / 50.0f;
 		x2 = x1 + (uint8_t)(fDist * (float)x1);
 		y1 = y + 25;
 		y2 = SSD1306_HEIGHT;
