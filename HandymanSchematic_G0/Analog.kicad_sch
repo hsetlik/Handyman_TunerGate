@@ -1974,6 +1974,12 @@
 		(uuid "90f061be-3bb4-47b5-acc9-e749619c62a4")
 	)
 	(junction
+		(at 149.86 36.068)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a49577c4-edd6-4097-ac9a-fb19793ac217")
+	)
+	(junction
 		(at 294.132 62.23)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1984,12 +1990,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b9067d9a-322c-4172-826c-60ddc751487f")
-	)
-	(junction
-		(at 153.67 45.72)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bea4aca3-255d-4c00-b0d2-0a311d476c7c")
 	)
 	(junction
 		(at 140.97 198.12)
@@ -2099,7 +2099,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 62.23) (xy 161.29 45.72)
+			(xy 161.29 36.068) (xy 161.29 62.23)
 		)
 		(stroke
 			(width 0)
@@ -2379,7 +2379,7 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 35.56) (xy 149.86 36.83)
+			(xy 149.86 35.56) (xy 149.86 36.068)
 		)
 		(stroke
 			(width 0)
@@ -2536,16 +2536,6 @@
 			(type default)
 		)
 		(uuid "4bc1c1d8-4763-435d-bddc-a24d8e55ecae")
-	)
-	(wire
-		(pts
-			(xy 161.29 45.72) (xy 153.67 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4bc37523-cdb5-45e0-a392-8b350be01688")
 	)
 	(wire
 		(pts
@@ -2849,6 +2839,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 36.068) (xy 149.86 36.068)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f14a5d4-5c04-4280-bfcc-53e658646538")
+	)
+	(wire
+		(pts
 			(xy 304.546 62.23) (xy 317.246 62.23)
 		)
 		(stroke
@@ -2886,16 +2886,6 @@
 			(type default)
 		)
 		(uuid "818d3007-ccf1-4641-9622-abf439f782fb")
-	)
-	(wire
-		(pts
-			(xy 143.51 45.72) (xy 149.86 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "82b3da37-bddf-43c5-bd90-f2aa815402b7")
 	)
 	(wire
 		(pts
@@ -2946,6 +2936,16 @@
 			(type default)
 		)
 		(uuid "8d70f67c-d07e-4b89-98be-d5493c5a0078")
+	)
+	(wire
+		(pts
+			(xy 149.86 36.068) (xy 149.86 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f2756aa-1462-4ef9-a81b-ec8d25274f6a")
 	)
 	(wire
 		(pts
@@ -3369,7 +3369,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 53.34) (xy 143.51 54.61)
+			(xy 141.986 53.34) (xy 141.986 54.61)
 		)
 		(stroke
 			(width 0)
@@ -3449,6 +3449,16 @@
 	)
 	(wire
 		(pts
+			(xy 141.986 45.72) (xy 141.986 36.068)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "daccbd59-8121-4667-8268-80d02343c7f2")
+	)
+	(wire
+		(pts
 			(xy 49.53 59.69) (xy 54.61 59.69)
 		)
 		(stroke
@@ -3516,6 +3526,16 @@
 			(type default)
 		)
 		(uuid "e1f50fb3-71ef-4453-8f34-1e3f28ec4041")
+	)
+	(wire
+		(pts
+			(xy 141.986 36.068) (xy 149.86 36.068)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e33a5a57-6376-4d37-82af-fbe914ac7064")
 	)
 	(wire
 		(pts
@@ -3819,6 +3839,7 @@
 	)
 	(label "VG"
 		(at 123.19 168.91 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3830,6 +3851,7 @@
 	)
 	(label "VG"
 		(at 135.89 81.28 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3840,6 +3862,7 @@
 	)
 	(label "AmpAnode"
 		(at 246.126 133.604 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3850,6 +3873,7 @@
 	)
 	(label "VG"
 		(at 95.25 177.8 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3860,6 +3884,7 @@
 	)
 	(label "VG"
 		(at 50.8 72.39 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3870,6 +3895,7 @@
 	)
 	(label "Env"
 		(at 142.24 67.31 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3878,8 +3904,20 @@
 		)
 		(uuid "30376f78-db50-4437-a1e4-d676f99473ff")
 	)
+	(label "Thresh"
+		(at 161.29 36.068 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3e6b8640-b0d6-42a8-ac17-328ab8583ef2")
+	)
 	(label "HalfRect"
 		(at 80.01 60.96 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3890,6 +3928,7 @@
 	)
 	(label "VG"
 		(at 142.24 90.17 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3900,6 +3939,7 @@
 	)
 	(label "VG"
 		(at 95.25 82.55 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3908,18 +3948,9 @@
 		)
 		(uuid "73bf6c67-857c-4bb8-92ab-5968cac65b23")
 	)
-	(label "Thresh"
-		(at 154.94 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "755df38b-4352-4ea6-bbb6-66dd928d1329")
-	)
 	(label "AmpAnode"
 		(at 153.67 217.17 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3931,6 +3962,7 @@
 	)
 	(label "AmpCathode"
 		(at 142.24 166.37 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3941,6 +3973,7 @@
 	)
 	(label "VG"
 		(at 276.352 64.77 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3952,6 +3985,7 @@
 	)
 	(label "SumPt"
 		(at 140.97 198.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3962,6 +3996,7 @@
 	)
 	(label "VG"
 		(at 166.37 203.2 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3972,6 +4007,7 @@
 	)
 	(label "VG"
 		(at 166.37 171.45 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3982,6 +4018,7 @@
 	)
 	(label "VG"
 		(at 246.126 148.082 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3992,6 +4029,7 @@
 	)
 	(label "VG"
 		(at 317.246 67.31 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4002,6 +4040,7 @@
 	)
 	(label "Env"
 		(at 246.126 154.686 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4012,6 +4051,7 @@
 	)
 	(label "VG"
 		(at 125.73 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4022,6 +4062,7 @@
 	)
 	(label "VG"
 		(at 115.57 200.66 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4032,6 +4073,7 @@
 	)
 	(label "Thresh"
 		(at 246.126 141.224 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4042,6 +4084,7 @@
 	)
 	(label "VG"
 		(at 304.546 72.644 180)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4052,6 +4095,7 @@
 	)
 	(label "AmpCathode"
 		(at 246.126 126.746 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5969,7 +6013,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 143.51 54.61 0)
+		(at 141.986 54.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5978,7 +6022,7 @@
 		(fields_autoplaced yes)
 		(uuid "2e522528-408a-466d-a51f-88501a6934f5")
 		(property "Reference" "#PWR015"
-			(at 143.51 60.96 0)
+			(at 141.986 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5987,7 +6031,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 143.51 58.42 0)
+			(at 141.986 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5996,7 +6040,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 143.51 54.61 0)
+			(at 141.986 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6005,7 +6049,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 143.51 54.61 0)
+			(at 141.986 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6014,7 +6058,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 143.51 54.61 0)
+			(at 141.986 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6598,7 +6642,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 143.51 49.53 0)
+		(at 141.986 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6607,7 +6651,7 @@
 		(fields_autoplaced yes)
 		(uuid "4aed92a8-0bc1-4c78-b70f-f1563002d64c")
 		(property "Reference" "C10"
-			(at 139.954 48.2599 0)
+			(at 138.43 48.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6616,7 +6660,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 139.954 50.7999 0)
+			(at 138.43 50.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6625,7 +6669,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 144.4752 53.34 0)
+			(at 142.9512 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6634,7 +6678,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 143.51 49.53 0)
+			(at 141.986 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6643,7 +6687,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 143.51 49.53 0)
+			(at 141.986 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
