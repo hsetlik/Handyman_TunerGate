@@ -2033,10 +2033,6 @@
 		(color 0 0 0 0)
 		(uuid "fe8e9e7a-e918-43cd-b949-d84b3c679e23")
 	)
-	(no_connect
-		(at 124.46 107.95)
-		(uuid "0049044c-8f2a-43fe-9073-6742de59c054")
-	)
 	(wire
 		(pts
 			(xy 153.67 45.72) (xy 149.86 45.72)
@@ -2356,16 +2352,6 @@
 			(type default)
 		)
 		(uuid "2e22a4f0-5e2d-48e1-bec9-0a2ec998648a")
-	)
-	(wire
-		(pts
-			(xy 241.3 133.604) (xy 246.126 133.604)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30fea118-ef27-4336-92ab-a27a998b0da0")
 	)
 	(wire
 		(pts
@@ -3339,16 +3325,6 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 126.746) (xy 246.126 126.746)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c9b7e908-c729-4137-a789-3659e86a1779")
-	)
-	(wire
-		(pts
 			(xy 127 187.96) (xy 130.81 187.96)
 		)
 		(stroke
@@ -3740,7 +3716,7 @@
 		(uuid 394430de-aac9-4a0d-be28-b6ab340da71e)
 	)
 	(rectangle
-		(start 236.474 119.126)
+		(start 236.474 133.985)
 		(end 269.748 158.75)
 		(stroke
 			(width 0)
@@ -3826,7 +3802,7 @@
 	)
 	(text "Test Points"
 		(exclude_from_sim no)
-		(at 236.474 116.332 0)
+		(at 235.458 130.81 0)
 		(effects
 			(font
 				(size 3.81 3.81)
@@ -3839,7 +3815,6 @@
 	)
 	(label "VG"
 		(at 123.19 168.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3851,7 +3826,6 @@
 	)
 	(label "VG"
 		(at 135.89 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3860,20 +3834,8 @@
 		)
 		(uuid "08393338-a25b-4d15-b678-2bb00cb53a0a")
 	)
-	(label "AmpAnode"
-		(at 246.126 133.604 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1ba76c92-abc1-46bb-8f46-45a3c2e2ac3c")
-	)
 	(label "VG"
 		(at 95.25 177.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3884,7 +3846,6 @@
 	)
 	(label "VG"
 		(at 50.8 72.39 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3895,7 +3856,6 @@
 	)
 	(label "Env"
 		(at 142.24 67.31 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3906,7 +3866,6 @@
 	)
 	(label "Thresh"
 		(at 161.29 36.068 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3917,7 +3876,6 @@
 	)
 	(label "HalfRect"
 		(at 80.01 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3928,7 +3886,6 @@
 	)
 	(label "VG"
 		(at 142.24 90.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3939,7 +3896,6 @@
 	)
 	(label "VG"
 		(at 95.25 82.55 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3950,7 +3906,6 @@
 	)
 	(label "AmpAnode"
 		(at 153.67 217.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3962,7 +3917,6 @@
 	)
 	(label "AmpCathode"
 		(at 142.24 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3973,7 +3927,6 @@
 	)
 	(label "VG"
 		(at 276.352 64.77 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3985,7 +3938,6 @@
 	)
 	(label "SumPt"
 		(at 140.97 198.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3996,7 +3948,6 @@
 	)
 	(label "VG"
 		(at 166.37 203.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4007,7 +3958,6 @@
 	)
 	(label "VG"
 		(at 166.37 171.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4018,7 +3968,6 @@
 	)
 	(label "VG"
 		(at 246.126 148.082 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4029,7 +3978,6 @@
 	)
 	(label "VG"
 		(at 317.246 67.31 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4040,7 +3988,6 @@
 	)
 	(label "Env"
 		(at 246.126 154.686 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4051,7 +3998,6 @@
 	)
 	(label "VG"
 		(at 125.73 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4062,7 +4008,6 @@
 	)
 	(label "VG"
 		(at 115.57 200.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4073,7 +4018,6 @@
 	)
 	(label "Thresh"
 		(at 246.126 141.224 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4084,7 +4028,6 @@
 	)
 	(label "VG"
 		(at 304.546 72.644 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4092,17 +4035,6 @@
 			(justify right bottom)
 		)
 		(uuid "e0ab82c1-b6fd-4d15-8be4-7f0ad8fe448b")
-	)
-	(label "AmpCathode"
-		(at 246.126 126.746 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f0c70632-f396-4cc7-933a-a65db0045c61")
 	)
 	(global_label "OPEN_IN"
 		(shape output)
@@ -4339,73 +4271,6 @@
 			(project "HandymanSchematic_G0"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
 					(reference "D3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 241.3 133.604 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0176195e-3ff8-4090-8a53-b17acc6a06fb")
-		(property "Reference" "TP2"
-			(at 242.824 129.0319 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "AA"
-			(at 242.824 131.5719 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
-			(at 246.38 133.604 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 246.38 133.604 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 241.3 133.604 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fa617a2f-dbec-48bd-887f-c9efc664b1e2")
-		)
-		(instances
-			(project "HandymanSchematic_G0"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -4869,73 +4734,6 @@
 			(project "HandymanSchematic_G0"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
 					(reference "R27")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 241.3 126.746 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "11e1b4fc-eac4-4cd0-a67f-919b98546f12")
-		(property "Reference" "TP1"
-			(at 243.84 122.1739 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "AK"
-			(at 243.84 124.7139 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
-			(at 246.38 126.746 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 246.38 126.746 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 241.3 126.746 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f6d9bca3-dc73-41b2-a93a-26c511d246af")
-		)
-		(instances
-			(project "HandymanSchematic_G0"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "TP1")
 					(unit 1)
 				)
 			)
