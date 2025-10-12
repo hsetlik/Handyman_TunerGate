@@ -116,12 +116,12 @@ if(value != gateIsOpen){
 }
 
 void updateTuningDisplay() {
-	static const uint32_t minRefreshMs = 40;
+	static const uint32_t minRefreshMs = 95;
 	static uint32_t lastUpdate = 0;
 	uint32_t now = SysTick->VAL;
 	if ((now - lastUpdate) > minRefreshMs) {
 		lastUpdate = now;
-		tuning_update_error(&tuning);
+		//tuning_update_error(&tuning);
 		tuning_update_display(&tuning);
 	}
 
@@ -314,7 +314,7 @@ static void MX_TIM14_Init(void)
   htim14.Instance = TIM14;
   htim14.Init.Prescaler = 0;
   htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim14.Init.Period = 7999;
+  htim14.Init.Period = 6399;
   htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
