@@ -10,6 +10,7 @@
 #include "main.h"
 #include <ssd1306_fonts.h>
 #include <math.h>
+#include <stdbool.h>
 #include <ssd1306.h>
 
 
@@ -35,6 +36,8 @@ typedef struct {
 
 // call this on the rising edge interrupt for the TUNE_IN pin
 void tuning_rising_edge(uint32_t tick);
+
+void tuning_falling_edge(uint32_t tick);
 
 void tuning_update_error(tuning_error_t* err);
 

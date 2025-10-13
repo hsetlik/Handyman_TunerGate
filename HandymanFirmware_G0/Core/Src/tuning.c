@@ -8,14 +8,25 @@
 
 
 // shared vars
-static uint32_t tuningBuf[TUNING_BUF_SIZE];
-static uint16_t head = 0;
+static uint32_t risingBuf[TUNING_BUF_SIZE] = {0};
+static uint16_t risingHead = 0;
+static uint32_t fallingBuf[TUNING_BUF_SIZE] = {0};
+static uint16_t fallingHead = 0;
 static uint8_t pitchesInitialized = 0;
 static float midiNotePitches[NUM_MIDI_NOTES];
 
+static float freq_diff_semitones(float freq1, float freq2){
+	return 12.0f * (logf(freq2 / freq1) / logf(2.0f));
+}
+
 void tuning_rising_edge(uint32_t tick){
-	tuningBuf[head] = tick;
-	head = (head + 1) % TUNING_BUF_SIZE;
+	risingBuf[risingHead] = tick;
+	risingHead = (risingHead + 1) % TUNING_BUF_SIZE;
+}
+
+void tuning_falling_edge(uint32_t tick){
+	fallingBuf[fallingHead] = tick;
+	fallingHead = (fallingHead + 1) % TUNING_BUF_SIZE;
 }
 
 // helper for converting to ms and handling timer overflow
@@ -31,14 +42,39 @@ static float tick_distance_ms(uint32_t first, uint32_t second){
 #endif
 }
 
+
+// if the passed in startingidx is the beginning of a repeating pattern,
+// returns the length of the pattern (in rising edges) or -1 if no pattern
+// exists
+int32_t check_repeating_period(uint32_t startingIdx){
+
+	int32_t layer = 1;
+	while(layer <  8){
+		uint32_t idx2 =	(startingIdx + (uint32_t)layer) % TUNING_BUF_SIZE;
+		uint32_t idx3 = (startingIdx + (uint32_t)(layer * 2)) % TUNING_BUF_SIZE;
+		float period1 = tick_distance_ms(risingBuf[startingIdx], risingBuf[idx2]) / 1000.0f;
+		float period2 = tick_distance_ms(risingBuf[idx2], risingBuf[idx3]) / 1000.0f;
+		// set a threshold of 5% for counting as valid
+		static const float thresh = 0.05f;
+		float diff = fabs(period1 - period2);
+		if(diff <= (thresh * period1)){
+			return layer;
+		}
+		++layer;
+	}
+	return -1;
+}
+
+
+
 static float mean_distance_ms(){
 	float totalMs = 0.0f;
 	float denom = 0.0f;
 	uint32_t prev;
 	uint32_t current;
 	for(uint16_t i = 1; i < TUNING_BUF_SIZE; ++i){
-		prev = tuningBuf[(head + i - 1)% TUNING_BUF_SIZE];
-		current = tuningBuf[(i + head) % TUNING_BUF_SIZE];
+		prev = risingBuf[(risingHead + i - 1)% TUNING_BUF_SIZE];
+		current = risingBuf[(i + risingHead) % TUNING_BUF_SIZE];
 		if(prev < current){
 			totalMs += tick_distance_ms(prev, current);
 			denom += 1.0f;
@@ -59,9 +95,7 @@ void initMidiPitches(){
 	}
 	}
 
-static float freq_diff_semitones(float freq1, float freq2){
-	return 12.0f * (logf(freq2 / freq1) / logf(2.0f));
-}
+
 // get the note nearest to a given pitch in hz
 uint8_t closestNote(float hz){
 	if(hz <= midiNotePitches[0])
