@@ -39,6 +39,9 @@ void tuning_rising_edge(uint32_t tick);
 
 void tuning_falling_edge(uint32_t tick);
 
+void tuning_start_listening();
+void tuning_stop_listening();
+
 void tuning_update_error(tuning_error_t* err);
 
 void tuning_update_display(tuning_error_t* err);

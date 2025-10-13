@@ -74,6 +74,12 @@ void updateTuningDisplay();
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+
+uint32_t get_timer_tick() {
+	return timerTick;
+}
+
 void checkSwitches() {
 	// same speed limiting idea as the display function
 	static const uint32_t minRefreshMs = 50;
@@ -108,7 +114,7 @@ void checkSwitches() {
 }
 
 void setGate(uint8_t value) {
-if(value != gateIsOpen){
+if(value != gateIsOpen && !bypassGate){
 	gateIsOpen = value;
 	GPIO_PinState state = gateIsOpen > 0 ? GPIO_PIN_RESET : GPIO_PIN_SET;
 	HAL_GPIO_WritePin(GPIOA, CLOSED_OUT_Pin, state);
@@ -138,15 +144,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*) {
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t pin) {
 	if (pin == TUNE_IN_Pin && tunerMode) {
 		tuning_rising_edge(timerTick);
-	} else if (!bypassGate && pin == OPEN_IN_Pin) {
+	} else if (pin == OPEN_IN_Pin) {
 		setGate(1);
+		if(tunerMode){
+			tuning_start_listening();
+		}
 	}
 
 }
 
 void HAL_GPIO_EXTI_Falling_Callback(uint16_t pin) {
-	if (!bypassGate && pin == OPEN_IN_Pin) {
+	if (pin == OPEN_IN_Pin) {
 		setGate(0);
+		if(tunerMode){
+			tuning_stop_listening();
+		}
 	}
 }
 /* USER CODE END 0 */
