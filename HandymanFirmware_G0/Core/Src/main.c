@@ -122,7 +122,7 @@ if(value != gateIsOpen && !bypassGate){
 }
 
 void updateTuningDisplay() {
-	static const uint32_t minRefreshMs = 95;
+	static const uint32_t minRefreshMs = 40;
 	static uint32_t lastUpdate = 0;
 	uint32_t now = SysTick->VAL;
 	if ((now - lastUpdate) > minRefreshMs) {
@@ -159,6 +159,8 @@ void HAL_GPIO_EXTI_Falling_Callback(uint16_t pin) {
 		if(tunerMode){
 			tuning_stop_listening();
 		}
+	} else if(pin == TUNE_IN_Pin && tunerMode){
+		tuning_falling_edge(timerTick);
 	}
 }
 /* USER CODE END 0 */

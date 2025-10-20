@@ -23,6 +23,7 @@ extern "C" {
 #define IN_TUNE_THRESHOLD 4
 #define TICK_RATE 5000
 #define NUM_MIDI_NOTES 127
+#define USE_DOUBLE_BUF
 
 #define TICK_OVERFLOW_SAFE
 
@@ -32,7 +33,10 @@ typedef struct {
 	int16_t cents;
 } tuning_error_t;
 
-
+typedef struct {
+	uint32_t startIdx;
+	uint32_t length;
+} edge_pattern_t;
 
 // call this on the rising edge interrupt for the TUNE_IN pin
 void tuning_rising_edge(uint32_t tick);

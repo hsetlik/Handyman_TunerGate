@@ -9,20 +9,27 @@
 // shared vars
 
 // two buffers for rising edges, two for falling
-uint32_t risingBuf1[TUNING_BUF_SIZE] = {0};
-uint32_t risingBuf2[TUNING_BUF_SIZE] = {0};
-uint32_t fallingBuf1[TUNING_BUF_SIZE] = {0};
-uint32_t fallingBuf2[TUNING_BUF_SIZE] = {0};
-static uint32_t* risingWriteBuf = risingBuf1;
-static uint32_t* risingReadBuf = risingBuf2;
+uint32_t risingBuf1[TUNING_BUF_SIZE] = { 0 };
+uint32_t risingBuf2[TUNING_BUF_SIZE] = { 0 };
+uint32_t fallingBuf1[TUNING_BUF_SIZE] = { 0 };
+uint32_t fallingBuf2[TUNING_BUF_SIZE] = { 0 };
+static uint32_t *risingWriteBuf = risingBuf1;
+#ifdef USE_DOUBLE_BUF
+static uint32_t *risingReadBuf = risingBuf2;
+#else
+static uint32_t *risingReadBuf = risingBuf1;
+
+#endif
 static uint16_t risingHead = 0;
-static uint32_t* fallingWriteBuf = fallingBuf1;
-static uint32_t* fallingReadBuf = fallingBuf2;
+static uint32_t *fallingWriteBuf = fallingBuf1;
+static uint32_t *fallingReadBuf = fallingBuf2;
 static uint16_t fallingHead = 0;
 static bool pitchesInitialized = false;
 static bool tunerListening = false;
+volatile bool readBufferReady = false;
 static uint32_t listeningStartIdx = 0;
 static float midiNotePitches[NUM_MIDI_NOTES];
+static float currentHz = 220.0f;
 
 static float freq_diff_semitones(float freq1, float freq2) {
 	return 12.0f * (logf(freq2 / freq1) / logf(2.0f));
@@ -31,20 +38,22 @@ static float freq_diff_semitones(float freq1, float freq2) {
 void tuning_rising_edge(uint32_t tick) {
 	risingWriteBuf[risingHead] = tick;
 	risingHead = (risingHead + 1) % TUNING_BUF_SIZE;
+#ifdef USE_DOUBLE_BUF
 	// swap to the read & write buffers
-	if(risingHead == 0){
-		uint32_t* prevRead = risingReadBuf;
+	if (risingHead == 0) {
+		uint32_t *prevRead = risingReadBuf;
 		risingReadBuf = risingWriteBuf;
 		risingWriteBuf = prevRead;
-
+		readBufferReady = true;
 	}
+#endif
 }
 
 void tuning_falling_edge(uint32_t tick) {
 	fallingWriteBuf[fallingHead] = tick;
 	fallingHead = (fallingHead + 1) % TUNING_BUF_SIZE;
-	if(fallingHead == 0){
-		uint32_t* prevRead = fallingReadBuf;
+	if (fallingHead == 0) {
+		uint32_t *prevRead = fallingReadBuf;
 		fallingReadBuf = fallingWriteBuf;
 		fallingWriteBuf = prevRead;
 	}
@@ -63,59 +72,77 @@ static float tick_distance_ms(uint32_t first, uint32_t second) {
 #endif
 }
 
-void tuning_start_listening(){
+void tuning_start_listening() {
 	tunerListening = true;
 	listeningStartIdx = risingHead;
 }
-void tuning_stop_listening(){
+void tuning_stop_listening() {
 	tunerListening = false;
 }
 
-// get the index of the first rising edge in the buffer since we started "listening"
-
-
-// if the passed in startingidx is the beginning of a repeating pattern,
-// returns the length of the pattern (in rising edges) or -1 if no pattern
-// exists
-int32_t check_repeating_period(uint32_t startingIdx) {
-
-	int32_t layer = 1;
-	while (layer < 8) {
-		uint32_t idx2 = (startingIdx + (uint32_t) layer) % TUNING_BUF_SIZE;
-		uint32_t idx3 = (startingIdx + (uint32_t) (layer * 2)) % TUNING_BUF_SIZE;
-		float period1 = tick_distance_ms(risingWriteBuf[startingIdx],
-				risingWriteBuf[idx2]) / 1000.0f;
-		float period2 = tick_distance_ms(risingWriteBuf[idx2], risingWriteBuf[idx3])
-				/ 1000.0f;
-		// set a threshold of 5% for counting as valid
-		static const float thresh = 0.05f;
-		float diff = fabs(period1 - period2);
-		if (diff <= (thresh * period1)) {
-			return layer;
-		}
-		++layer;
+// returns the avg deviation from the length of the first period of given length starting from a given index
+float get_pattern_deviation(uint32_t startIdx, uint32_t length,
+		uint32_t *edgeBuf) {
+	uint32_t idx1 = startIdx;
+	uint32_t idx2 = idx1 + length;
+	const float firstPeriod = tick_distance_ms(edgeBuf[idx1], edgeBuf[idx2]);
+	float devSum = 0.0f;
+	uint16_t numCycles = 0;
+	idx1 = idx2;
+	idx2 = idx1 + length;
+	while (idx2 < TUNING_BUF_SIZE) {
+		float period = tick_distance_ms(edgeBuf[idx1], edgeBuf[idx2]);
+		float deviation = fabs(firstPeriod - period) / firstPeriod;
+		devSum += deviation;
+		++numCycles;
+		idx1 = idx2;
+		idx2 = idx1 + length;
 	}
-	return -1;
+	return devSum / (float) numCycles;
 }
 
-static float mean_distance_ms() {
-	float totalMs = 0.0f;
-	float denom = 0.0f;
-	uint32_t prev;
-	uint32_t current;
-	for (uint16_t i = 1; i < TUNING_BUF_SIZE; ++i) {
-		prev = risingWriteBuf[(risingHead + i - 1) % TUNING_BUF_SIZE];
-		current = risingWriteBuf[(i + risingHead) % TUNING_BUF_SIZE];
-		if (prev < current) {
-			totalMs += tick_distance_ms(prev, current);
-			denom += 1.0f;
+// gets the edge pattern with the least deviation with the given startIdx and length range
+edge_pattern_t closest_pattern_within(uint32_t maxStartIdx, uint32_t maxLength,
+		uint32_t *buf) {
+	float minDeviation = 1000000.0f;
+	edge_pattern_t minPattern = { 0, 0 };
+	for (uint32_t start = 0; start < maxStartIdx; ++start) {
+		for (uint32_t length = 1; length <= maxLength; ++length) {
+			float dev = get_pattern_deviation(start, length, buf);
+			if (dev < minDeviation) {
+				minDeviation = dev;
+				minPattern = (edge_pattern_t ) { start, length };
+			}
+
 		}
 	}
-	return totalMs / denom;
+	return minPattern;
+}
+
+// gives a frequency in hz for a given edge pattern
+float hz_for_pattern(edge_pattern_t pattern, uint32_t *edgeBuf) {
+	//handle the case of an invalid pattern
+	if (pattern.length < 1) {
+		return 0.0f;
+	}
+	float periodSum = 0.0f;
+	uint16_t numCycles = 0;
+	uint32_t idx1 = pattern.startIdx;
+	uint32_t idx2 = idx1 + pattern.length;
+	while (idx2 < TUNING_BUF_SIZE) {
+		periodSum += tick_distance_ms(edgeBuf[idx1], edgeBuf[idx2]);
+		++numCycles;
+		idx1 = idx2;
+		idx2 = idx1 + pattern.length;
+	}
+	float meanPeriod = periodSum / 1000.0f / (float) numCycles;
+	return 1.0f / meanPeriod;
 }
 
 float tuning_get_current_hz() {
-	return 1000.0f / mean_distance_ms();
+	edge_pattern_t pattern = closest_pattern_within(5, 10, risingReadBuf);
+	currentHz = hz_for_pattern(pattern, risingReadBuf);
+	return currentHz;
 }
 
 // note/error stuff-------------------
@@ -169,15 +196,19 @@ void tuning_update_error(tuning_error_t *err) {
 		initMidiPitches();
 		pitchesInitialized = true;
 	}
-	float pitch = tuning_get_current_hz();
-	err->note = closestNote(pitch);
-	err->cents = getErrorHz(err->note, pitch);
+
+	if (readBufferReady) {
+		float pitch = tuning_get_current_hz();
+		err->note = closestNote(pitch);
+		err->cents = getErrorHz(err->note, pitch);
+		readBufferReady = false;
+	}
 
 }
 
 void tuning_update_display(tuning_error_t *err) {
 	static char *noteNames[] = { "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F",
-			"Gb", "G" };
+			"Gb", "G", "Ab" };
 
 	const uint8_t x = (128 - 16) / 2;
 	const uint8_t y = (64 - 26) / 2;
