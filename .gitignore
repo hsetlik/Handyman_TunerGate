@@ -6,6 +6,7 @@ Datasheets
 */Release
 */.DS_STORE
 HandymanSchematic_G0/*backups
+AttenuatorSim/*backups
 HandymanSchematic_G0/gerber
 HandymanSchematic_G0/*cache
 HandymanSchematic_G0/*.zip
