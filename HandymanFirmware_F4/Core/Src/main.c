@@ -316,11 +316,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : TunerMode_IN_Pin */
-  GPIO_InitStruct.Pin = TunerMode_IN_Pin;
+  /*Configure GPIO pins : GateOpen_IN_Pin TunerMode_IN_Pin */
+  GPIO_InitStruct.Pin = GateOpen_IN_Pin|TunerMode_IN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(TunerMode_IN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : UseGate_IN_Pin */
   GPIO_InitStruct.Pin = UseGate_IN_Pin;

@@ -4305,8 +4305,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "12884746-e1e8-409b-8d0e-f9208fd0df5c")
-		(property "Reference" "R?"
+		(uuid "12884746-e1e8-409b-8d0e-f9208fd0df5d")
+		(property "Reference" "R28"
 			(at 251.46 38.7349 0)
 			(effects
 				(font
@@ -4352,15 +4352,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "042a768f-a03f-466e-9768-db7458fd50c0")
+			(uuid "042a768f-a03f-466e-9768-db7458fd50c1")
 		)
 		(pin "1"
-			(uuid "ac95054e-faea-46e0-ab04-eb4e4746ba06")
+			(uuid "ac95054e-faea-46e0-ab04-eb4e4746ba07")
 		)
 		(instances
 			(project "HandymanSchematic_F4"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "R?")
+					(reference "R28")
 					(unit 1)
 				)
 			)
@@ -4451,7 +4451,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "15e3d478-4129-4906-9f47-b0fdf0cdcf14")
-		(property "Reference" "U?"
+		(property "Reference" "U1"
 			(at 36.83 109.2199 0)
 			(effects
 				(font
@@ -4541,7 +4541,7 @@
 		(instances
 			(project "HandymanSchematic_F4"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "U?")
+					(reference "U1")
 					(unit 5)
 				)
 			)
@@ -7103,8 +7103,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "690f98ab-97af-4a9f-bab3-042f3d826932")
-		(property "Reference" "C?"
+		(uuid "690f98ab-97af-4a9f-bab3-042f3d826933")
+		(property "Reference" "C23"
 			(at 240.665 54.61 90)
 			(effects
 				(font
@@ -7148,15 +7148,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "3ab7fddc-6c19-4e1d-9ae5-7cce1d0ae097")
+			(uuid "3ab7fddc-6c19-4e1d-9ae5-7cce1d0ae098")
 		)
 		(pin "1"
-			(uuid "4f6dd44c-f8b9-46a9-85fa-465ef303fb9b")
+			(uuid "4f6dd44c-f8b9-46a9-85fa-465ef303fb9c")
 		)
 		(instances
 			(project "HandymanSchematic_F4"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "C?")
+					(reference "C23")
 					(unit 1)
 				)
 			)

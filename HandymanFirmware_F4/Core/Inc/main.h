@@ -57,12 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define Thresh_IN_Pin GPIO_PIN_5
-#define Thresh_IN_GPIO_Port GPIOA
-#define Release_IN_Pin GPIO_PIN_6
-#define Release_IN_GPIO_Port GPIOA
 #define GateClosed_OUT_Pin GPIO_PIN_4
 #define GateClosed_OUT_GPIO_Port GPIOC
+#define GateOpen_IN_Pin GPIO_PIN_2
+#define GateOpen_IN_GPIO_Port GPIOB
 #define TunerMode_IN_Pin GPIO_PIN_13
 #define TunerMode_IN_GPIO_Port GPIOB
 #define UseGate_IN_Pin GPIO_PIN_7
