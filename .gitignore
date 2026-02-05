@@ -3,11 +3,16 @@ bom
 Enclosure/*.ai
 Datasheets
 */Debug
+*/Release
 */.DS_STORE
 HandymanSchematic_G0/*backups
 HandymanSchematic_G0/gerber
 HandymanSchematic_G0/*cache
 HandymanSchematic_G0/*.zip
 HandymanSchematic_G0/*.lck
-
+HandymanSchematic_F4/*backups
+HandymanSchematic_F4/gerber
+HandymanSchematic_F4/*cache
+HandymanSchematic_F4/*.zip
+HandymanSchematic_F4/*.lck
 

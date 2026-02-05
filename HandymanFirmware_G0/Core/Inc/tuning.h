@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-#define TUNING_BUF_SIZE 128
+#define TUNING_BUF_SIZE 85
 #define SEMITONE_RATIO 1.05946309436f
 #define IN_TUNE_THRESHOLD 4
 #define TICK_RATE 5000

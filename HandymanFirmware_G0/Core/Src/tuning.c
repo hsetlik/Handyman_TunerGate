@@ -102,29 +102,25 @@ float get_pattern_deviation(uint32_t startIdx, uint32_t length,
 }
 
 // gets the edge pattern with the least deviation with the given startIdx and length range
-edge_pattern_t closest_pattern_within(uint32_t maxStartIdx, uint32_t maxLength,
+edge_pattern_t first_valid_pattern(uint32_t maxStartIdx, uint32_t maxLength,
 		uint32_t *buf) {
-	float minDeviation = 1000000.0f;
-	edge_pattern_t minPattern = { 0, 0 };
+	static const float maxValidDeviation = 0.04;
 	for (uint32_t start = 0; start < maxStartIdx; ++start) {
 		for (uint32_t length = 1; length <= maxLength; ++length) {
 			float dev = get_pattern_deviation(start, length, buf);
-			if (dev < minDeviation) {
-				minDeviation = dev;
-				minPattern = (edge_pattern_t ) { start, length };
+			if (dev < maxValidDeviation) {
+				return (edge_pattern_t) { start, length };
 			}
 
 		}
 	}
-	return minPattern;
+	return (edge_pattern_t){0, 0};
 }
 
 // gives a frequency in hz for a given edge pattern
 float hz_for_pattern(edge_pattern_t pattern, uint32_t *edgeBuf) {
 	//handle the case of an invalid pattern
-	if (pattern.length < 1) {
-		return 0.0f;
-	}
+
 	float periodSum = 0.0f;
 	uint16_t numCycles = 0;
 	uint32_t idx1 = pattern.startIdx;
@@ -140,8 +136,11 @@ float hz_for_pattern(edge_pattern_t pattern, uint32_t *edgeBuf) {
 }
 
 float tuning_get_current_hz() {
-	edge_pattern_t pattern = closest_pattern_within(5, 10, risingReadBuf);
-	currentHz = hz_for_pattern(pattern, risingReadBuf);
+	edge_pattern_t pattern = first_valid_pattern(10, 10, risingReadBuf);
+	// only calculate hz if our patterh is valid
+	if (pattern.length >= 1) {
+		currentHz = hz_for_pattern(pattern, risingReadBuf);
+	}
 	return currentHz;
 }
 
