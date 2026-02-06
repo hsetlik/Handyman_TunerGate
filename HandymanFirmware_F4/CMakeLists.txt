@@ -42,9 +42,15 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
 
+set(CORE_DIR "${CMAKE_CURRENT_LIST_DIR}/Core")
+set(INC_DIR "${CORE_DIR}/Inc")
+set(SRC_DIR "${CORE_DIR}/Src")
+
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    "${INC_DIR}/AudioADC.h"
+    "${SRC_DIR}/AudioADC.c"
 )
 
 # Add include paths
