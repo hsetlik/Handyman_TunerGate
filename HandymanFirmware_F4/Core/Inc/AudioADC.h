@@ -6,12 +6,10 @@
 
 // converts a right-aligned 12 bit value from the ADC to a 
 // 32 bit float in the -1 to 1 range
-float AudioADC_12BitToFloat(uint32_t value);
+float AudioADC_12BitToFloat(uint16_t value);
+// call this at the end of a conversion to load a chunk of samples from teh ADC buffer into the FFT buffer
+void AudioADC_LoadToFFTBuffer(uint16_t* buf);
 
-// call this once at boot to initialise the two FFT buffers
-void AudioADC_InitFFTBuffers();
 
-// push the next value into the current FFT buffer
-void AudioADC_PushFFTValue(float value);
 
 #endif

@@ -41,18 +41,24 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
 
 I2C_HandleTypeDef hi2c1;
 
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
+// DMA fills this buffer with our audio DMA data
+uint16_t adcBuffer[FFT_SIZE * 2];
+
+
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
@@ -94,15 +100,15 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  // 1. Initialize FFT buffers
-  AudioADC_InitFFTBuffers();
-  // 2. Start Timer 2 to begin the Audio ADC callbacks
+  // 1. Start Timer 2 to begin the Audio ADC callbacks
   HAL_TIM_Base_Start(&htim2);
-
+  // 2. start the DMA stream
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, FFT_SIZE * 2);
 
   /* USER CODE END 2 */
 
@@ -186,7 +192,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.ScanConvMode = DISABLE;
-  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T2_TRGO;
@@ -271,7 +277,7 @@ static void MX_TIM2_Init(void)
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 1655;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
     Error_Handler();
@@ -290,6 +296,22 @@ static void MX_TIM2_Init(void)
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
 
 }
 
@@ -339,10 +361,18 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+//========================================================================================
 // Audio ADC callback
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
-  AudioADC_PushFFTValue(AudioADC_12BitToFloat(HAL_ADC_GetValue(hadc)));
+  // compute the second half of the buffer
+  uint16_t* startPtr = &adcBuffer[FFT_SIZE];
+  AudioADC_LoadToFFTBuffer(startPtr);
+}
+
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
+  // compute the first half of the buffer
+  uint16_t* startPtr = &adcBuffer[0];
+  AudioADC_LoadToFFTBuffer(startPtr);
 }
 
 /* USER CODE END 4 */
