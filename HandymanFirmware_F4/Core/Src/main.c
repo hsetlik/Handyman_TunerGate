@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "AudioADC.h"
+#include "stm32f4xx_hal_tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,10 +47,14 @@ DMA_HandleTypeDef hdma_adc1;
 I2C_HandleTypeDef hi2c1;
 
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-// DMA fills this buffer with our audio DMA data
+// DMA fills this buffer with the ADC values
 uint16_t adcBuffer[FFT_SIZE * 2 * 3];
+// flags for tuner/noise gate modes
+bool inTunerMode = false;
+bool useNoiseGate = false;
 
 
 
@@ -62,12 +67,21 @@ static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
-
+// check the GPIOs to set the above `inTunerMode` and `useNoiseGate` flags
+// call this once before the main while loop and again in the ISR for TIM3 (which is 10x/second with current settings)
+void checkModeSettings();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void checkModeSettings(){
+  GPIO_PinState tuneState = HAL_GPIO_ReadPin(TunerMode_IN_GPIO_Port, TunerMode_IN_Pin);
+  GPIO_PinState useGateState = HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
+  inTunerMode = tuneState == GPIO_PIN_SET;
+  useNoiseGate = useGateState == GPIO_PIN_SET;
+}
 
 /* USER CODE END 0 */
 
@@ -104,11 +118,14 @@ int main(void)
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   // 1. Start Timer 2 to begin the Audio ADC callbacks
   HAL_TIM_Base_Start(&htim2);
   // 2. start the DMA stream
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, FFT_SIZE * 2);
+  // 3. start timer 3 for checking mode settings
+  HAL_TIM_Base_Start(&htim3);
 
   /* USER CODE END 2 */
 
@@ -117,6 +134,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    if(inTunerMode && AudioADC_ShouldPerformFFT()){
+      //TODO: do the fft, find the tuning error, and update the display here
+    }
 
     /* USER CODE BEGIN 3 */
   }
@@ -318,6 +338,51 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 143;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 49999;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -384,13 +449,27 @@ static void MX_GPIO_Init(void)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
   // compute the second half of the buffer
   uint16_t* startPtr = &adcBuffer[FFT_SIZE];
-  AudioADC_LoadToFFTBuffer(startPtr);
+  if(inTunerMode){
+    AudioADC_LoadToFFTBuffer(startPtr);
+  } else if (useNoiseGate){
+    AudioADC_LoadToRMSBuffer(startPtr);
+  }
 }
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
   // compute the first half of the buffer
   uint16_t* startPtr = &adcBuffer[0];
-  AudioADC_LoadToFFTBuffer(startPtr);
+  if(inTunerMode){
+    AudioADC_LoadToFFTBuffer(startPtr);
+  } else if (useNoiseGate){
+    AudioADC_LoadToRMSBuffer(startPtr);
+  }
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+  if(htim == &htim3){
+    checkModeSettings();
+  }
 }
 
 /* USER CODE END 4 */
