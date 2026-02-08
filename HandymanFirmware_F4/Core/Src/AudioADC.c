@@ -14,7 +14,7 @@ float AudioADC_12BitToFloat(uint16_t value){
 
 void AudioADC_LoadToFFTBuffer(uint16_t* buf) {
     for(uint32_t i = 0; i < FFT_SIZE; ++i){
-        fftBuf[i] = AudioADC_12BitToFloat(buf[i]);
+        fftBuf[i] = AudioADC_12BitToFloat(buf[i * 3]);
     }
     timeForFFT = true;
 }
