@@ -1,8 +1,8 @@
 #include "AudioADC.h"
 
 // buffer for our FFT data
-float fftBuf[FFT_SIZE * 2];
-bool timeForFFT = false;
+float ACFBuf[WINDOW_SIZE];
+bool timeForACF = false;
 
 // buffer for our envelope follower
 
@@ -12,17 +12,20 @@ float AudioADC_12BitToFloat(uint16_t value){
 }
 
 
-void AudioADC_LoadToFFTBuffer(uint16_t* buf) {
-    for(uint32_t i = 0; i < FFT_SIZE; ++i){
-        fftBuf[i] = AudioADC_12BitToFloat(buf[i * 3]);
+void AudioADC_LoadToACFBuffer(uint16_t* buf) {
+    for(uint32_t i = 0; i < WINDOW_SIZE; ++i){
+        ACFBuf[i] = AudioADC_12BitToFloat(buf[i * 3]);
     }
-    timeForFFT = true;
+    timeForACF = true;
 }
 
 
-bool AudioADC_ShouldPerformFFT(){
-    return timeForFFT;
+bool AudioADC_ShouldPerformACF(){
+    return timeForACF;
 }
+
+// this is a cooley lewis and welch type FFT that takes two buffers of length FFT_SIZE
+// for the real and imaginary components
 
 //-----------------------------------------------------------------
 void AudioADC_LoadToRMSBuffer(uint16_t* buf){

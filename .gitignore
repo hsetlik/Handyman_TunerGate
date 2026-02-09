@@ -7,13 +7,10 @@ Datasheets
 */.DS_STORE
 HandymanSchematic_G0/*backups
 AttenuatorSim/*backups
-HandymanSchematic_G0/gerber
-HandymanSchematic_G0/*cache
-HandymanSchematic_G0/*.zip
-HandymanSchematic_G0/*.lck
-HandymanSchematic_F4/*backups
-HandymanSchematic_F4/gerber
-HandymanSchematic_F4/*cache
-HandymanSchematic_F4/*.zip
-HandymanSchematic_F4/*.lck
+AlgorithmInfo/*.zip
+HandymanSchematic*/*backups
+HandymanSchematic*/gerber
+HandymanSchematic*/*cache
+HandymanSchematic*/*.zip
+HandymanSchematic*/*.lck
 

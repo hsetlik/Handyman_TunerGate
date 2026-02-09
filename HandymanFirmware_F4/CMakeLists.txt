@@ -51,6 +51,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     "${INC_DIR}/AudioADC.h"
     "${SRC_DIR}/AudioADC.c"
+    "${INC_DIR}/BitstreamACF.h"
+    "${SRC_DIR}/BitstreamACF.c"
 )
 
 # Add include paths

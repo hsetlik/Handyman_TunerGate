@@ -51,7 +51,7 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 // DMA fills this buffer with the ADC values
-uint16_t adcBuffer[FFT_SIZE * 2 * 3];
+uint16_t adcBuffer[WINDOW_SIZE * 2 * 3];
 // flags for tuner/noise gate modes
 bool inTunerMode = false;
 bool useNoiseGate = false;
@@ -123,7 +123,7 @@ int main(void)
   // 1. Start Timer 2 to begin the Audio ADC callbacks
   HAL_TIM_Base_Start(&htim2);
   // 2. start the DMA stream
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, FFT_SIZE * 2);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, WINDOW_SIZE * 2 * 3);
   // 3. start timer 3 for checking mode settings
   HAL_TIM_Base_Start(&htim3);
 
@@ -133,10 +133,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-    if(inTunerMode && AudioADC_ShouldPerformFFT()){
+    if(inTunerMode && AudioADC_ShouldPerformACF()){
       //TODO: do the fft, find the tuning error, and update the display here
     }
+
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
@@ -165,7 +166,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 72;
+  RCC_OscInitStruct.PLL.PLLN = 80;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -209,7 +210,7 @@ static void MX_ADC1_Init(void)
   /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.ScanConvMode = ENABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
@@ -313,7 +314,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1655;
+  htim2.Init.Period = 1999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -448,9 +449,9 @@ static void MX_GPIO_Init(void)
 // Audio ADC callback
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
   // compute the second half of the buffer
-  uint16_t* startPtr = &adcBuffer[FFT_SIZE];
+  uint16_t* startPtr = &adcBuffer[WINDOW_SIZE * 3];
   if(inTunerMode){
-    AudioADC_LoadToFFTBuffer(startPtr);
+    AudioADC_LoadToACFBuffer(startPtr);
   } else if (useNoiseGate){
     AudioADC_LoadToRMSBuffer(startPtr);
   }
@@ -460,7 +461,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
   // compute the first half of the buffer
   uint16_t* startPtr = &adcBuffer[0];
   if(inTunerMode){
-    AudioADC_LoadToFFTBuffer(startPtr);
+    AudioADC_LoadToACFBuffer(startPtr);
   } else if (useNoiseGate){
     AudioADC_LoadToRMSBuffer(startPtr);
   }
