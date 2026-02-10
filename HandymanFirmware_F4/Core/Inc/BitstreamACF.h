@@ -30,7 +30,14 @@ bool BAC_isZeroCross(uint16_t value);
 
 // call this on the filled ADC buffer to load data into the bitstream
 void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing);
+
 // the actual autocorellation happens here. the input is a buffer of half the window size
-void BAC_autoCorrelate(bitval_t* corBuf);
+void BAC_autoCorrelate();
+
+// check if we're ready to run the algorithm
+bool BAC_isBitstreamLoaded();
+
+// return the current best guess for the fundamental frequency in the correlation buffer
+float BAC_getCurrentHz();
 
 #endif

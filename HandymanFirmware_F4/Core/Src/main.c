@@ -122,9 +122,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // 1. Start Timer 2 to begin the Audio ADC callbacks
   HAL_TIM_Base_Start(&htim2);
-  // 2. start the DMA stream
+  // 2. Initialize the buffers for the BAC handling
+  BAC_initBitArray();
+  // 3. start the DMA stream
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, WINDOW_SIZE * 2 * 3);
-  // 3. start timer 3 for checking mode settings
+  // 4. start timer 3 for checking mode settings
   HAL_TIM_Base_Start(&htim3);
 
   /* USER CODE END 2 */
@@ -133,8 +135,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if(inTunerMode && AudioADC_ShouldPerformACF()){
-      //TODO: do the fft, find the tuning error, and update the display here
+    if(inTunerMode && BAC_isBitstreamLoaded()){
+      // 1. run the BAC algorithm
+      BAC_autoCorrelate();
     }
 
     /* USER CODE END WHILE */
@@ -451,7 +454,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
   // compute the second half of the buffer
   uint16_t* startPtr = &adcBuffer[WINDOW_SIZE * 3];
   if(inTunerMode){
-    AudioADC_LoadToACFBuffer(startPtr);
+    BAC_loadBitstream(startPtr, 3);
   } else if (useNoiseGate){
     AudioADC_LoadToRMSBuffer(startPtr);
   }
@@ -461,7 +464,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
   // compute the first half of the buffer
   uint16_t* startPtr = &adcBuffer[0];
   if(inTunerMode){
-    AudioADC_LoadToACFBuffer(startPtr);
+    BAC_loadBitstream(startPtr, 3);
   } else if (useNoiseGate){
     AudioADC_LoadToRMSBuffer(startPtr);
   }
