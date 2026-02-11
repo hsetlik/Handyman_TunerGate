@@ -99,19 +99,19 @@ void checkModeSettings() {
   }
 }
 
-const char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
+char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
                              "F#", "G",  "G#", "A",  "A#", "B"};
 
 void displayTuningError(tuning_error_t *err) {
   // 1. fill the display w black
   ssd1306_Fill(Black);
   // 2. Grip the appropriate note name
-  const char* noteName = noteNames[err->midiNote % 12];
+  char* noteName = noteNames[err->midiNote % 12];
   // 3. find the appropriate x position to draw the string
   uint8_t xPos = 64 - (8 * strlen(noteName));
   ssd1306_SetCursor(xPos, 12);
   // 4. draw the note name
-  ssd1306_WriteString((char*)noteName, Font_16x26, White);
+  ssd1306_WriteString(noteName, Font_16x26, White);
   // 5. check if we're within the tuning threshold
   if(abs(err->errorCents) <= IN_TUNE_THRESH){
     ssd1306_InvertRectangle(0, 0, SSD1306_WIDTH, SSD1306_HEIGHT);
