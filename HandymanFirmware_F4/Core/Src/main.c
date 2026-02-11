@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "AudioADC.h"
 #include "stm32f4xx_hal_tim.h"
+#include "Tuning.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -120,6 +121,7 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+
   // 1. Start Timer 2 to begin the Audio ADC callbacks
   HAL_TIM_Base_Start(&htim2);
   // 2. Initialize the buffers for the BAC handling
@@ -138,6 +140,9 @@ int main(void)
     if(inTunerMode && BAC_isBitstreamLoaded()){
       // 1. run the BAC algorithm
       BAC_autoCorrelate();
+      // 2. convert to an error value
+      tuning_error_t err = Tune_getErrorForFreq(BAC_getCurrentHz());
+      //TODO: 3. display the error
     }
 
     /* USER CODE END WHILE */

@@ -40,13 +40,10 @@ bitval_t BAC_countBits(bitval_t n) {
     return count;
 }
 
-
-
 bool BAC_get(uint32_t i){
     bitval_t mask = 1 << (i % BAC_numBits);
     return (bits[i / BAC_numBits] & mask) != 0;
 }
-
 
 void BAC_set(uint32_t i, bool val){
     bitval_t mask = 1 << (i % BAC_numBits);
@@ -57,7 +54,6 @@ void BAC_set(uint32_t i, bool val){
         *ref &= ~(mask);
     }
 }
-
 
 bool BAC_isZeroCross(uint16_t value){
     return value >= 2048;
@@ -70,11 +66,13 @@ void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
     bitstreamLoaded = true;
 }
 
-
 bool BAC_isBitstreamLoaded(){
     return bitstreamLoaded;
 }
 
+bool BAC_isWorking(){
+    return bacRunning;
+}
 
 void BAC_autoCorrelate(){
     bacRunning = true;
@@ -130,5 +128,5 @@ static uint32_t BAC_minCorrelationIndex(uint32_t startBin, uint32_t endBin){
 }
 
 float BAC_getCurrentHz(){
-    return BAC_hzForIndex(BAC_minCorrelationIndex(4, 510));
+    return BAC_hzForIndex(BAC_minCorrelationIndex(4, (WINDOW_SIZE / 2) - 1));
 }

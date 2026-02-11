@@ -37,6 +37,9 @@ void BAC_autoCorrelate();
 // check if we're ready to run the algorithm
 bool BAC_isBitstreamLoaded();
 
+// check if the algorithm is currently working (for debug reasons)
+bool BAC_isWorking();
+
 // return the current best guess for the fundamental frequency in the correlation buffer
 float BAC_getCurrentHz();
 

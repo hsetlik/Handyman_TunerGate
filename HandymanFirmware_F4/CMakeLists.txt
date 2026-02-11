@@ -53,6 +53,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     "${SRC_DIR}/AudioADC.c"
     "${INC_DIR}/BitstreamACF.h"
     "${SRC_DIR}/BitstreamACF.c"
+    "${INC_DIR}/Tuning.h"
+    "${SRC_DIR}/Tuning.c"
 )
 
 # Add include paths
