@@ -25,6 +25,7 @@
 #include "stm32f4xx_hal_tim.h"
 #include "Tuning.h"
 #include "BitstreamACF.h"
+#include "ssd1306.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,6 +75,9 @@ static void MX_TIM3_Init(void);
 // check the GPIOs to set the above `inTunerMode` and `useNoiseGate` flags
 // call this once before the main while loop and again in the ISR for TIM3 (which is 10x/second with current settings)
 void checkModeSettings();
+
+// draw the current tuning error to the display
+void displayTuningError(tuning_error_t* err);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -83,6 +87,11 @@ void checkModeSettings(){
   GPIO_PinState useGateState = HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
   inTunerMode = tuneState == GPIO_PIN_SET;
   useNoiseGate = useGateState == GPIO_PIN_SET;
+}
+
+
+void displayTuningError(tuning_error_t* err) {
+  //TODO
 }
 
 /* USER CODE END 0 */
@@ -145,7 +154,8 @@ int main(void)
       BAC_autoCorrelate();
       // 2. convert to an error value
       tuning_error_t err = Tune_getErrorForFreq(BAC_getCurrentHz());
-      //TODO: 3. display the error
+      // 3. display the error
+      displayTuningError(&err);
       // 4. Unset the bitstreamLoaded flag
       BAC_finishedWithCurrentHz();
     }

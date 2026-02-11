@@ -55,6 +55,11 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     "${SRC_DIR}/BitstreamACF.c"
     "${INC_DIR}/Tuning.h"
     "${SRC_DIR}/Tuning.c"
+    "${INC_DIR}/ssd1306_conf.h"
+    "${INC_DIR}/ssd1306.h"
+    "${SRC_DIR}/ssd1306.c"
+    "${INC_DIR}/ssd1306_fonts.h"
+    "${SRC_DIR}/ssd1306_fonts.c"
 )
 
 # Add include paths
