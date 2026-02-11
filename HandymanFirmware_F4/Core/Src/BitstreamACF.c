@@ -9,19 +9,17 @@ bitval_t smallestPow2(bitval_t n){
 }
 
 static const float BAC_sampleRate = 40000.0f;
-static const bitval_t BAC_numBits = 8 * sizeof(bitval_t);
+#define BAC_numBits 32
 static const bitval_t BAC_arraySize = WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
 volatile bool bitstreamLoaded = false;
 
 // the main array of bitstream values
-bitval_t* bits;
-bitval_t* corBuffer;
+bitval_t bits[WINDOW_SIZE / BAC_numBits];
+bitval_t corBuffer[WINDOW_SIZE / 2];
 
 
 void BAC_initBitArray(){
-    bits = (bitval_t*)malloc(BAC_arraySize * sizeof(bitval_t));
-    corBuffer = (bitval_t*)malloc((WINDOW_SIZE / 2) * sizeof(bitval_t));
     for(bitval_t i = 0; i < BAC_arraySize; ++i){
         bits[i] = 0;
     }
@@ -38,6 +36,11 @@ bitval_t BAC_countBits(bitval_t n) {
         }
     }
     return count;
+}
+
+
+void BAC_finishedWithCurrentHz(){
+    bitstreamLoaded = false;
 }
 
 bool BAC_get(uint32_t i){
@@ -82,18 +85,18 @@ void BAC_autoCorrelate(){
     uint32_t index = 0;
     uint32_t shift = 1;
 
-    for(uint32_t pos = 1; pos != midPoint; ++pos){
+    for(uint32_t pos = 1; pos < midPoint; ++pos){
         bitval_t* p1 = &bits[0];
         bitval_t* p2 = &bits[index];
         uint32_t count = 0;
         if(shift == 0){
-            for(uint32_t i = 0; i != midArray; ++i){
+            for(uint32_t i = 0; i < midArray; ++i){
                 count += BAC_countBits(*p1++ ^ *p2++);
             }
         } else {
             uint32_t shift2 = BAC_numBits - shift;
             
-            for(uint32_t i = 0; i != midArray; ++i){
+            for(uint32_t i = 0; i < midArray; ++i){
                 uint32_t v = *p2++ >> shift;
                 v |= *p2 << shift2;
                 count += BAC_countBits(*p1++ ^ v);

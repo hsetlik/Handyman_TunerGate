@@ -43,4 +43,7 @@ bool BAC_isWorking();
 // return the current best guess for the fundamental frequency in the correlation buffer
 float BAC_getCurrentHz();
 
+// call this after displaying the current tuning error
+void BAC_finishedWithCurrentHz();
+
 #endif

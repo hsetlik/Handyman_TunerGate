@@ -24,6 +24,7 @@
 #include "AudioADC.h"
 #include "stm32f4xx_hal_tim.h"
 #include "Tuning.h"
+#include "BitstreamACF.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -130,6 +131,8 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcBuffer, WINDOW_SIZE * 2 * 3);
   // 4. start timer 3 for checking mode settings
   HAL_TIM_Base_Start(&htim3);
+  // 5. check the GPIO inputs for the first time
+  checkModeSettings();
 
   /* USER CODE END 2 */
 
@@ -143,6 +146,8 @@ int main(void)
       // 2. convert to an error value
       tuning_error_t err = Tune_getErrorForFreq(BAC_getCurrentHz());
       //TODO: 3. display the error
+      // 4. Unset the bitstreamLoaded flag
+      BAC_finishedWithCurrentHz();
     }
 
     /* USER CODE END WHILE */
