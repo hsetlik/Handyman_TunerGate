@@ -5973,6 +5973,16 @@
 	)
 	(wire
 		(pts
+			(xy 180.34 155.575) (xy 177.8 155.575)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4a8611b-c0b8-4ae0-b869-07905ea77880")
+	)
+	(wire
+		(pts
 			(xy 93.345 86.36) (xy 97.79 86.36)
 		)
 		(stroke
@@ -6280,6 +6290,16 @@
 			(type default)
 		)
 		(uuid "e9dd0e4c-cd57-439d-9b1d-82f0d55e70c3")
+	)
+	(wire
+		(pts
+			(xy 177.8 155.575) (xy 177.8 154.305)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ead749b2-087a-49fb-84fa-4d00c148c8fa")
 	)
 	(wire
 		(pts
@@ -6743,6 +6763,28 @@
 			)
 		)
 	)
+	(global_label "TUNE_IN"
+		(shape output)
+		(at 180.34 155.575 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c07bb37a-5287-4b42-aed6-b54f3cbc8b0b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 191.0057 155.575 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SWCLK"
 		(shape input)
 		(at 97.79 88.9 0)
@@ -7196,6 +7238,73 @@
 			(project "HandymanSchematic_G0"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
 					(reference "C17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 177.8 154.305 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "15e117bf-c96f-4523-ad6e-00905ddc661e")
+		(property "Reference" "TP3"
+			(at 180.34 149.7329 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TI"
+			(at 180.34 152.2729 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm_VAL"
+			(at 182.88 154.305 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 182.88 154.305 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 177.8 154.305 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a04ad7c4-2228-4839-9cd1-e557a2de8de1")
+		)
+		(instances
+			(project "HandymanSchematic_F4"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
+					(reference "TP3")
 					(unit 1)
 				)
 			)
@@ -8469,7 +8578,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x06_P2.00mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical"
 			(at 157.48 100.965 0)
 			(effects
 				(font
