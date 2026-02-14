@@ -65,6 +65,7 @@ uint16_t* midBufPtr = &adcBuffer[WINDOW_SIZE];
 // flags for tuner/noise gate modes
 bool inTunerMode = false;
 bool useNoiseGate = false;
+volatile bool isDmaRunning = false;
 
 /* USER CODE END PV */
 
@@ -137,6 +138,36 @@ void displayTuningError(tuning_error_t *err) {
   ssd1306_UpdateScreen();
 }
 
+// Implementations of shared stuff from main.h---------------------------------------------------
+
+void startAudioDMA(){
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
+  if(dmaStatus != HAL_OK){
+    Error_Handler();
+  }
+  HAL_StatusTypeDef timerStatus = HAL_TIM_Base_Start(&htim2);
+  if(timerStatus != HAL_OK){
+    Error_Handler();
+  }
+  isDmaRunning = true;
+}
+
+
+void stopAudioDMA(){
+  HAL_StatusTypeDef timerStatus = HAL_TIM_Base_Stop(&htim2);
+  if(timerStatus != HAL_OK){
+    Error_Handler();
+  }
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Stop_DMA(&hadc1);
+  if(dmaStatus != HAL_OK){
+    Error_Handler();
+  }
+  isDmaRunning = false;
+}
+
+uint8_t audioDMARunning(){
+  return isDmaRunning ? 1 : 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -174,26 +205,21 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-
-
-  // 2. Initialize the buffers for the BAC handling
+  // Initialize the buffers for the BAC handling
   BAC_initBitArray();
-  // 3. start the DMA stream
-  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
-  if(dmaStatus != HAL_OK){
-    Error_Handler();
-  }
-  // 5. initialize the OLED
+
+  // initialize the OLED
   ssd1306_Init();
   ssd1306_Fill(White);
   ssd1306_UpdateScreen();
   HAL_Delay(200);
-  // 6. check the GPIO inputs for the first time
+  // check the GPIO inputs for the first time
   checkModeSettings();
-  // 4. start timer 3 for checking mode settings
+  // start timer 3 for checking mode settings
   HAL_TIM_Base_Start(&htim3);
-  // 1. Start Timer 2 to begin the Audio ADC callbacks
-  HAL_TIM_Base_Start(&htim2);
+  // start the audio DMA stream
+  startAudioDMA();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

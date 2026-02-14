@@ -53,7 +53,12 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+// this starts the timer and dma stream for the audio input ADC
+void startAudioDMA();
+// stop the timer & DMA stream
+void stopAudioDMA();
+// return 1 if the DMA stream is running, 0 otherwise
+uint8_t audioDMARunning();
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
