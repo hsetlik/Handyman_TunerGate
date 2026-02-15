@@ -26,8 +26,10 @@
 #include "Tuning.h"
 #include "ssd1306.h"
 #include "ssd1306_fonts.h"
+#include "NoiseGate.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_hal_tim.h"
 #include <string.h>
 #include <stdlib.h>
@@ -66,6 +68,7 @@ uint16_t* midBufPtr = &adcBuffer[WINDOW_SIZE];
 bool inTunerMode = false;
 bool useNoiseGate = false;
 volatile bool isDmaRunning = false;
+volatile bool noiseGateClosed = false;
 
 /* USER CODE END PV */
 
@@ -101,6 +104,7 @@ void checkModeSettings() {
   } else {
     ssd1306_SetDisplayOn(0);
   }
+  setUseGateLED(useNoiseGate);
 }
 
 char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
@@ -165,8 +169,19 @@ void stopAudioDMA(){
   isDmaRunning = false;
 }
 
-uint8_t audioDMARunning(){
-  return isDmaRunning ? 1 : 0;
+bool audioDMARunning(){
+  return isDmaRunning;
+}
+
+
+void setUseGateLED(bool ledOn){
+  GPIO_PinState state = ledOn ? GPIO_PIN_SET : GPIO_PIN_RESET;
+  HAL_GPIO_WritePin(UseGate_OUT_GPIO_Port, UseGate_OUT_Pin, state);
+}
+
+void setNoiseGateClosed(bool gateClosed){
+  GPIO_PinState state = noiseGateClosed ? GPIO_PIN_SET : GPIO_PIN_RESET;
+  HAL_GPIO_WritePin(GateClosed_OUT_GPIO_Port, GateClosed_OUT_Pin, state);
 }
 /* USER CODE END 0 */
 

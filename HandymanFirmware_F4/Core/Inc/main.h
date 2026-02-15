@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -53,12 +53,22 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+
 // this starts the timer and dma stream for the audio input ADC
 void startAudioDMA();
+
 // stop the timer & DMA stream
 void stopAudioDMA();
+
 // return 1 if the DMA stream is running, 0 otherwise
-uint8_t audioDMARunning();
+bool audioDMARunning();
+
+// set the LED to indicate tuner/noise gate mode
+void setUseGateLED(bool ledOn);
+
+// set the GPIO pin that opens/closes the noise gate
+void setNoiseGateClosed(bool gateClosed);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
