@@ -549,7 +549,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
   if (inTunerMode) {
     BAC_loadBitstream(midBufPtr, 1);
   } else if (useNoiseGate) {
-    AudioADC_LoadToRMSBuffer(midBufPtr);
+    Gate_processChunk(midBufPtr, WINDOW_SIZE);
   }
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
 }
@@ -560,7 +560,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
   if (inTunerMode) {
     BAC_loadBitstream(startPtr, 1);
   } else if (useNoiseGate) {
-    AudioADC_LoadToRMSBuffer(startPtr);
+    Gate_processChunk(startPtr, WINDOW_SIZE);
   }
 }
 
