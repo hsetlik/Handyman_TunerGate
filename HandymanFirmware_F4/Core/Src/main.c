@@ -145,7 +145,7 @@ void displayTuningError(tuning_error_t *err) {
 // Implementations of shared stuff from main.h---------------------------------------------------
 
 void startAudioDMA(){
-  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2 * 3);
   if(dmaStatus != HAL_OK){
     Error_Handler();
   }
@@ -249,6 +249,9 @@ int main(void)
       displayTuningError(&err);
       // 4. Unset the bitstreamLoaded flag
       BAC_finishedWithCurrentHz();
+      // if (!isDmaRunning){
+      //   startAudioDMA();
+      // }
     }
 
     /* USER CODE END WHILE */
@@ -275,11 +278,10 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 80;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
@@ -547,10 +549,12 @@ static void MX_GPIO_Init(void)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the second half of the buffer
   if (inTunerMode) {
-    BAC_loadBitstream(midBufPtr, 1);
+    BAC_loadBitstream(midBufPtr,  1);
   } else if (useNoiseGate) {
     Gate_processChunk(midBufPtr, WINDOW_SIZE);
   }
+  // stop the timer
+  //HAL_TIM_Base_Stop(&htim2);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
 }
 
