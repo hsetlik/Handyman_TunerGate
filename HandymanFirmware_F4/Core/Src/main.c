@@ -348,7 +348,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES;
+  sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -575,21 +575,19 @@ static void MX_GPIO_Init(void)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the second half of the buffer
   if (inTunerMode) {
-    BAC_loadBitstream(midBufPtr,  1);
+    BAC_loadBitstream(adcBuffer,  1);
   } else if (useNoiseGate) {
     Gate_processChunk(midBufPtr, WINDOW_SIZE);
   }
-  // stop the timer
-  //HAL_TIM_Base_Stop(&htim2);
+
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
 }
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the first half of the buffer
   uint16_t *startPtr = adcBuffer;
-  if (inTunerMode) {
-    BAC_loadBitstream(startPtr, 1);
-  } else if (useNoiseGate) {
+  // NOTE: we won't load the ACF buffer here because we need to room to find the first rising edge
+  if (useNoiseGate && !inTunerMode) {
     Gate_processChunk(startPtr, WINDOW_SIZE);
   }
 }

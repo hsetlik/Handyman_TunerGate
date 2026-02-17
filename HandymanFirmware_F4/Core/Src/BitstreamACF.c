@@ -1,4 +1,5 @@
 #include "BitstreamACF.h"
+#include "main.h"
 #include <stdlib.h>
 static bitval_t smallestPow2Recur(bitval_t n, bitval_t m){
     return (m < n) ? smallestPow2Recur(n, m << 1) : m;
@@ -52,9 +53,9 @@ void BAC_set(uint32_t i, bool val){
     bitval_t mask = 1 << (i % BAC_numBits);
     bitval_t* ref = &bits[i / BAC_numBits];
     if(val){
-        *ref = *ref | mask;
+        bits[i / BAC_numBits] = *ref | mask;
     } else {
-        *ref &= ~(mask);
+        bits[i / BAC_numBits] = *ref & ~(mask);
     }
 }
 
@@ -62,15 +63,30 @@ bool BAC_isZeroCross(uint16_t value){
     return value >= 2048;
 }
 
+static uint32_t BAC_firstRisingEdge(uint16_t* buf){
+    for(uint32_t i = 1; i < WINDOW_SIZE; ++i){
+        if(buf[i - 1] < 2048 && buf[i] >= 2048){
+            return i;
+        }
+    }
+    Error_Handler();
+    return 0;
+}
+
 void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
+    // 1. find the first rising edge, ensuring that it falls before the midway point of the input buffer
+    const uint32_t offset = BAC_firstRisingEdge(adcBuf);
+    // 2. copy the relevant portion of the adc buffer into the bitstream
     for(uint32_t i = 0; i < WINDOW_SIZE; ++i){
-        BAC_set(i, BAC_isZeroCross(adcBuf[i * spacing]));
+        BAC_set(i, BAC_isZeroCross(adcBuf[(i + offset) * spacing]));
     }
     bitstreamLoaded = true;
 }
 
+
+
 bool BAC_isBitstreamLoaded(){
-    return bitstreamLoaded;
+    return bitstreamLoaded && !bacRunning;
 }
 
 bool BAC_isWorking(){
