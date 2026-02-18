@@ -19,6 +19,7 @@ float envLevel = 0.0f;
 float noiseThresh = 0.35f;
 bool isGateClosed = false;
 volatile bool wantsPotReadings = false;
+
 float Gate_pushSample(uint16_t val){
     const float vMag = Gate_sampleMagnitude(val);
     if(vMag > envLevel){
@@ -65,8 +66,14 @@ bool Gate_isAwaitingPotReadings() {
     return wantsPotReadings;
 }
 
+static float lerp12Bit(float minVal, float maxVal, uint16_t pos){
+    const float fPos = (float)pos / 4096.0f;
+    return minVal + (fPos * (maxVal - minVal));
+}
+
 
 void Gate_updatePotReadings(uint16_t threshVal, uint16_t releaseVal) {
-    //TODO: update the relevant variables from the ADC readings here
+    fRelease = lerp12Bit(RELEASE_MIN, RELEASE_MAX, releaseVal);
+    noiseThresh = lerp12Bit(THRESH_MIN, THRESH_MAX, threshVal);
     wantsPotReadings = false;
 }

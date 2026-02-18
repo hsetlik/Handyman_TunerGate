@@ -595,8 +595,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     // update the pots here if it's time
     if(Gate_isAwaitingPotReadings()){
       startPotADCConversion();
-      uint32_t releaseVal = HAL_ADCEx_InjectedGetValue(&hadc1, 1);
-      uint32_t threshVal = HAL_ADCEx_InjectedGetValue(&hadc1, 2);
+      uint32_t threshVal = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_1);
+      uint32_t releaseVal = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_2);
       Gate_updatePotReadings((uint16_t)threshVal, (uint16_t)releaseVal);
     }
   }

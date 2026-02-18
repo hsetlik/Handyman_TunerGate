@@ -1,6 +1,10 @@
 #ifndef NOISE_GATE_H
 #define NOISE_GATE_H
 #include "main.h"
+#define RELEASE_MIN 0.85f
+#define RELEASE_MAX 0.988f
+#define THRESH_MIN 0.35f
+#define THRESH_MAX 0.85f
 
 // get the floating point magnitude of this unsigned sample relative to the "zero" line (2048 in the case of our 12-bit ADC)
 float Gate_sampleMagnitude(uint16_t val);
