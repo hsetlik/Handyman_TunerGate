@@ -14,7 +14,7 @@ void ssd1306_Reset(void) {
 // Send a byte to the command register
 void ssd1306_WriteCommand(uint8_t byte) {
     HAL_StatusTypeDef status = HAL_I2C_Mem_Write(&SSD1306_I2C_PORT, SSD1306_I2C_ADDR, 0x00, 1, &byte, 1, HAL_MAX_DELAY);
-    if(status != HAL_OK){
+    if(status == HAL_ERROR){
         Error_Handler();
     }
 }

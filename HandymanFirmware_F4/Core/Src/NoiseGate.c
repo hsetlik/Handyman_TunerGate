@@ -18,6 +18,7 @@ float fRelease = 0.95f;
 float envLevel = 0.0f;
 float noiseThresh = 0.35f;
 bool isGateClosed = false;
+volatile bool wantsPotReadings = false;
 float Gate_pushSample(uint16_t val){
     const float vMag = Gate_sampleMagnitude(val);
     if(vMag > envLevel){
@@ -52,4 +53,20 @@ void Gate_processChunk(uint16_t* buf, uint32_t length){
         bufIdx += chunkLength;
 
     }
+}
+
+
+void Gate_requestPotReadings(){
+    wantsPotReadings = true;
+}
+
+
+bool Gate_isAwaitingPotReadings() {
+    return wantsPotReadings;
+}
+
+
+void Gate_updatePotReadings(uint16_t threshVal, uint16_t releaseVal) {
+    //TODO: update the relevant variables from the ADC readings here
+    wantsPotReadings = false;
 }

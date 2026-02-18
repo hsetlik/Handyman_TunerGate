@@ -69,6 +69,9 @@ void setUseGateLED(bool ledOn);
 // set the GPIO pin that opens/closes the noise gate
 void setNoiseGateClosed(bool gateClosed);
 
+// poll for the injected ADC group (the pot readings)
+void startPotADCConversion();
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

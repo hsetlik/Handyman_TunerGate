@@ -147,5 +147,5 @@ static uint32_t BAC_minCorrelationIndex(uint32_t startBin, uint32_t endBin){
 }
 
 float BAC_getCurrentHz(){
-    return BAC_hzForIndex(BAC_minCorrelationIndex(4, (WINDOW_SIZE / 2) - 1));
+    return BAC_hzForIndex(BAC_minCorrelationIndex(55, (WINDOW_SIZE / 2) - 1));
 }

@@ -12,5 +12,10 @@ float Gate_pushSample(uint16_t val);
 void Gate_processChunk(uint16_t* buf, uint32_t length);
 
 //TODO updating and ADC reading for the release and threshold knobs
+void Gate_requestPotReadings();
+
+bool Gate_isAwaitingPotReadings();
+
+void Gate_updatePotReadings(uint16_t threshVal, uint16_t releaseVal);
 
 #endif
