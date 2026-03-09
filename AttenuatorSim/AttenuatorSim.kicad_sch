@@ -1909,6 +1909,12 @@
 		(uuid "1c3b6dd4-7599-4d85-a5bd-b66dd90fd7f7")
 	)
 	(junction
+		(at 27.94 163.195)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1d9c2758-dcfa-4059-bab0-0a8dc8c26f67")
+	)
+	(junction
 		(at 118.11 80.645)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1925,6 +1931,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3d395582-f758-4ca1-b778-ae265a2c19c7")
+	)
+	(junction
+		(at 58.42 165.735)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "510670fd-361c-4e7e-9764-e01049e459da")
 	)
 	(junction
 		(at 118.11 67.31)
@@ -1949,6 +1961,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "860849a1-1e84-4513-ab73-440a8cdc6f35")
+	)
+	(junction
+		(at 85.725 163.195)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "97ea32b3-603e-4fd8-a51e-6a4ff2fb9e7e")
 	)
 	(junction
 		(at 139.7 99.06)
@@ -2032,6 +2050,16 @@
 	)
 	(wire
 		(pts
+			(xy 65.405 160.655) (xy 65.405 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0cc68943-f60d-42dd-bff9-f56e63b261cd")
+	)
+	(wire
+		(pts
 			(xy 128.27 64.77) (xy 130.81 64.77)
 		)
 		(stroke
@@ -2072,6 +2100,16 @@
 	)
 	(wire
 		(pts
+			(xy 85.725 163.195) (xy 81.915 163.195)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1985750b-b5ed-4519-83d7-cd4a357fac2b")
+	)
+	(wire
+		(pts
 			(xy 118.11 96.52) (xy 120.65 96.52)
 		)
 		(stroke
@@ -2092,6 +2130,16 @@
 	)
 	(wire
 		(pts
+			(xy 22.86 168.275) (xy 22.86 163.195)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "246835d7-3bb7-41f5-ad88-be979b6f9654")
+	)
+	(wire
+		(pts
 			(xy 107.95 70.485) (xy 107.95 67.31)
 		)
 		(stroke
@@ -2099,6 +2147,16 @@
 			(type default)
 		)
 		(uuid "2b06e953-4e2a-40d3-9655-a870c8687b4f")
+	)
+	(wire
+		(pts
+			(xy 27.94 179.705) (xy 27.94 180.975)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c7393db-b81a-4436-88e0-a2937214b6ac")
 	)
 	(wire
 		(pts
@@ -2172,6 +2230,16 @@
 	)
 	(wire
 		(pts
+			(xy 22.86 163.195) (xy 27.94 163.195)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48cb41db-92bb-4876-ae61-29804ab8b776")
+	)
+	(wire
+		(pts
 			(xy 118.11 80.645) (xy 118.11 83.82)
 		)
 		(stroke
@@ -2199,6 +2267,16 @@
 			(type default)
 		)
 		(uuid "4bf5f0d9-6d4d-4f2d-9aad-84babb94acb8")
+	)
+	(wire
+		(pts
+			(xy 22.86 175.895) (xy 22.86 177.165)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "525a3125-d760-466b-b336-99722064c4a6")
 	)
 	(wire
 		(pts
@@ -2259,6 +2337,16 @@
 			(type default)
 		)
 		(uuid "59bb7cae-0fed-47f4-810f-ab3614232023")
+	)
+	(wire
+		(pts
+			(xy 58.42 175.26) (xy 58.42 178.435)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ba9c3eb-ed4b-483d-a75c-5917b6b0e95b")
 	)
 	(wire
 		(pts
@@ -2339,6 +2427,16 @@
 			(type default)
 		)
 		(uuid "69a635f6-42be-4112-ad34-98e66a712e76")
+	)
+	(wire
+		(pts
+			(xy 58.42 150.495) (xy 58.42 153.035)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b88f4c4-56a3-4e4b-b528-fa5bbd24eea4")
 	)
 	(wire
 		(pts
@@ -2432,6 +2530,26 @@
 	)
 	(wire
 		(pts
+			(xy 27.94 163.195) (xy 27.94 164.465)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a197a0b-a3a7-49ec-9734-aac8fcd58279")
+	)
+	(wire
+		(pts
+			(xy 58.42 165.735) (xy 66.675 165.735)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8af82182-a163-4149-8b68-f70c72dd8574")
+	)
+	(wire
+		(pts
 			(xy 219.71 69.85) (xy 219.71 118.11)
 		)
 		(stroke
@@ -2439,6 +2557,16 @@
 			(type default)
 		)
 		(uuid "8b8c43f3-e92f-464d-828a-10b98605b00f")
+	)
+	(wire
+		(pts
+			(xy 85.725 152.4) (xy 85.725 163.195)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e601747-7964-4e5f-8307-b245bc82fade")
 	)
 	(wire
 		(pts
@@ -2469,16 +2597,6 @@
 			(type default)
 		)
 		(uuid "940b1d0c-48e7-415a-8eeb-74b01f507509")
-	)
-	(wire
-		(pts
-			(xy 34.29 92.075) (xy 34.29 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9484d967-6838-4715-b30c-be4e7a2afb2a")
 	)
 	(wire
 		(pts
@@ -2572,13 +2690,13 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 104.14) (xy 34.29 106.045)
+			(xy 27.94 160.655) (xy 27.94 163.195)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c4bf94a1-8bc8-4ba3-b57a-2a9f0ab9f643")
+		(uuid "d13593ab-64c3-4c5f-a425-9f774fb89670")
 	)
 	(wire
 		(pts
@@ -2642,6 +2760,16 @@
 	)
 	(wire
 		(pts
+			(xy 65.405 152.4) (xy 85.725 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e18da449-bc40-4038-8918-7f882f417858")
+	)
+	(wire
+		(pts
 			(xy 171.45 99.06) (xy 175.26 99.06)
 		)
 		(stroke
@@ -2672,6 +2800,26 @@
 	)
 	(wire
 		(pts
+			(xy 58.42 160.655) (xy 58.42 165.735)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb273507-2e41-4e6e-8b4c-b1e68e4ceba0")
+	)
+	(wire
+		(pts
+			(xy 85.725 163.195) (xy 89.535 163.195)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f1263a23-8af2-4b10-99dd-03140b832e51")
+	)
+	(wire
+		(pts
 			(xy 78.74 119.38) (xy 78.74 120.65)
 		)
 		(stroke
@@ -2682,6 +2830,16 @@
 	)
 	(wire
 		(pts
+			(xy 58.42 165.735) (xy 58.42 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4471c5f-2d86-4ce1-a880-f01b452f83e2")
+	)
+	(wire
+		(pts
 			(xy 190.5 91.44) (xy 190.5 101.6)
 		)
 		(stroke
@@ -2689,6 +2847,16 @@
 			(type default)
 		)
 		(uuid "f48b73a0-59ce-4d1a-b408-6e37e79b25b4")
+	)
+	(wire
+		(pts
+			(xy 66.675 160.655) (xy 65.405 160.655)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5de5e0a-724e-47ad-a191-e541a7c648eb")
 	)
 	(wire
 		(pts
@@ -2759,6 +2927,16 @@
 			(justify right bottom)
 		)
 		(uuid "15cc0804-d4cd-45aa-b5c8-04cc69be0a61")
+	)
+	(label "VG"
+		(at 89.535 163.195 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "19e460d2-803d-48e4-91b3-814ca47abb8e")
 	)
 	(label "SumPt"
 		(at 149.86 99.06 0)
@@ -2831,16 +3009,6 @@
 			(justify left bottom)
 		)
 		(uuid "c80372bf-e135-44a9-b703-7388b9bb885d")
-	)
-	(label "VG"
-		(at 34.29 92.075 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ddfeaa7b-49b1-4141-a90a-f361d6827c38")
 	)
 	(label "VG"
 		(at 124.46 101.6 180)
@@ -4130,17 +4298,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:0")
-		(at 34.29 106.045 0)
+		(lib_id "Device:R_US")
+		(at 58.42 156.845 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "520c7f03-efa2-4c45-9e82-3a7222c19734")
-		(property "Reference" "#GND03"
-			(at 34.29 111.125 0)
+		(uuid "5128c67a-fcfc-4d84-90d6-9b6f67911053")
+		(property "Reference" "R14"
+			(at 60.325 155.5749 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47k"
+			(at 60.325 158.1149 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 59.436 157.099 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4148,8 +4334,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "0"
-			(at 34.29 108.585 0)
+		(property "Datasheet" "~"
+			(at 58.42 156.845 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4157,8 +4343,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
-			(at 34.29 106.045 0)
+		(property "Description" "Resistor, US symbol"
+			(at 58.42 156.845 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4166,31 +4352,16 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#subsec_Circuit_elements__device"
-			(at 34.29 116.205 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "0V reference potential for simulation"
-			(at 34.29 113.665 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "2"
+			(uuid "9f0583e8-779d-4d6f-96b8-61f470878bd2")
 		)
 		(pin "1"
-			(uuid "7bdaf3db-4120-4f67-ad78-0b80d8a31a1d")
+			(uuid "7768ad03-b14f-4649-ad66-de0eaa37c487")
 		)
 		(instances
 			(project "AttenuatorSim"
 				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
-					(reference "#GND03")
+					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -4774,6 +4945,72 @@
 		)
 	)
 	(symbol
+		(lib_id "PCM_4ms_Power-symbol:+9V")
+		(at 27.94 160.655 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6f69cc44-a35c-465d-9c27-8b494a6c1639")
+		(property "Reference" "#PWR02"
+			(at 27.94 164.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+9V"
+			(at 27.94 156.337 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 27.94 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 27.94 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+9V\""
+			(at 27.94 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "92bda85c-674f-4394-ba7a-cf0a275f05b8")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 144.78 99.06 90)
 		(unit 1)
@@ -5115,6 +5352,143 @@
 		)
 	)
 	(symbol
+		(lib_id "Simulation_SPICE:0")
+		(at 58.42 178.435 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8943e0d7-a54c-46b5-b914-27210bb67b2e")
+		(property "Reference" "#GND011"
+			(at 58.42 183.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "0"
+			(at 58.42 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 58.42 178.435 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#subsec_Circuit_elements__device"
+			(at 58.42 188.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0V reference potential for simulation"
+			(at 58.42 186.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "96fa7f67-4816-46b1-adc5-7ee240c299d0")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "#GND011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 58.42 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "898e4b50-adef-4686-817c-89a44ba17848")
+		(property "Reference" "R15"
+			(at 60.325 170.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47k"
+			(at 60.325 172.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 59.436 171.704 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 58.42 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 58.42 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "46e48376-2277-4409-ad55-8f33e0b0fe6a")
+		)
+		(pin "1"
+			(uuid "3462dd73-f5c2-4a38-af95-f78eeffa6a34")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 107.95 74.295 0)
 		(unit 1)
@@ -5180,6 +5554,218 @@
 				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
 					(reference "C2")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 22.86 172.085 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "91022d57-ed00-426c-b5b9-4450c3233f84")
+		(property "Reference" "C6"
+			(at 19.304 170.8149 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "100n"
+			(at 19.304 173.3549 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 23.8252 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 22.86 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 22.86 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c66932c6-d78e-46b6-94ad-71a478f93e4d")
+		)
+		(pin "1"
+			(uuid "94110aee-5378-447d-bd7e-28885262c1de")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "C6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:TL074")
+		(at 30.48 172.085 0)
+		(unit 5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "99bd3f0b-0ddf-42d9-9c41-f3b2b8ab2eaf")
+		(property "Reference" "U2"
+			(at 29.21 170.8149 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TL074"
+			(at 29.21 173.3549 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 29.21 169.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tl071.pdf"
+			(at 31.75 167.005 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad Low-Noise JFET-Input Operational Amplifiers, DIP-14/SOIC-14"
+			(at 30.48 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Library" "tl074-quad.cir"
+			(at 30.48 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Name" "TL074c"
+			(at 30.48 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "SUBCKT"
+			(at 30.48 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=1 2=2 3=3 4=4 5=5 6=6 7=7 8=8 9=9 10=10 11=11 12=12 13=13 14=14"
+			(at 30.48 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "96c392f0-10ad-4e2d-8f6b-b82675919855")
+		)
+		(pin "9"
+			(uuid "b35198d4-5474-4527-b5ab-c03c8b7dd89f")
+		)
+		(pin "8"
+			(uuid "b57ece04-54e2-48fd-934d-cfdde193f5cc")
+		)
+		(pin "12"
+			(uuid "d637f9cf-0575-4f87-a108-cc82f51ea0be")
+		)
+		(pin "13"
+			(uuid "50691cbf-2b20-47d9-a912-97ac189e719a")
+		)
+		(pin "14"
+			(uuid "fe7c95bf-2529-45d5-8796-b576d9b5b743")
+		)
+		(pin "4"
+			(uuid "1433a0f0-414b-4a00-aa21-893e1f047bac")
+		)
+		(pin "11"
+			(uuid "899de681-4533-43fd-b79c-4c70f686e119")
+		)
+		(pin "5"
+			(uuid "bf91bbe2-09b0-418c-a2c3-61f35b3a7fd3")
+		)
+		(pin "6"
+			(uuid "bb304f60-484a-41ca-bf8c-0434a40552ee")
+		)
+		(pin "7"
+			(uuid "4f55fb55-805b-4320-9f10-fef2a7a33c2f")
+		)
+		(pin "10"
+			(uuid "e880cb30-9b9b-4d2f-9178-7b0eb51e66b8")
+		)
+		(pin "2"
+			(uuid "16d82e62-ef86-461b-aca2-795b52a563e3")
+		)
+		(pin "1"
+			(uuid "3713526f-a742-4a2b-bc19-ae305aed5ce6")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "U2")
+					(unit 5)
 				)
 			)
 		)
@@ -5464,6 +6050,146 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:TL074")
+		(at 74.295 163.195 0)
+		(mirror x)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a29543f5-de1e-4e35-b10f-373fd8441127")
+		(property "Reference" "U2"
+			(at 74.295 173.355 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TL074"
+			(at 74.295 170.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 73.025 165.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tl071.pdf"
+			(at 75.565 168.275 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Quad Low-Noise JFET-Input Operational Amplifiers, DIP-14/SOIC-14"
+			(at 74.295 163.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Library" "tl074-quad.cir"
+			(at 74.295 163.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Name" "TL074c"
+			(at 74.295 163.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "SUBCKT"
+			(at 74.295 163.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=1 2=2 3=3 4=4 5=5 6=6 7=7 8=8 9=9 10=10 11=11 12=12 13=13 14=14"
+			(at 74.295 163.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "ee587a04-bfd8-44e4-be71-e36960db1089")
+		)
+		(pin "2"
+			(uuid "64aa146b-3a22-4ca3-a790-f0466bce76af")
+		)
+		(pin "1"
+			(uuid "735fc06c-383b-4e5c-8cc9-db6b2aacb1e4")
+		)
+		(pin "6"
+			(uuid "934617e2-0751-40f1-becd-5a70b9bbd720")
+		)
+		(pin "7"
+			(uuid "e3195bae-f2b3-4afd-91ea-131878e848b2")
+		)
+		(pin "10"
+			(uuid "f030b091-e620-4a77-aaf5-f128c34300d8")
+		)
+		(pin "8"
+			(uuid "4feb8e8f-c989-408f-aa1d-297d0e04eb60")
+		)
+		(pin "9"
+			(uuid "36cc64e6-5672-4f69-b21d-63ef5a4b37a8")
+		)
+		(pin "12"
+			(uuid "59e085e3-e536-48ab-a1b5-48f30f6cfeda")
+		)
+		(pin "13"
+			(uuid "4a7d84d5-07a3-4a8c-a511-c89ece5d5f81")
+		)
+		(pin "14"
+			(uuid "de961946-e346-4c26-98fc-56b683a252d3")
+		)
+		(pin "11"
+			(uuid "ecfb47ae-880a-486d-bc70-2ad59d41361a")
+		)
+		(pin "4"
+			(uuid "1b671f26-e2af-4527-924b-bd58834d2f76")
+		)
+		(pin "5"
+			(uuid "9d3afac7-8b2e-4cc6-8356-e34fd91bf945")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "U2")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:TL074")
 		(at 81.28 111.76 0)
 		(unit 5)
 		(exclude_from_sim no)
@@ -5605,35 +6331,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:VDC")
-		(at 34.29 99.06 0)
+		(lib_id "Simulation_SPICE:0")
+		(at 22.86 177.165 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "a5cfe97a-b05c-44e5-8d6b-1ed2b401069e")
-		(property "Reference" "V3"
-			(at 38.1 97.6601 0)
+		(uuid "a37fd121-b959-43da-87b5-5c6c27b34d46")
+		(property "Reference" "#GND09"
+			(at 22.86 182.245 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(hide yes)
 			)
 		)
-		(property "Value" "4.5"
-			(at 38.1 100.2001 0)
+		(property "Value" "0"
+			(at 22.86 179.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(hide yes)
 			)
 		)
 		(property "Footprint" ""
-			(at 34.29 99.06 0)
+			(at 22.86 177.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5641,8 +6367,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 34.29 99.06 0)
+		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#subsec_Circuit_elements__device"
+			(at 22.86 187.325 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5650,53 +6376,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Voltage source, DC"
-			(at 34.29 99.06 0)
+		(property "Description" "0V reference potential for simulation"
+			(at 22.86 184.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=+ 2=-"
-			(at 34.29 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" "DC"
-			(at 34.29 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "V"
-			(at 34.29 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
 		(pin "1"
-			(uuid "2325ec47-351f-4251-8e62-0ea0024205a5")
-		)
-		(pin "2"
-			(uuid "5be95a14-a2dd-4350-98b1-1242855cbdb2")
+			(uuid "70090b10-7d3b-4050-88ef-b62e71d5f303")
 		)
 		(instances
 			(project "AttenuatorSim"
 				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
-					(reference "V3")
+					(reference "#GND09")
 					(unit 1)
 				)
 			)
@@ -6113,6 +6808,72 @@
 		)
 	)
 	(symbol
+		(lib_id "PCM_4ms_Power-symbol:+9V")
+		(at 58.42 150.495 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bfa05294-0b85-4e79-9dd4-368d6ab20d81")
+		(property "Reference" "#PWR03"
+			(at 58.42 154.305 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+9V"
+			(at 58.42 146.177 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 58.42 150.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 150.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+9V\""
+			(at 58.42 150.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "86051375-ce41-4397-9d47-18d54e98ecd2")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Simulation_SPICE:0")
 		(at 22.86 106.045 0)
 		(unit 1)
@@ -6174,6 +6935,73 @@
 			(project "AttenuatorSim"
 				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
 					(reference "#GND01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Simulation_SPICE:0")
+		(at 27.94 180.975 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c8b02483-a30e-4e0c-9e25-5a28cad5555e")
+		(property "Reference" "#GND010"
+			(at 27.94 186.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "0"
+			(at 27.94 183.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 27.94 180.975 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#subsec_Circuit_elements__device"
+			(at 27.94 191.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "0V reference potential for simulation"
+			(at 27.94 188.595 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "322c9e63-3511-4cf9-8954-b2b43e580e0c")
+		)
+		(instances
+			(project "AttenuatorSim"
+				(path "/98bc47f1-8090-4985-b644-bda5d553ef6a"
+					(reference "#GND010")
 					(unit 1)
 				)
 			)

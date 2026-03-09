@@ -5323,7 +5323,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 188.595) (xy 26.67 189.865)
+			(xy 26.035 180.34) (xy 26.035 181.61)
 		)
 		(stroke
 			(width 0)
@@ -5760,16 +5760,6 @@
 			(type default)
 		)
 		(uuid "8444507b-eb72-4fa3-9472-5ffe24c17415")
-	)
-	(wire
-		(pts
-			(xy 26.67 166.37) (xy 26.67 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "84c1ebf2-6e07-4c39-88a5-92090bcbea2f")
 	)
 	(wire
 		(pts
@@ -6223,7 +6213,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 177.8) (xy 26.67 180.975)
+			(xy 26.035 169.545) (xy 26.035 172.72)
 		)
 		(stroke
 			(width 0)
@@ -6462,7 +6452,7 @@
 		(uuid "77090557-3473-42a2-b352-fb66f10d6618")
 	)
 	(label "BOOT0"
-		(at 26.67 180.975 0)
+		(at 26.035 169.545 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8209,7 +8199,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 26.67 184.785 0)
+		(at 26.035 176.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8218,7 +8208,7 @@
 		(fields_autoplaced yes)
 		(uuid "6138efd5-e6c1-4267-aac5-69f01827dc14")
 		(property "Reference" "R310"
-			(at 29.21 183.515 0)
+			(at 27.94 175.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8226,8 +8216,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100k"
-			(at 29.21 186.055 0)
+		(property "Value" "10k"
+			(at 27.94 177.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8236,7 +8226,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 27.686 185.039 90)
+			(at 27.051 176.784 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8245,7 +8235,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 26.67 184.785 0)
+			(at 26.035 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8254,7 +8244,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 26.67 184.785 0)
+			(at 26.035 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8416,7 +8406,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 26.67 189.865 0)
+		(at 26.035 181.61 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8426,7 +8416,7 @@
 		(fields_autoplaced yes)
 		(uuid "6edb58ce-8689-4f7a-a939-547a4ba02e16")
 		(property "Reference" "#PWR0337"
-			(at 26.67 196.215 0)
+			(at 26.035 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8435,7 +8425,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 26.67 193.675 0)
+			(at 26.035 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8444,7 +8434,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 26.67 189.865 0)
+			(at 26.035 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8453,7 +8443,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 26.67 189.865 0)
+			(at 26.035 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8462,7 +8452,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 26.67 189.865 0)
+			(at 26.035 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9235,72 +9225,6 @@
 			(project "HandymanSchematic_G0"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
 					(reference "#PWR039")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 26.67 166.37 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9364df82-a9ae-4550-9721-8ec8dfaeb4d0")
-		(property "Reference" "#PWR0336"
-			(at 26.67 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 26.67 161.417 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 26.67 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 26.67 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 26.67 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "903095d9-5ba2-428e-afbb-b631fe1dd460")
-		)
-		(instances
-			(project "HandymanSchematic_F4"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
-					(reference "#PWR0336")
 					(unit 1)
 				)
 			)
@@ -11822,76 +11746,6 @@
 			(project "HandymanSchematic_G0"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
 					(reference "#PWR027")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_SPST")
-		(at 26.67 172.72 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ec9fc49d-7206-4954-acfc-e3c0fd253733")
-		(property "Reference" "SW302"
-			(at 27.94 171.45 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "BOOT"
-			(at 27.94 173.99 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_B3U-1000P"
-			(at 26.67 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 26.67 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 26.67 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "91794ccd-9eca-45ce-ac09-d0ca64c0a5d8")
-		)
-		(pin "2"
-			(uuid "d7e80a42-f3ab-4080-bbb5-bd0dda23e2aa")
-		)
-		(instances
-			(project "HandymanSchematic_F4"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
-					(reference "SW302")
 					(unit 1)
 				)
 			)
