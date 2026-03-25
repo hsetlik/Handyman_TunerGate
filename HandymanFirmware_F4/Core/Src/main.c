@@ -254,7 +254,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
-    if (inTunerMode && BAC_isBitstreamLoaded()) {
+    if (inTunerMode && BAC_isBitstreamLoaded() && BAC_hasTuningSignal()) {
       // 1. run the BAC algorithm
       BAC_autoCorrelate();
       // 2. convert to an error value

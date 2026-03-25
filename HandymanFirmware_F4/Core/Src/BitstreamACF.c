@@ -14,6 +14,7 @@ static const float BAC_sampleRate = 40000.0f;
 static const bitval_t BAC_arraySize = WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
 volatile bool bitstreamLoaded = false;
+volatile bool hasValidSignal = false;
 
 // the main array of bitstream values
 bitval_t bits[WINDOW_SIZE / BAC_numBits];
@@ -40,8 +41,14 @@ bitval_t BAC_countBits(bitval_t n) {
 }
 
 
+bool BAC_hasTuningSignal(){
+    return hasValidSignal;
+}
+
+
 void BAC_finishedWithCurrentHz(){
     bitstreamLoaded = false;
+    hasValidSignal = false;
 }
 
 bool BAC_get(uint32_t i){
@@ -66,10 +73,11 @@ bool BAC_isZeroCross(uint16_t value){
 static uint32_t BAC_firstRisingEdge(uint16_t* buf){
     for(uint32_t i = 1; i < WINDOW_SIZE; ++i){
         if(buf[i - 1] < 2048 && buf[i] >= 2048){
+            hasValidSignal = true;
             return i;
         }
     }
-    Error_Handler();
+    hasValidSignal = false;
     return 0;
 }
 
