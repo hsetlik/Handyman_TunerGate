@@ -89,6 +89,8 @@ void checkModeSettings();
 
 // draw the current tuning error to the display
 void displayTuningError(tuning_error_t *err);
+// draw a blank screen if we don't have valid tuning data
+void displayBlankTuning();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -142,10 +144,15 @@ void displayTuningError(tuning_error_t *err) {
   ssd1306_UpdateScreen();
 }
 
+
+void displayBlankTuning(){
+  ssd1306_Fill(Black);
+  ssd1306_UpdateScreen();
+}
 // Implementations of shared stuff from main.h---------------------------------------------------
 
 void startAudioDMA(){
-  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2 * 3);
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
   if(dmaStatus != HAL_OK){
     Error_Handler();
   }
@@ -254,18 +261,20 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
-    if (inTunerMode && BAC_isBitstreamLoaded() && BAC_hasTuningSignal()) {
-      // 1. run the BAC algorithm
-      BAC_autoCorrelate();
-      // 2. convert to an error value
-      tuning_error_t err = Tune_getErrorForFreq(BAC_getCurrentHz());
-      // 3. display the error
-      displayTuningError(&err);
+    if (inTunerMode && BAC_isBitstreamLoaded()) {
+      if(BAC_hasTuningSignal()){
+        // 1. run the BAC algorithm
+        BAC_autoCorrelate();
+        // 2. convert to an error value
+        tuning_error_t err = Tune_getErrorForFreq(BAC_getCurrentHz());
+        // 3. display the error
+        displayTuningError(&err);
+      } else {
+        displayBlankTuning();
+      }
       // 4. Unset the bitstreamLoaded flag
       BAC_finishedWithCurrentHz();
-      // if (!isDmaRunning){
-      //   startAudioDMA();
-      // }
+
     }
 
     /* USER CODE END WHILE */
@@ -600,7 +609,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
       Gate_updatePotReadings((uint16_t)threshVal, (uint16_t)releaseVal);
     }
   }
-
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
 }
 
