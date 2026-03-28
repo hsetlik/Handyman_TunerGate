@@ -15,6 +15,7 @@ static const bitval_t BAC_arraySize = WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
 volatile bool bitstreamLoaded = false;
 volatile bool hasValidSignal = false;
+volatile uint32_t currentRisingEdge = 0;
 
 // the main array of bitstream values
 bitval_t bits[WINDOW_SIZE / BAC_numBits];
@@ -29,17 +30,6 @@ void BAC_initBitArray(){
         corBuffer[i] = 0;
     }
 }
-
-bitval_t BAC_countBits(bitval_t n) {
-    bitval_t count = 0;
-    for(bitval_t i = 0; i < BAC_numBits; ++i){
-        if((n & (1 << i)) > 0){
-            ++count;
-        }
-    }
-    return count;
-}
-
 
 bool BAC_hasTuningSignal(){
     return hasValidSignal;
@@ -71,7 +61,7 @@ bool BAC_isZeroCross(uint16_t value){
 }
 
 static uint32_t BAC_firstRisingEdge(uint16_t* buf){
-    for(uint32_t i = 1; i < WINDOW_SIZE; ++i){
+    for(uint32_t i = 1; i < (WINDOW_SIZE / 2); ++i){
         if(buf[i - 1] < 2048 && buf[i] >= 2048){
             hasValidSignal = true;
             return i;
@@ -82,8 +72,11 @@ static uint32_t BAC_firstRisingEdge(uint16_t* buf){
 }
 
 void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
+    if(bitstreamLoaded && hasValidSignal){
+        return;
+    }
     // 1. find the first rising edge, ensuring that it falls before the midway point of the input buffer
-    const uint32_t offset = BAC_firstRisingEdge(adcBuf);
+    currentRisingEdge = BAC_firstRisingEdge(adcBuf);
     // 2. copy the relevant portion of the adc buffer into the bitstream
     for(uint32_t i = 0; i < WINDOW_SIZE; ++i){
         BAC_set(i, BAC_isZeroCross(adcBuf[i * spacing]));
@@ -101,21 +94,27 @@ bool BAC_isWorking(){
     return bacRunning;
 }
 
-void BAC_autoCorrelate(){
+static void BAC_clearCorBuf(){
+    for(uint32_t i = 0; i < (WINDOW_SIZE / 2); ++i){
+        corBuffer[i] = 0;
+    }
+}
+
+void BAC_autoCorrelate(uint32_t startPos){
     bacRunning = true;
-    corBuffer[0] = 0;
+    BAC_clearCorBuf();
     const uint32_t midArray = (BAC_arraySize / 2) - 1;
     const uint32_t midPoint = WINDOW_SIZE / 2;
-    uint32_t index = 0;
-    uint32_t shift = 1;
+    uint32_t index = startPos / BAC_numBits;
+    uint32_t shift = startPos % BAC_numBits;
 
-    for(uint32_t pos = 1; pos < midPoint; ++pos){
+    for(uint32_t pos = startPos; pos < midPoint; ++pos){
         bitval_t* p1 = &bits[0];
         bitval_t* p2 = &bits[index];
         uint32_t count = 0;
         if(shift == 0){
             for(uint32_t i = 0; i < midArray; ++i){
-                count += BAC_countBits(*p1++ ^ *p2++);
+                count += __builtin_popcount(*p1++ ^ *p2++);
             }
         } else {
             uint32_t shift2 = BAC_numBits - shift;
@@ -123,7 +122,7 @@ void BAC_autoCorrelate(){
             for(uint32_t i = 0; i < midArray; ++i){
                 uint32_t v = *p2++ >> shift;
                 v |= *p2 << shift2;
-                count += BAC_countBits(*p1++ ^ v);
+                count += __builtin_popcount(*p1++ ^ v);
             }
         }
         ++shift;
@@ -134,6 +133,7 @@ void BAC_autoCorrelate(){
         corBuffer[pos] = count;
     }
     bacRunning = false;
+    bitstreamLoaded = false;
 }
 
 // convert the correlation bin index to a frequency in hertz
@@ -155,5 +155,7 @@ static uint32_t BAC_minCorrelationIndex(uint32_t startBin, uint32_t endBin){
 }
 
 float BAC_getCurrentHz(){
-    return BAC_hzForIndex(BAC_minCorrelationIndex(55, (WINDOW_SIZE / 2) - 1));
+    BAC_autoCorrelate(currentRisingEdge);
+    const uint32_t startBin = (currentRisingEdge > 55) ? currentRisingEdge : 55;
+    return BAC_hzForIndex(BAC_minCorrelationIndex(startBin, (WINDOW_SIZE / 2) - 1));
 }

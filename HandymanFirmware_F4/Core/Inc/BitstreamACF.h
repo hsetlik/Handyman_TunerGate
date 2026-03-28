@@ -3,7 +3,7 @@
 #include "main.h"
 // the type we'll use to store the bitstreams
 #define bitval_t uint32_t
-#define WINDOW_SIZE 1024
+#define WINDOW_SIZE 2048
 /* This is based on Joel de Guzman's Bitstream Autocorrelation concept, explained
 in his 2018 blog post here:
 https://www.cycfi.com/2018/03/fast-and-efficient-pitch-detection-bitstream-autocorrelation/
@@ -14,8 +14,7 @@ but in C (duh) and without a couple compiler specific things
 // return the smallest power of 2 greater than n
 bitval_t smallestPow2(bitval_t n);
 
-// returns the number of set bits in the input n
-bitval_t BAC_countBits(bitval_t n);
+
 
 //call this at startup
 void BAC_initBitArray();
@@ -34,7 +33,7 @@ void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing);
 bool BAC_hasTuningSignal();
 
 // the actual autocorellation happens here. the input is a buffer of half the window size
-void BAC_autoCorrelate();
+void BAC_autoCorrelate(uint32_t startPos);
 
 // check if we're ready to run the algorithm
 bool BAC_isBitstreamLoaded();

@@ -264,9 +264,9 @@ int main(void)
     if (inTunerMode && BAC_isBitstreamLoaded()) {
       if(BAC_hasTuningSignal()){
         // 1. run the BAC algorithm
-        BAC_autoCorrelate();
+        const float currentHz = BAC_getCurrentHz();
         // 2. convert to an error value
-        tuning_error_t err = Tune_getErrorForFreq(BAC_getCurrentHz());
+        tuning_error_t err = Tune_getErrorForFreq(currentHz);
         // 3. display the error
         displayTuningError(&err);
       } else {
