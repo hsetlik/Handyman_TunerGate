@@ -86,7 +86,7 @@ void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
     const uint32_t offset = BAC_firstRisingEdge(adcBuf);
     // 2. copy the relevant portion of the adc buffer into the bitstream
     for(uint32_t i = 0; i < WINDOW_SIZE; ++i){
-        BAC_set(i, BAC_isZeroCross(adcBuf[(i + offset) * spacing]));
+        BAC_set(i, BAC_isZeroCross(adcBuf[i * spacing]));
     }
     bitstreamLoaded = true;
 }
