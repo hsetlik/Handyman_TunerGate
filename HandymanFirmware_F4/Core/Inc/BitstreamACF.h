@@ -3,7 +3,7 @@
 #include "main.h"
 // the type we'll use to store the bitstreams
 #define bitval_t uint32_t
-#define WINDOW_SIZE 2048
+#define WINDOW_SIZE 1024
 /* This is based on Joel de Guzman's Bitstream Autocorrelation concept, explained
 in his 2018 blog post here:
 https://www.cycfi.com/2018/03/fast-and-efficient-pitch-detection-bitstream-autocorrelation/
