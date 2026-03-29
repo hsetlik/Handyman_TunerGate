@@ -9,7 +9,7 @@ bitval_t smallestPow2(bitval_t n){
     return smallestPow2Recur(n, 1);
 }
 
-static const float BAC_sampleRate = 40000.0f;
+static const float BAC_sampleRate = 56000.0f;
 #define BAC_numBits 32
 static const bitval_t BAC_arraySize = WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
@@ -60,26 +60,24 @@ bool BAC_isZeroCross(uint16_t value){
     return value >= 2048;
 }
 
-static uint32_t BAC_firstRisingEdge(uint16_t* buf){
-    for(uint32_t i = 1; i < (WINDOW_SIZE / 2); ++i){
-        if(buf[i - 1] < 2048 && buf[i] >= 2048){
-            hasValidSignal = true;
-            return i;
-        }
-    }
-    hasValidSignal = false;
-    return 0;
-}
-
 void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
     if(bitstreamLoaded && hasValidSignal){
         return;
     }
-    // 1. find the first rising edge, ensuring that it falls before the midway point of the input buffer
-    currentRisingEdge = BAC_firstRisingEdge(adcBuf);
-    // 2. copy the relevant portion of the adc buffer into the bitstream
-    for(uint32_t i = 0; i < WINDOW_SIZE; ++i){
-        BAC_set(i, BAC_isZeroCross(adcBuf[i * spacing]));
+    hasValidSignal = false;
+
+    bool prev = BAC_isZeroCross(adcBuf[0]);
+    BAC_set(0, prev);
+    for(uint32_t i = 1; i < WINDOW_SIZE; ++i){
+        bool current =  BAC_isZeroCross(adcBuf[i * spacing]);
+        BAC_set(i, current);
+        if(!hasValidSignal){
+            if(prev != current){
+                currentRisingEdge = i;
+                hasValidSignal = true;
+            }
+            prev = current;
+        }
     }
     bitstreamLoaded = true;
 }
