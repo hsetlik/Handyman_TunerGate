@@ -32,6 +32,7 @@
 #include "stm32f4xx_hal_def.h"
 #include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_hal_tim.h"
+#include "stm32f4xx_it.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -70,6 +71,7 @@ bool inTunerMode = false;
 bool useNoiseGate = false;
 volatile bool isDmaRunning = false;
 volatile bool noiseGateClosed = false;
+uint32_t lastUpdateTick = 0;
 
 /* USER CODE END PV */
 
@@ -113,19 +115,17 @@ char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
                              "F#", "G",  "G#", "A",  "A#", "B"};
 
 void displayTuningError(tuning_error_t *err) {
-  // 1. fill the display w black
-  ssd1306_Fill(Black);
-  // 2. Grip the appropriate note name
   char* noteName = noteNames[err->midiNote % 12];
-  // 3. find the appropriate x position to draw the string
   uint8_t xPos = 64 - (8 * strlen(noteName));
-  ssd1306_SetCursor(xPos, 12);
-  // 4. draw the note name
-  ssd1306_WriteString(noteName, Font_16x26, White);
-  // 5. check if we're within the tuning threshold
+  // check if we're within the tuning threshold
   if(abs(err->errorCents) <= IN_TUNE_THRESH){
-    ssd1306_InvertRectangle(0, 0, SSD1306_WIDTH, SSD1306_HEIGHT);
+  ssd1306_Fill(White);
+  ssd1306_SetCursor(xPos, 12);
+  ssd1306_WriteString(noteName, Font_16x26, Black);
   } else {
+  ssd1306_Fill(Black);
+  ssd1306_SetCursor(xPos, 12);
+  ssd1306_WriteString(noteName, Font_16x26, White);
     // draw the tuning error bar
     const uint8_t y0 = 40;
     const uint8_t y1 = 55;
@@ -178,6 +178,12 @@ void stopAudioDMA(){
 
 bool audioDMARunning(){
   return isDmaRunning;
+}
+
+
+bool readyToClearScreen(){
+  uint32_t now = HAL_GetTick();
+  return (now - lastUpdateTick) > 1000;
 }
 
 
@@ -269,7 +275,8 @@ int main(void)
         tuning_error_t err = Tune_getErrorForFreq(currentHz);
         // 3. display the error
         displayTuningError(&err);
-      } else {
+        lastUpdateTick = HAL_GetTick();
+      } else if (readyToClearScreen()) {
         displayBlankTuning();
       }
       // 4. Unset the bitstreamLoaded flag
@@ -630,6 +637,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     }
   }
 }
+
 
 /* USER CODE END 4 */
 

@@ -72,6 +72,9 @@ void setNoiseGateClosed(bool gateClosed);
 // poll for the injected ADC group (the pot readings)
 void startPotADCConversion();
 
+//check if it's time to clear the screen
+bool readyToClearScreen();
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
