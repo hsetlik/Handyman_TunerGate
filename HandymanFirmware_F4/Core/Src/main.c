@@ -183,7 +183,7 @@ bool audioDMARunning(){
 
 bool readyToClearScreen(){
   uint32_t now = HAL_GetTick();
-  return (now - lastUpdateTick) > 1000;
+  return (now - lastUpdateTick) > 600;
 }
 
 
