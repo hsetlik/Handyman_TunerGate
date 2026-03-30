@@ -56,11 +56,11 @@ void BAC_set(uint32_t i, bool val){
     }
 }
 
-bool BAC_isZeroCross(uint16_t value){
+static inline bool BAC_isZeroCross(uint16_t value){
     return value >= 2048;
 }
 
-void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
+void BAC_loadBitstream(uint16_t* adcBuf){
     if(bitstreamLoaded && hasValidSignal){
         return;
     }
@@ -69,7 +69,7 @@ void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
     bool prev = BAC_isZeroCross(adcBuf[0]);
     BAC_set(0, prev);
     for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
-        bool current =  BAC_isZeroCross(adcBuf[i * spacing]);
+        bool current =  BAC_isZeroCross(adcBuf[i]);
         BAC_set(i, current);
         if(!hasValidSignal){
             if(prev != current){
@@ -85,7 +85,7 @@ void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
 
 
 bool BAC_isBitstreamLoaded(){
-    return bitstreamLoaded && !bacRunning;
+    return bitstreamLoaded;
 }
 
 bool BAC_isWorking(){

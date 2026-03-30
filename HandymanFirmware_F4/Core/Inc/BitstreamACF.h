@@ -23,11 +23,10 @@ void BAC_initBitArray();
 bool BAC_get(uint32_t i);
 void BAC_set(uint32_t i, bool val);
 
-// check if this ADC value is above the common mode voltage
-bool BAC_isZeroCross(uint16_t value);
+
 
 // call this on the filled ADC buffer to load data into the bitstream
-void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing);
+void BAC_loadBitstream(uint16_t* adcBuf);
 
 // check if we've gotten a usable signal
 bool BAC_hasTuningSignal();

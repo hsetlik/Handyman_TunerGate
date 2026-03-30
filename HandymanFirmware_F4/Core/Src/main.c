@@ -223,6 +223,7 @@ void setUseGateLED(bool ledOn){
 }
 
 void setNoiseGateClosed(bool gateClosed){
+  noiseGateClosed = gateClosed;
   GPIO_PinState state = noiseGateClosed ? GPIO_PIN_SET : GPIO_PIN_RESET;
   HAL_GPIO_WritePin(GateClosed_OUT_GPIO_Port, GateClosed_OUT_Pin, state);
 }
@@ -286,12 +287,13 @@ int main(void)
   ssd1306_UpdateScreen();
   HAL_Delay(200);
 
-  // start timer 3 for checking mode settings
-  HAL_TIM_Base_Start_IT(&htim3);
+
 
   // check the GPIO inputs for the first time and start the relevant DMA streams
   checkModeSettings();
 
+  // start timer 3 for checking mode settings
+  HAL_TIM_Base_Start_IT(&htim3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -636,8 +638,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the second half of the buffer
   if (inTunerMode) {
   uint16_t* startPtr = &tuningBuffer[TUNING_WINDOW_SIZE];
-    BAC_loadBitstream(startPtr,  1);
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t *)tuningBuffer, TUNING_WINDOW_SIZE * 2);
+    BAC_loadBitstream(startPtr);
+    HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)tuningBuffer, TUNING_WINDOW_SIZE * 2);
+    if(dmaStatus != HAL_OK){
+      Error_Handler();
+    }
   } else if (useNoiseGate) {
     uint16_t* startPtr = &noiseGateBuffer[GATE_WINDOW_SIZE];
     Gate_processChunk(startPtr, GATE_WINDOW_SIZE);
@@ -655,7 +660,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the first half of the buffer
   if(inTunerMode){
-    BAC_loadBitstream(tuningBuffer, 1);
+    BAC_loadBitstream(tuningBuffer);
   } else if (useNoiseGate) {
     Gate_processChunk(noiseGateBuffer, GATE_WINDOW_SIZE);
   }

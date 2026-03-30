@@ -10,7 +10,7 @@ static int16_t abs16(int16_t val){
 
 float Gate_sampleMagnitude(uint16_t val) {
     int16_t iVal = abs16((int16_t)val - 2048);
-    return (float)iVal / 2048.0f;
+    return (float)iVal / 1024.0f;
 }
 
 static const float fAttack = 0.8f;
