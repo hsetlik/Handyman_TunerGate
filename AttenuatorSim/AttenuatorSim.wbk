@@ -4,11 +4,11 @@
     {
       "analysis": "TRAN",
       "commands": [
-        ".tran 1u 250m 220m 3u",
+        ".tran 1u 250m 220m 3u uic",
         ".kicad adjustpaths",
         ".save all",
         ".probe alli",
-        ".probe allp"
+        ".kicad esavenone"
       ],
       "dottedSecondary": true,
       "margins": {
@@ -19,7 +19,33 @@
       },
       "measurements": [],
       "showGrid": true,
-      "traces": []
+      "traces": [
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(/AmpAnode)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(228, 26, 28)",
+          "signal": "V(/AmpCathode)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 127, 0)",
+          "signal": "V(CLOSED_OUT)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(77, 175, 74)",
+          "signal": "V(LOOP_IN)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(152, 78, 163)",
+          "signal": "V(LOOP_OUT)",
+          "trace_type": 257
+        }
+      ]
     }
   ],
   "user_defined_signals": [],

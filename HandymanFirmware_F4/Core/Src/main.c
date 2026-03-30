@@ -224,7 +224,7 @@ void setUseGateLED(bool ledOn){
 
 void setNoiseGateClosed(bool gateClosed){
   noiseGateClosed = gateClosed;
-  GPIO_PinState state = noiseGateClosed ? GPIO_PIN_SET : GPIO_PIN_RESET;
+  GPIO_PinState state = noiseGateClosed ? GPIO_PIN_RESET : GPIO_PIN_SET;
   HAL_GPIO_WritePin(GateClosed_OUT_GPIO_Port, GateClosed_OUT_Pin, state);
 }
 
