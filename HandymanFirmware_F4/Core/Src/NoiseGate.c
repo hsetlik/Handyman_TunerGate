@@ -20,8 +20,7 @@ float noiseThresh = 0.35f;
 bool isGateClosed = false;
 volatile bool wantsPotReadings = false;
 
-float Gate_pushSample(uint16_t val){
-    const float vMag = Gate_sampleMagnitude(val);
+float Gate_pushChunkLevel(float vMag){
     if(vMag > envLevel){
         envLevel = fAttack * envLevel + (1.0f - fAttack) * vMag;
     } else {
@@ -30,18 +29,25 @@ float Gate_pushSample(uint16_t val){
     return envLevel;
 }
 
+static float Gate_getChunkLevel(uint16_t* buf, uint32_t length){
+    float chunkSum = 0.0f;
+    for(uint32_t i = 0; i < length; ++i){
+        chunkSum +=  Gate_sampleMagnitude(buf[i]);
+    }
+    return (chunkSum / (float)length);
+}
+
 
 void Gate_processChunk(uint16_t* buf, uint32_t length){
-    const uint32_t chunkLength = length / 64;
-    if(length % 64 != 0){
+    const uint32_t chunkLength = length / 4;
+    if(length % 4 != 0){
         Error_Handler();
     }
     uint32_t bufIdx = 0;
     while(bufIdx < length){
         // 1. load the chunk into the env follower
-        for(uint32_t i = 0; i < chunkLength; ++i){
-            Gate_pushSample(buf[bufIdx + i]);
-        }
+        const float chunkLvl = Gate_getChunkLevel(&buf[bufIdx], chunkLength);
+        Gate_pushChunkLevel(chunkLvl);
         // 2. check if we should open/close the gate
         if(!isGateClosed && envLevel < noiseThresh){
             setNoiseGateClosed(true);
