@@ -1,6 +1,7 @@
 #ifndef NOISE_GATE_H
 #define NOISE_GATE_H
 #include "main.h"
+#define GATE_WINDOW_SIZE 128
 #define RELEASE_MIN 0.85f
 #define RELEASE_MAX 0.988f
 #define THRESH_MIN 0.35f

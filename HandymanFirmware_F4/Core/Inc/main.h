@@ -55,13 +55,13 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 
 // this starts the timer and dma stream for the audio input ADC
-void startAudioDMA();
+void startTunerDMA();
 
 // stop the timer & DMA stream
-void stopAudioDMA();
+void stopTunerDMA();
 
-// return 1 if the DMA stream is running, 0 otherwise
-bool audioDMARunning();
+void startNoiseGateDMA();
+void stopNoiseGateDMA();
 
 // set the LED to indicate tuner/noise gate mode
 void setUseGateLED(bool ledOn);

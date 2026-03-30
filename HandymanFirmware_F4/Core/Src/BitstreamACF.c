@@ -11,22 +11,22 @@ bitval_t smallestPow2(bitval_t n){
 
 static const float BAC_sampleRate = 56000.0f;
 #define BAC_numBits 32
-static const bitval_t BAC_arraySize = WINDOW_SIZE / BAC_numBits;
+static const bitval_t BAC_arraySize = TUNING_WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
 volatile bool bitstreamLoaded = false;
 volatile bool hasValidSignal = false;
 volatile uint32_t currentRisingEdge = 0;
 
 // the main array of bitstream values
-bitval_t bits[WINDOW_SIZE / BAC_numBits];
-bitval_t corBuffer[WINDOW_SIZE / 2];
+bitval_t bits[TUNING_WINDOW_SIZE / BAC_numBits];
+bitval_t corBuffer[TUNING_WINDOW_SIZE / 2];
 
 
 void BAC_initBitArray(){
     for(bitval_t i = 0; i < BAC_arraySize; ++i){
         bits[i] = 0;
     }
-    for(bitval_t i = 0; i < WINDOW_SIZE / 2; ++i){
+    for(bitval_t i = 0; i < TUNING_WINDOW_SIZE / 2; ++i){
         corBuffer[i] = 0;
     }
 }
@@ -68,7 +68,7 @@ void BAC_loadBitstream(uint16_t* adcBuf, uint32_t spacing){
 
     bool prev = BAC_isZeroCross(adcBuf[0]);
     BAC_set(0, prev);
-    for(uint32_t i = 1; i < WINDOW_SIZE; ++i){
+    for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
         bool current =  BAC_isZeroCross(adcBuf[i * spacing]);
         BAC_set(i, current);
         if(!hasValidSignal){
@@ -93,7 +93,7 @@ bool BAC_isWorking(){
 }
 
 static void BAC_clearCorBuf(){
-    for(uint32_t i = 0; i < (WINDOW_SIZE / 2); ++i){
+    for(uint32_t i = 0; i < (TUNING_WINDOW_SIZE / 2); ++i){
         corBuffer[i] = 0;
     }
 }
@@ -102,7 +102,7 @@ void BAC_autoCorrelate(uint32_t startPos){
     bacRunning = true;
     BAC_clearCorBuf();
     const uint32_t midArray = (BAC_arraySize / 2) - 1;
-    const uint32_t midPoint = WINDOW_SIZE / 2;
+    const uint32_t midPoint = TUNING_WINDOW_SIZE / 2;
     uint32_t index = startPos / BAC_numBits;
     uint32_t shift = startPos % BAC_numBits;
 
@@ -155,5 +155,5 @@ static uint32_t BAC_minCorrelationIndex(uint32_t startBin, uint32_t endBin){
 float BAC_getCurrentHz(){
     BAC_autoCorrelate(currentRisingEdge);
     const uint32_t startBin = (currentRisingEdge > 55) ? currentRisingEdge : 55;
-    return BAC_hzForIndex(BAC_minCorrelationIndex(startBin, (WINDOW_SIZE / 2) - 1));
+    return BAC_hzForIndex(BAC_minCorrelationIndex(startBin, (TUNING_WINDOW_SIZE / 2) - 1));
 }

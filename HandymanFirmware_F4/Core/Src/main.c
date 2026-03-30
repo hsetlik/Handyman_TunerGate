@@ -21,7 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "AudioADC.h"
 #include "BitstreamACF.h"
 #include "Tuning.h"
 #include "ssd1306.h"
@@ -64,12 +63,13 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 // DMA fills this buffer with the ADC values
-uint16_t adcBuffer[WINDOW_SIZE * 2];
-uint16_t* midBufPtr = &adcBuffer[WINDOW_SIZE];
+uint16_t tuningBuffer[TUNING_WINDOW_SIZE * 2];
+uint16_t noiseGateBuffer[GATE_WINDOW_SIZE * 2];
 // flags for tuner/noise gate modes
 bool inTunerMode = false;
 bool useNoiseGate = false;
-volatile bool isDmaRunning = false;
+volatile bool tunerDmaRunning = false;
+volatile bool gateDmaRunning = false;
 volatile bool noiseGateClosed = false;
 uint32_t lastUpdateTick = 0;
 
@@ -98,6 +98,7 @@ void displayBlankTuning();
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void checkModeSettings() {
+  // 1. read the GPIOs to determine what state we should be in
   GPIO_PinState tuneState =
       HAL_GPIO_ReadPin(TunerMode_IN_GPIO_Port, TunerMode_IN_Pin);
   GPIO_PinState useGateState =
@@ -109,6 +110,17 @@ void checkModeSettings() {
     ssd1306_SetDisplayOn((uint8_t)inTunerMode);
   } 
   setUseGateLED(useNoiseGate);
+  if(inTunerMode && !tunerDmaRunning){
+    if(gateDmaRunning){
+      stopNoiseGateDMA();
+    }
+    startTunerDMA();
+  } else if (!inTunerMode && !gateDmaRunning && useNoiseGate){
+    if(tunerDmaRunning){
+      stopTunerDMA();
+    }
+    startNoiseGateDMA();
+  }
 }
 
 char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
@@ -151,8 +163,8 @@ void displayBlankTuning(){
 }
 // Implementations of shared stuff from main.h---------------------------------------------------
 
-void startAudioDMA(){
-  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
+void startTunerDMA(){
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)tuningBuffer, TUNING_WINDOW_SIZE * 2);
   if(dmaStatus != HAL_OK){
     Error_Handler();
   }
@@ -160,11 +172,11 @@ void startAudioDMA(){
   if(timerStatus != HAL_OK){
     Error_Handler();
   }
-  isDmaRunning = true;
+  tunerDmaRunning = true;
 }
 
 
-void stopAudioDMA(){
+void stopTunerDMA(){
   HAL_StatusTypeDef timerStatus = HAL_TIM_Base_Stop(&htim2);
   if(timerStatus != HAL_OK){
     Error_Handler();
@@ -173,19 +185,37 @@ void stopAudioDMA(){
   if(dmaStatus != HAL_OK){
     Error_Handler();
   }
-  isDmaRunning = false;
+  tunerDmaRunning = false;
 }
 
-bool audioDMARunning(){
-  return isDmaRunning;
+void startNoiseGateDMA(){
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)noiseGateBuffer, GATE_WINDOW_SIZE * 2);
+  if(dmaStatus != HAL_OK){
+    Error_Handler();
+  }
+  HAL_StatusTypeDef timerStatus = HAL_TIM_Base_Start(&htim2);
+  if(timerStatus != HAL_OK){
+    Error_Handler();
+  }
+  gateDmaRunning = true;
 }
 
+void stopNoiseGateDMA(){
+  HAL_StatusTypeDef timerStatus = HAL_TIM_Base_Stop(&htim2);
+  if(timerStatus != HAL_OK){
+    Error_Handler();
+  }
+  HAL_StatusTypeDef dmaStatus = HAL_ADC_Stop_DMA(&hadc1);
+  if(dmaStatus != HAL_OK){
+    Error_Handler();
+  }
+  gateDmaRunning = false;
+}
 
 bool readyToClearScreen(){
   uint32_t now = HAL_GetTick();
   return (now - lastUpdateTick) > 600;
 }
-
 
 void setUseGateLED(bool ledOn){
   GPIO_PinState state = ledOn ? GPIO_PIN_SET : GPIO_PIN_RESET;
@@ -255,12 +285,12 @@ int main(void)
   ssd1306_Fill(White);
   ssd1306_UpdateScreen();
   HAL_Delay(200);
-  // check the GPIO inputs for the first time
-  checkModeSettings();
+
   // start timer 3 for checking mode settings
   HAL_TIM_Base_Start_IT(&htim3);
-  // start the audio DMA stream
-  startAudioDMA();
+
+  // check the GPIO inputs for the first time and start the relevant DMA streams
+  checkModeSettings();
 
   /* USER CODE END 2 */
 
@@ -605,9 +635,12 @@ static void MX_GPIO_Init(void)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the second half of the buffer
   if (inTunerMode) {
-    BAC_loadBitstream(midBufPtr,  1);
+  uint16_t* startPtr = &tuningBuffer[TUNING_WINDOW_SIZE];
+    BAC_loadBitstream(startPtr,  1);
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t *)tuningBuffer, TUNING_WINDOW_SIZE * 2);
   } else if (useNoiseGate) {
-    Gate_processChunk(midBufPtr, WINDOW_SIZE);
+    uint16_t* startPtr = &noiseGateBuffer[GATE_WINDOW_SIZE];
+    Gate_processChunk(startPtr, GATE_WINDOW_SIZE);
     // update the pots here if it's time
     if(Gate_isAwaitingPotReadings()){
       startPotADCConversion();
@@ -615,17 +648,16 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
       uint32_t releaseVal = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_2);
       Gate_updatePotReadings((uint16_t)threshVal, (uint16_t)releaseVal);
     }
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t *)noiseGateBuffer, GATE_WINDOW_SIZE * 2);
   }
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcBuffer, WINDOW_SIZE * 2);
 }
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the first half of the buffer
-  uint16_t *startPtr = adcBuffer;
   if(inTunerMode){
-    BAC_loadBitstream(startPtr, 1);
+    BAC_loadBitstream(tuningBuffer, 1);
   } else if (useNoiseGate) {
-    Gate_processChunk(startPtr, WINDOW_SIZE);
+    Gate_processChunk(noiseGateBuffer, GATE_WINDOW_SIZE);
   }
 }
 
