@@ -2,11 +2,16 @@
 #define NOISE_GATE_H
 #include "main.h"
 #define GATE_WINDOW_SIZE 128
-#define RELEASE_MIN 0.941f
-#define RELEASE_MAX 0.998f
-#define THRESH_MIN 75.0f
+//#define RELEASE_MIN 0.941f
+//#define RELEASE_MAX 0.998f
+#define RELEASE_MIN_SAMPLES 2000.0
+#define RELEASE_MAX_SAMPLES 42000.0
+#define THRESH_MIN 35.0f
 #define THRESH_MAX 120.0f
 
+// this calculates the release coefficients (call once during setup)
+
+void Gate_prepareNoiseGate();
 // get the floating point magnitude of this unsigned sample relative to the "zero" line (2048 in the case of our 12-bit ADC)
 float Gate_sampleMagnitude(uint16_t val);
 

@@ -1,5 +1,20 @@
 #include "NoiseGate.h"
 #include "main.h"
+#include <math.h>
+
+// constants for the min/max release values
+static const double minLevel = 0.00001f;
+// minLevel = r^rSamples
+// or r = minLevel^(1/rSamples)
+float RELEASE_MIN;
+float RELEASE_MAX;
+
+
+
+void Gate_prepareNoiseGate(){
+    RELEASE_MIN = (float)pow(minLevel, 1.0f / RELEASE_MIN_SAMPLES);
+    RELEASE_MAX = (float)pow(minLevel, 1.0f / RELEASE_MAX_SAMPLES);
+}
 
 static int16_t abs16(int16_t val){
     if(val < 0){
@@ -39,8 +54,8 @@ static float Gate_getChunkLevel(uint16_t* buf, uint32_t length){
 
 
 void Gate_processChunk(uint16_t* buf, uint32_t length){
-    const uint32_t chunkLength = length / 2;
-    if(length % 2 != 0){
+    const uint32_t chunkLength = length / 4;
+    if(length % 4 != 0){
         Error_Handler();
     }
     uint32_t bufIdx = 0;
