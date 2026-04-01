@@ -9,7 +9,7 @@ bitval_t smallestPow2(bitval_t n){
     return smallestPow2Recur(n, 1);
 }
 
-static const float BAC_sampleRate = 56000.0f;
+static const float BAC_sampleRate = 48000.0f;
 #define BAC_numBits 32
 static const bitval_t BAC_arraySize = TUNING_WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
@@ -60,6 +60,14 @@ static inline bool BAC_isZeroCross(uint16_t value){
     return value >= 2048;
 }
 
+static inline float getSampleMagnitude(uint16_t sample){
+    int16_t val = (int16_t)(sample - 2048);
+    if(val < 0){
+       val = -val; 
+    }
+    return (float)val;
+}
+
 void BAC_loadBitstream(uint16_t* adcBuf){
     if(bitstreamLoaded && hasValidSignal){
         return;
@@ -67,9 +75,11 @@ void BAC_loadBitstream(uint16_t* adcBuf){
     hasValidSignal = false;
 
     bool prev = BAC_isZeroCross(adcBuf[0]);
+    float sum = getSampleMagnitude(adcBuf[0]);
     BAC_set(0, prev);
     for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
         bool current =  BAC_isZeroCross(adcBuf[i]);
+        sum += getSampleMagnitude(adcBuf[i]);
         BAC_set(i, current);
         if(!hasValidSignal){
             if(prev != current){
@@ -79,6 +89,8 @@ void BAC_loadBitstream(uint16_t* adcBuf){
             prev = current;
         }
     }
+    const float avgMag = sum / (float)TUNING_WINDOW_SIZE;
+    hasValidSignal = hasValidSignal && (avgMag >= 35.0f);
     bitstreamLoaded = true;
 }
 
