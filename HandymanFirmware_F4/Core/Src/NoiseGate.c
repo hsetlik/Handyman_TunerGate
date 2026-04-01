@@ -10,12 +10,12 @@ static int16_t abs16(int16_t val){
 
 float Gate_sampleMagnitude(uint16_t val) {
     int16_t iVal = abs16((int16_t)val - 2048);
-    return (float)iVal / 1024.0f;
+    return (float)iVal;
 }
 
-static const float fAttack = 0.8f;
-float fRelease = 0.95f;
-float envLevel = 0.0f;
+static const float fAttack = 0.35f;
+float fRelease = 0.98f;
+float envLevel = 100.0f;
 float noiseThresh = 0.35f;
 bool isGateClosed = false;
 volatile bool wantsPotReadings = false;
@@ -39,8 +39,8 @@ static float Gate_getChunkLevel(uint16_t* buf, uint32_t length){
 
 
 void Gate_processChunk(uint16_t* buf, uint32_t length){
-    const uint32_t chunkLength = length / 4;
-    if(length % 4 != 0){
+    const uint32_t chunkLength = length / 2;
+    if(length % 2 != 0){
         Error_Handler();
     }
     uint32_t bufIdx = 0;

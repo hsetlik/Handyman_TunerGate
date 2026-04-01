@@ -115,11 +115,16 @@ void checkModeSettings() {
       stopNoiseGateDMA();
     }
     startTunerDMA();
-  } else if (!inTunerMode && !gateDmaRunning && useNoiseGate){
+    return;
+  } else if (!inTunerMode && useNoiseGate){
     if(tunerDmaRunning){
       stopTunerDMA();
     }
-    startNoiseGateDMA();
+    if(!gateDmaRunning){
+      startNoiseGateDMA();
+    }
+  } else if (!useNoiseGate && gateDmaRunning){
+    stopNoiseGateDMA();
   }
 }
 
