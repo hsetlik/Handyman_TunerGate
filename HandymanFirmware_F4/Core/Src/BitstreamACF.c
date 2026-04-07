@@ -90,7 +90,7 @@ void BAC_loadBitstream(uint16_t* adcBuf){
         }
     }
     const float avgMag = sum / (float)TUNING_WINDOW_SIZE;
-    hasValidSignal = hasValidSignal && (avgMag >= 35.0f);
+    hasValidSignal = hasValidSignal && (avgMag >= 50.0f);
     bitstreamLoaded = true;
 }
 

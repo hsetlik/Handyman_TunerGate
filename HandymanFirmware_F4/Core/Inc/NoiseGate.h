@@ -4,9 +4,9 @@
 #define GATE_WINDOW_SIZE 128
 //#define RELEASE_MIN 0.941f
 //#define RELEASE_MAX 0.998f
-#define RELEASE_MIN_SAMPLES 2000.0
-#define RELEASE_MAX_SAMPLES 42000.0
-#define THRESH_MIN 35.0f
+#define RELEASE_MIN_SAMPLES 1200.0
+#define RELEASE_MAX_SAMPLES  36000.0
+#define THRESH_MIN 32.0f
 #define THRESH_MAX 120.0f
 
 // this calculates the release coefficients (call once during setup)

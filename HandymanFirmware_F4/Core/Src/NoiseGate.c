@@ -3,18 +3,13 @@
 #include <math.h>
 
 // constants for the min/max release values
-static const double minLevel = 0.00001f;
+//static const double minLevel = 0.00001f;
 // minLevel = r^rSamples
 // or r = minLevel^(1/rSamples)
 float RELEASE_MIN;
 float RELEASE_MAX;
 
 
-
-void Gate_prepareNoiseGate(){
-    RELEASE_MIN = (float)pow(minLevel, 1.0f / RELEASE_MIN_SAMPLES);
-    RELEASE_MAX = (float)pow(minLevel, 1.0f / RELEASE_MAX_SAMPLES);
-}
 
 static int16_t abs16(int16_t val){
     if(val < 0){
@@ -43,6 +38,14 @@ float Gate_pushChunkLevel(float vMag){
     }
     return envLevel;
 }
+
+void Gate_prepareNoiseGate(){
+    const double minLevel = (double)(noiseThresh / THRESH_MAX) / 10.0;
+    RELEASE_MIN = (float)pow(minLevel, 1.0f / RELEASE_MIN_SAMPLES);
+    RELEASE_MAX = (float)pow(minLevel, 1.0f / RELEASE_MAX_SAMPLES);
+}
+
+
 
 static float Gate_getChunkLevel(uint16_t* buf, uint32_t length){
     float chunkSum = 0.0f;
@@ -96,5 +99,6 @@ static float lerp12Bit(float minVal, float maxVal, uint16_t pos){
 void Gate_updatePotReadings(uint16_t threshVal, uint16_t releaseVal) {
     fRelease = lerp12Bit(RELEASE_MIN, RELEASE_MAX, releaseVal);
     noiseThresh = lerp12Bit(THRESH_MIN, THRESH_MAX, threshVal);
+    Gate_prepareNoiseGate();
     wantsPotReadings = false;
 }
