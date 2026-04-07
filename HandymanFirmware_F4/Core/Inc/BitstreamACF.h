@@ -9,11 +9,8 @@ in his 2018 blog post here:
 https://www.cycfi.com/2018/03/fast-and-efficient-pitch-detection-bitstream-autocorrelation/
 Code works more or less the same as Guzman's C++ implementation here:
 https://github.com/cycfi/bitstream_autocorrelation
-but in C (duh) and without a couple compiler specific things
+but in C (duh) 
 */
-// return the smallest power of 2 greater than n
-bitval_t smallestPow2(bitval_t n);
-
 
 
 //call this at startup

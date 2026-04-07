@@ -1,13 +1,6 @@
 #include "BitstreamACF.h"
 #include "main.h"
 #include <stdlib.h>
-static bitval_t smallestPow2Recur(bitval_t n, bitval_t m){
-    return (m < n) ? smallestPow2Recur(n, m << 1) : m;
-}
-
-bitval_t smallestPow2(bitval_t n){
-    return smallestPow2Recur(n, 1);
-}
 
 static const float BAC_sampleRate = 48000.0f;
 #define BAC_numBits 32
@@ -90,6 +83,11 @@ void BAC_loadBitstream(uint16_t* adcBuf){
         }
     }
     const float avgMag = sum / (float)TUNING_WINDOW_SIZE;
+
+    /* only update the tuning display if we have at least one zero crossing
+     AND the magnitude of this chunk is above some threshold (50 seems about right for the 
+     pickups/guitars I've tested this with)
+    */ 
     hasValidSignal = hasValidSignal && (avgMag >= 50.0f);
     bitstreamLoaded = true;
 }
