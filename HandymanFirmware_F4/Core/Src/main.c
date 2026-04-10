@@ -70,7 +70,7 @@ bool inTunerMode = false;
 bool useNoiseGate = false;
 volatile bool tunerDmaRunning = false;
 volatile bool gateDmaRunning = false;
-volatile bool noiseGateClosed = false;
+volatile bool noiseGateClosed = true;
 uint32_t lastUpdateTick = 0;
 
 /* USER CODE END PV */
@@ -115,7 +115,7 @@ void checkModeSettings() {
       stopNoiseGateDMA();
     }
     startTunerDMA();
-    return;
+    setNoiseGateClosed(true);
   } else if (!inTunerMode && useNoiseGate){
     if(tunerDmaRunning){
       stopTunerDMA();
@@ -228,9 +228,11 @@ void setUseGateLED(bool ledOn){
 }
 
 void setNoiseGateClosed(bool gateClosed){
-  noiseGateClosed = gateClosed;
-  GPIO_PinState state = noiseGateClosed ? GPIO_PIN_RESET : GPIO_PIN_SET;
-  HAL_GPIO_WritePin(GateClosed_OUT_GPIO_Port, GateClosed_OUT_Pin, state);
+  if(noiseGateClosed != gateClosed){
+    noiseGateClosed = gateClosed;
+    GPIO_PinState state = noiseGateClosed ? GPIO_PIN_RESET : GPIO_PIN_SET;
+    HAL_GPIO_WritePin(GateClosed_OUT_GPIO_Port, GateClosed_OUT_Pin, state);
+  }
 }
 
 

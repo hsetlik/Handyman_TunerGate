@@ -2,11 +2,6 @@
 #define NOISE_GATE_H
 #include "main.h"
 #define GATE_WINDOW_SIZE 128
-//#define ATTACK_MIN 0.941f
-//#define ATTACK_MAX 0.998f
-#define ATTACK_MIN_SAMPLES 2400.0
-#define ATTACK_MAX_SAMPLES  48000.0
-#define RELEASE_SAMPLES 100.0
 #define THRESH_MIN 35.0f
 #define THRESH_MAX 200.0f
 
