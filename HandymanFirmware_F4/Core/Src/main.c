@@ -286,7 +286,7 @@ int main(void)
   // Initialize the buffers for the BAC handling
   BAC_initBitArray();
   // prepare the noise gate
-  Gate_prepareNoiseGate();
+  Gate_initNoiseGate();
 
   // initialize the OLED
   ssd1306_Init();
@@ -652,7 +652,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     }
   } else if (useNoiseGate) {
     uint16_t* startPtr = &noiseGateBuffer[GATE_WINDOW_SIZE];
-    Gate_processChunk(startPtr, GATE_WINDOW_SIZE);
+    Gate_processWindow(startPtr, GATE_WINDOW_SIZE);
     // update the pots here if it's time
     if(Gate_isAwaitingPotReadings()){
       startPotADCConversion();
@@ -669,7 +669,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
   if(inTunerMode){
     BAC_loadBitstream(tuningBuffer);
   } else if (useNoiseGate) {
-    Gate_processChunk(noiseGateBuffer, GATE_WINDOW_SIZE);
+    Gate_processWindow(noiseGateBuffer, GATE_WINDOW_SIZE);
   }
 }
 

@@ -2,25 +2,34 @@
 #define NOISE_GATE_H
 #include "main.h"
 #define GATE_WINDOW_SIZE 128
-//#define RELEASE_MIN 0.941f
-//#define RELEASE_MAX 0.998f
-#define RELEASE_MIN_SAMPLES 1200.0
-#define RELEASE_MAX_SAMPLES  36000.0
-#define THRESH_MIN 32.0f
-#define THRESH_MAX 120.0f
+//#define ATTACK_MIN 0.941f
+//#define ATTACK_MAX 0.998f
+#define ATTACK_MIN_SAMPLES 2400.0
+#define ATTACK_MAX_SAMPLES  48000.0
+#define RELEASE_SAMPLES 100.0
+#define THRESH_MIN 35.0f
+#define THRESH_MAX 200.0f
 
-// this calculates the release coefficients (call once during setup)
 
-void Gate_prepareNoiseGate();
-// get the floating point magnitude of this unsigned sample relative to the "zero" line (2048 in the case of our 12-bit ADC)
-float Gate_sampleMagnitude(uint16_t val);
+#define ATTACK_MS_MIN 25.0f
+#define ATTACK_MS_MAX 1500.0f
+#define RELEASE_MS 8.0f
+#define HOLD_TIME_MS 6.0f
 
-float Gate_pushChunkLevel(float val);
+typedef struct {
+    float threshold;
+    float attackCoeff;
+    float releaseCoeff;
+    float attackCounter;
+    float smoothedGain;
+} noise_gate_t;
+
+// call once at startup
+void Gate_initNoiseGate();
 
 // load a chunk of the DMA buffer into the envelope follower and open/close the noise gate as appropriate
-void Gate_processChunk(uint16_t* buf, uint32_t length);
+void Gate_processWindow(uint16_t* buf, uint32_t length);
 
-//TODO updating and ADC reading for the release and threshold knobs
 void Gate_requestPotReadings();
 
 bool Gate_isAwaitingPotReadings();

@@ -2,85 +2,87 @@
 #include "main.h"
 #include <math.h>
 
-// constants for the min/max release values
-//static const double minLevel = 0.00001f;
+#define SAMPLE_RATE 48000.0f
+#define TIME_CONST -2197.22457724f
+
 // minLevel = r^rSamples
 // or r = minLevel^(1/rSamples)
-float RELEASE_MIN;
-float RELEASE_MAX;
+noise_gate_t ng;
+float sampleTimeMs;
 
 
-
-static int16_t abs16(int16_t val){
+static inline int16_t abs16(int16_t val){
     if(val < 0){
         return -val;
     }
     return val;
 }
 
-float Gate_sampleMagnitude(uint16_t val) {
+static inline float Gate_sampleMagnitude(uint16_t val) {
     int16_t iVal = abs16((int16_t)val - 2048);
     return (float)iVal;
 }
 
-static const float fAttack = 0.35f;
-float fRelease = 0.98f;
-float envLevel = 100.0f;
-float noiseThresh = 0.35f;
-bool isGateClosed = false;
-volatile bool wantsPotReadings = false;
-
-float Gate_pushChunkLevel(float vMag){
-    if(vMag > envLevel){
-        envLevel = fAttack * envLevel + (1.0f - fAttack) * vMag;
-    } else {
-        envLevel = fRelease * envLevel + (1.0f - fRelease) * vMag;
-    }
-    return envLevel;
-}
-
-void Gate_prepareNoiseGate(){
-    const double minLevel = (double)(noiseThresh / THRESH_MAX) / 10.0;
-    RELEASE_MIN = (float)pow(minLevel, 1.0f / RELEASE_MIN_SAMPLES);
-    RELEASE_MAX = (float)pow(minLevel, 1.0f / RELEASE_MAX_SAMPLES);
+static float getCoefficientForMs(float ms){
+    return expf(TIME_CONST / (SAMPLE_RATE * ms));
 }
 
 
 
-static float Gate_getChunkLevel(uint16_t* buf, uint32_t length){
-    float chunkSum = 0.0f;
-    for(uint32_t i = 0; i < length; ++i){
-        chunkSum +=  Gate_sampleMagnitude(buf[i]);
-    }
-    return (chunkSum / (float)length);
+void Gate_initNoiseGate(){
+    ng.threshold = THRESH_MIN;
+    ng.attackCoeff = getCoefficientForMs(ATTACK_MS_MIN);
+    ng.releaseCoeff = getCoefficientForMs(RELEASE_MS);
+    ng.attackCounter = 0.0f;
+    ng.smoothedGain = 1.0f;
+    sampleTimeMs = 1000.0f / SAMPLE_RATE;
 }
 
+static void Gate_processSample(uint16_t value){
+    // 1. grip the magnitude of the current sample
+    const float mag = Gate_sampleMagnitude(value);
+    // 2. determine whether we should smooth the gain towards 0 or 1
+    const float gain = (mag >= ng.threshold) ? 1.0f : 0.0f;
 
-void Gate_processChunk(uint16_t* buf, uint32_t length){
-    const uint32_t chunkLength = length / 4;
-    if(length % 4 != 0){
-        Error_Handler();
-    }
-    uint32_t bufIdx = 0;
-    while(bufIdx < length){
-        // 1. load the chunk into the env follower
-        const float chunkLvl = Gate_getChunkLevel(&buf[bufIdx], chunkLength);
-        Gate_pushChunkLevel(chunkLvl);
-        // 2. check if we should open/close the gate
-        if(!isGateClosed && envLevel < noiseThresh){
-            setNoiseGateClosed(true);
-            isGateClosed = true;
-        } else if (isGateClosed && envLevel >= noiseThresh){
-            setNoiseGateClosed(false);
-            isGateClosed = false;
+    // 3. if the smoothed gain is above our target, either:
+    if(gain <= ng.smoothedGain){
+        // a. lerp towards the target gain w the appropriate filter coefficient
+        if(ng.attackCounter > HOLD_TIME_MS){
+            ng.smoothedGain = (ng.attackCoeff * ng.smoothedGain) + ((1.0f - ng.attackCoeff) * gain);
+        // or b. increment the counter until it's time to do a.
+        } else {
+            ng.attackCounter += sampleTimeMs;
         }
-        // 3. increment bufIdx
-        bufIdx += chunkLength;
-
+    // 4. if our smoothed gain is below the target, smooth w the release coefficient
+    } else {
+        ng.smoothedGain = (ng.releaseCoeff * ng.smoothedGain) + ((1.0f - ng.releaseCoeff) * gain);
+        // the attackCounter gets reset here since we're in the release phase
+        ng.attackCounter = 0.0f;
     }
 }
 
+static void Gate_processChunk(uint16_t* buf, uint32_t length){
+    for(uint32_t i = 0; i < length; ++i){
+        Gate_processSample(buf[i]);
+    }
+}
 
+void Gate_processWindow(uint16_t* buf, uint32_t length){
+    const uint32_t chunkLength = length / 4;
+    uint32_t bufIdx = 0;
+    /* split the buffer up into four chunks, each will be 32 samples long.
+       after processing each chunk, we set the GPIO pin that controls the analog 
+       gate circuit based on the status of the smoothed gain
+    */
+    while(bufIdx < length){
+        Gate_processChunk(&buf[bufIdx], chunkLength);
+        setNoiseGateClosed(ng.smoothedGain < 0.5f);
+        bufIdx += chunkLength;
+    }
+}
+
+//=====================================================================================
+volatile bool wantsPotReadings = true;
 void Gate_requestPotReadings(){
     wantsPotReadings = true;
 }
@@ -96,9 +98,9 @@ static float lerp12Bit(float minVal, float maxVal, uint16_t pos){
 }
 
 
-void Gate_updatePotReadings(uint16_t threshVal, uint16_t releaseVal) {
-    fRelease = lerp12Bit(RELEASE_MIN, RELEASE_MAX, releaseVal);
-    noiseThresh = lerp12Bit(THRESH_MIN, THRESH_MAX, threshVal);
-    Gate_prepareNoiseGate();
+void Gate_updatePotReadings(uint16_t threshVal, uint16_t attackVal) {
+    ng.threshold = lerp12Bit(THRESH_MIN, THRESH_MAX, threshVal);
+    const float attackMs = lerp12Bit(ATTACK_MS_MIN, ATTACK_MS_MAX, attackVal);
+    ng.attackCoeff = getCoefficientForMs(attackMs);
     wantsPotReadings = false;
 }
