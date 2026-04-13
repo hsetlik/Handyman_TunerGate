@@ -287,7 +287,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // Initialize the buffers for the BAC handling
   BAC_initBitArray();
-  // prepare the noise gate
+
+  // initialize the noise gate
   Gate_initNoiseGate();
 
   // initialize the OLED

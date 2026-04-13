@@ -2,22 +2,15 @@
 #define NOISE_GATE_H
 #include "main.h"
 #define GATE_WINDOW_SIZE 128
-#define THRESH_MIN 35.0f
-#define THRESH_MAX 200.0f
+#define THRESH_MIN 30.0f
+#define THRESH_CENTER 65.0f
+#define THRESH_MAX 170.0f
 
 
 #define ATTACK_MS_MIN 25.0f
 #define ATTACK_MS_MAX 1500.0f
 #define RELEASE_MS 8.0f
 #define HOLD_TIME_MS 6.0f
-
-typedef struct {
-    float threshold;
-    float attackCoeff;
-    float releaseCoeff;
-    float attackCounter;
-    float smoothedGain;
-} noise_gate_t;
 
 // call once at startup
 void Gate_initNoiseGate();
