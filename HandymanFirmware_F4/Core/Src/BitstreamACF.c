@@ -85,10 +85,10 @@ void BAC_loadBitstream(uint16_t* adcBuf){
     const float avgMag = sum / (float)TUNING_WINDOW_SIZE;
 
     /* only update the tuning display if we have at least one zero crossing
-     AND the magnitude of this chunk is above some threshold (50 seems about right for the 
+     AND the magnitude of this chunk is above some threshold (60 seems about right for the 
      pickups/guitars I've tested this with)
     */ 
-    hasValidSignal = hasValidSignal && (avgMag >= 50.0f);
+    hasValidSignal = hasValidSignal && (avgMag >= 60.0f);
     bitstreamLoaded = true;
 }
 

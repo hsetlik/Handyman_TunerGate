@@ -107,6 +107,8 @@ void checkModeSettings() {
   useNoiseGate = useGateState == GPIO_PIN_SET;
   const bool oledIsOn = ssd1306_GetDisplayOn() > 0;
   if (inTunerMode != oledIsOn) {
+    if(!inTunerMode)
+      displayBlankTuning();
     ssd1306_SetDisplayOn((uint8_t)inTunerMode);
   } 
   setUseGateLED(useNoiseGate);
@@ -287,9 +289,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // Initialize the buffers for the BAC handling
   BAC_initBitArray();
-
-  // initialize the noise gate
-  Gate_initNoiseGate();
 
   // initialize the OLED
   ssd1306_Init();
