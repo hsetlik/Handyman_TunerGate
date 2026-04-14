@@ -26,18 +26,45 @@ float threshold = THRESH_MIN;
 float attackCoeff;
 float releaseCoeff;
 float attackCounter = 0.0f;
-float envLevel = 1.0f;
+float envLevel = 0.0f;
 const float sampleTimeMs = 1000.0f / SAMPLE_RATE;
 
+
+#ifdef NOISE_DEBUG
+#define RMS_LENGTH 1024
+float rmsBuf[RMS_LENGTH];
+uint16_t rmsHead = 0;
+float rmsSum = 0.0f;
+float rmsLevel = 0.0f;
+static void pushRMS(float mag){
+    // 1. subtract the oldest sample
+    rmsSum -= rmsBuf[rmsHead];
+    // 2. add the newest sample
+    rmsSum += mag;
+    // 3. overwrite the oldest sample
+    rmsBuf[rmsHead] = mag;
+    rmsHead = (rmsHead + 1) % RMS_LENGTH;
+    // 4. calculate the mean
+    rmsLevel = rmsSum / (float)RMS_LENGTH;
+}
+#endif
 
 void Gate_initNoiseGate(){
 attackCoeff = getCoefficientForMs(ATTACK_MS_MIN);
 releaseCoeff = getCoefficientForMs(RELEASE_MS);
+#ifdef NOISE_DEBUG
+for(uint16_t i = 0; i < RMS_LENGTH; ++i){
+    rmsBuf[i] = 0.0f;
+}
+#endif
 }
 
 static void Gate_processSample(uint16_t value){
     // 1. grip the magnitude of the current sample
     const float mag = Gate_sampleMagnitude(value);
+    #ifdef NOISE_DEBUG
+    pushRMS(mag);
+    #endif
     // 2. determine whether we should smooth the gain towards 0 or 1
     const float gain = (mag >= threshold) ? 1.0f : 0.0f;
 
