@@ -3,8 +3,8 @@
 #include "main.h"
 #define GATE_WINDOW_SIZE 128
 #define THRESH_MIN 45.0f
-#define THRESH_CENTER 85.0f
-#define THRESH_MAX 200.0f
+#define THRESH_CENTER 100.0f
+#define THRESH_MAX 240.0f
 
 //#define NOISE_DEBUG
 
