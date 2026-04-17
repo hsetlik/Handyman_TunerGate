@@ -3,16 +3,16 @@
 #include "main.h"
 #define GATE_WINDOW_SIZE 128
 #define THRESH_MIN 45.0f
-#define THRESH_CENTER 100.0f
-#define THRESH_MAX 240.0f
+#define THRESH_CENTER 130.0f
+#define THRESH_MAX 260.0f
 
 //#define NOISE_DEBUG
 
 
 #define ATTACK_MS_MIN 25.0f
 #define ATTACK_MS_MAX 1500.0f
-#define RELEASE_MS 8.0f
-#define HOLD_TIME_MS 6.0f
+#define RELEASE_MS 6.0f
+#define HOLD_TIME_MS 8.0f
 
 // call once at startup
 void Gate_initNoiseGate();

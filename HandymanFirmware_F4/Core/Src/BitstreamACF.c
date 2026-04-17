@@ -164,6 +164,6 @@ static uint32_t BAC_minCorrelationIndex(uint32_t startBin, uint32_t endBin){
 
 float BAC_getCurrentHz(){
     BAC_autoCorrelate(currentRisingEdge);
-    const uint32_t startBin = (currentRisingEdge > 55) ? currentRisingEdge : 55;
+    const uint32_t startBin = (currentRisingEdge > 35) ? currentRisingEdge : 35;
     return BAC_hzForIndex(BAC_minCorrelationIndex(startBin, (TUNING_WINDOW_SIZE / 2) - 1));
 }
