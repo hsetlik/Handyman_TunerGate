@@ -3,7 +3,6 @@
 #include "main.h"
 #include <math.h>
 
-#define SAMPLE_RATE 48000.0f
 #define TIME_CONST -2197.22457724f
 
 static inline int16_t abs16(int16_t val){
@@ -29,7 +28,7 @@ float releaseCoeff;
 float attackCounter = 0.0f;
 float envLevel = 0.0f;
 const float sampleTimeMs = 1000.0f / SAMPLE_RATE;
-iir_t filter;
+static iir_t filter;
 
 
 #ifdef NOISE_DEBUG

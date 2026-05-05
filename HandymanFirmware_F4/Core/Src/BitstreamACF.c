@@ -1,4 +1,5 @@
 #include "BitstreamACF.h"
+#include "IIR.h"
 #include "main.h"
 #include <stdlib.h>
 
@@ -13,6 +14,8 @@ volatile uint32_t currentRisingEdge = 0;
 // the main array of bitstream values
 bitval_t bits[TUNING_WINDOW_SIZE / BAC_numBits];
 bitval_t corBuffer[TUNING_WINDOW_SIZE / 2];
+// input filter
+static iir_t filter;
 
 
 void BAC_initBitArray(){
@@ -22,6 +25,8 @@ void BAC_initBitArray(){
     for(bitval_t i = 0; i < TUNING_WINDOW_SIZE / 2; ++i){
         corBuffer[i] = 0;
     }
+    filter.alpha = iir_getAlpha(INPUT_CUTOFF_FREQ);
+    filter.y1 = 0.0f;
 }
 
 bool BAC_hasTuningSignal(){
@@ -68,11 +73,11 @@ void BAC_loadBitstream(uint16_t* adcBuf){
     hasValidSignal = false;
 
     bool prev = BAC_isZeroCross(adcBuf[0]);
-    float sum = getSampleMagnitude(adcBuf[0]);
+    float sum = iir_process(&filter, getSampleMagnitude(adcBuf[0]));
     BAC_set(0, prev);
     for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
         bool current =  BAC_isZeroCross(adcBuf[i]);
-        sum += getSampleMagnitude(adcBuf[i]);
+        sum += iir_process(&filter, getSampleMagnitude(adcBuf[i]));
         BAC_set(i, current);
         if(!hasValidSignal){
             if(prev != current){

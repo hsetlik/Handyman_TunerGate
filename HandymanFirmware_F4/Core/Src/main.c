@@ -289,6 +289,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // Initialize the buffers for the BAC handling
   BAC_initBitArray();
+  // initialize the noise gate
+  Gate_initNoiseGate();
 
   // initialize the OLED
   ssd1306_Init();
