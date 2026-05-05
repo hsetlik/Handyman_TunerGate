@@ -41,7 +41,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+#define SAMPLE_RATE 48000.0f
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/

@@ -1,4 +1,5 @@
 #include "NoiseGate.h"
+#include "IIR.h"
 #include "main.h"
 #include <math.h>
 
@@ -28,6 +29,7 @@ float releaseCoeff;
 float attackCounter = 0.0f;
 float envLevel = 0.0f;
 const float sampleTimeMs = 1000.0f / SAMPLE_RATE;
+iir_t filter;
 
 
 #ifdef NOISE_DEBUG
@@ -52,6 +54,9 @@ static void pushRMS(float mag){
 void Gate_initNoiseGate(){
 attackCoeff = getCoefficientForMs(ATTACK_MS_MIN);
 releaseCoeff = getCoefficientForMs(RELEASE_MS);
+// set up input filter
+filter.alpha = iir_getAlpha(INPUT_CUTOFF);
+filter.y1 = 0.0f;
 #ifdef NOISE_DEBUG
 for(uint16_t i = 0; i < RMS_LENGTH; ++i){
     rmsBuf[i] = 0.0f;
@@ -61,7 +66,7 @@ for(uint16_t i = 0; i < RMS_LENGTH; ++i){
 
 static void Gate_processSample(uint16_t value){
     // 1. grip the magnitude of the current sample
-    const float mag = Gate_sampleMagnitude(value);
+    const float mag = iir_process(&filter, Gate_sampleMagnitude(value));
     #ifdef NOISE_DEBUG
     pushRMS(mag);
     #endif

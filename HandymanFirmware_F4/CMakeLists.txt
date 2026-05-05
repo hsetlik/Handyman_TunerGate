@@ -51,6 +51,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     "${INC_DIR}/BitstreamACF.h"
     "${SRC_DIR}/BitstreamACF.c"
+    "${INC_DIR}/IIR.h"
+    "${SRC_DIR}/IIR.c"
     "${INC_DIR}/Tuning.h"
     "${SRC_DIR}/Tuning.c"
     "${INC_DIR}/NoiseGate.h"

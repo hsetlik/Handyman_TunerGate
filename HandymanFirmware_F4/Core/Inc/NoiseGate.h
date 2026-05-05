@@ -1,10 +1,12 @@
 #ifndef NOISE_GATE_H
 #define NOISE_GATE_H
 #include "main.h"
+#include "IIR.h"
 #define GATE_WINDOW_SIZE 128
 #define THRESH_MIN 45.0f
 #define THRESH_CENTER 130.0f
 #define THRESH_MAX 260.0f
+#define INPUT_CUTOFF 6500.0f
 
 //#define NOISE_DEBUG
 
