@@ -22,8 +22,6 @@ void BAC_initBitArray();
 bool BAC_get(uint32_t i);
 void BAC_set(uint32_t i, bool val);
 
-
-
 // call this on the filled ADC buffer to load data into the bitstream
 void BAC_loadBitstream(uint16_t* adcBuf);
 
