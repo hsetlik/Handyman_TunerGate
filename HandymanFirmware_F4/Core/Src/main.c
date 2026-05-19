@@ -105,6 +105,7 @@ void checkModeSettings() {
       HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
   inTunerMode = tuneState == GPIO_PIN_SET;
   useNoiseGate = useGateState == GPIO_PIN_SET;
+  useNoiseGate = useNoiseGate && (!inTunerMode);
   const bool oledIsOn = ssd1306_GetDisplayOn() > 0;
   if (inTunerMode != oledIsOn) {
     if(!inTunerMode)
@@ -133,6 +134,21 @@ void checkModeSettings() {
 char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
                              "F#", "G",  "G#", "A",  "A#", "B"};
 
+float errorSkew = 0.0f;
+#define TUNE_ERROR_MIN 0.0f
+#define TUNE_ERROR_MAX 64.0f
+#define TUNE_ERROR_CENTER 15.0f
+static float getErrorSkew(){
+  return logf(0.5f) / logf((TUNE_ERROR_CENTER - TUNE_ERROR_MIN) / (TUNE_ERROR_MAX - TUNE_ERROR_MIN));
+}                            
+
+uint8_t barWidthForError(int16_t sErrorCents){
+  const float normError = (float)abs(sErrorCents) / 50.0f;
+  const float proportion = expf(logf(normError) / errorSkew); 
+  return (uint8_t)(TUNE_ERROR_MAX * proportion);
+
+}
+
 void displayTuningError(tuning_error_t *err) {
   char* noteName = noteNames[err->midiNote % 12];
   uint8_t xPos = 64 - (8 * strlen(noteName));
@@ -145,10 +161,13 @@ void displayTuningError(tuning_error_t *err) {
   ssd1306_Fill(Black);
   ssd1306_SetCursor(xPos, 12);
   ssd1306_WriteString(noteName, Font_16x26, White);
+
     // draw the tuning error bar
     const uint8_t y0 = 40;
     const uint8_t y1 = 55;
-    uint8_t barWidth = (uint8_t)(((float)abs(err->errorCents) / 50.0f) * 64.0f);
+    // draw the center divider line
+    ssd1306_FillRectangle(63, y0 - 5, 65, y1 + 5, White);
+    uint8_t barWidth = barWidthForError(err->errorCents);
     uint8_t x0, x1;
     if(err->errorCents > 0){
       x0 = 64;
@@ -287,6 +306,8 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  // calculate the skew for the error bar
+  errorSkew = getErrorSkew();
   // Initialize the buffers for the BAC handling
   BAC_initBitArray();
   // initialize the noise gate
