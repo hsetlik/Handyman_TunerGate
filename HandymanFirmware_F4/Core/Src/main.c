@@ -647,24 +647,24 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, DISP_DC_Pin|DISP_CS_Pin|GateClosed_OUT_Pin|UseGate_OUT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, DISP_CS_Pin|DISP_BLK_Pin|GateClosed_OUT_Pin|UseGate_OUT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DISP_RST_GPIO_Port, DISP_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, DISP_RST_Pin|DISP_DC_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : DISP_DC_Pin GateClosed_OUT_Pin UseGate_OUT_Pin */
-  GPIO_InitStruct.Pin = DISP_DC_Pin|GateClosed_OUT_Pin|UseGate_OUT_Pin;
+  /*Configure GPIO pins : DISP_CS_Pin GateClosed_OUT_Pin UseGate_OUT_Pin */
+  GPIO_InitStruct.Pin = DISP_CS_Pin|GateClosed_OUT_Pin|UseGate_OUT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : DISP_CS_Pin */
-  GPIO_InitStruct.Pin = DISP_CS_Pin;
+  /*Configure GPIO pin : DISP_BLK_Pin */
+  GPIO_InitStruct.Pin = DISP_BLK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DISP_CS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(DISP_BLK_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : GateOpen_IN_Pin TunerMode_IN_Pin */
   GPIO_InitStruct.Pin = GateOpen_IN_Pin|TunerMode_IN_Pin;
@@ -678,12 +678,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(UseGate_IN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : DISP_RST_Pin */
-  GPIO_InitStruct.Pin = DISP_RST_Pin;
+  /*Configure GPIO pins : DISP_RST_Pin DISP_DC_Pin */
+  GPIO_InitStruct.Pin = DISP_RST_Pin|DISP_DC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DISP_RST_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
