@@ -57,11 +57,15 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     "${SRC_DIR}/Tuning.c"
     "${INC_DIR}/NoiseGate.h"
     "${SRC_DIR}/NoiseGate.c"
-    "${INC_DIR}/ssd1306_conf.h"
-    "${INC_DIR}/ssd1306.h"
-    "${SRC_DIR}/ssd1306.c"
-    "${INC_DIR}/ssd1306_fonts.h"
-    "${SRC_DIR}/ssd1306_fonts.c"
+    "${INC_DIR}/fonts.h"
+    "${SRC_DIR}/fonts.c"
+    "${INC_DIR}/st7789.h"
+    "${SRC_DIR}/st7789.c"
+    #"${INC_DIR}/ssd1306_conf.h"
+    #"${INC_DIR}/ssd1306.h"
+    #"${SRC_DIR}/ssd1306.c"
+    #"${INC_DIR}/ssd1306_fonts.h"
+    #"${SRC_DIR}/ssd1306_fonts.c"
 )
 
 # Add include paths

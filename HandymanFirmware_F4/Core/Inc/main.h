@@ -78,6 +78,10 @@ bool readyToClearScreen();
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define DISP_DC_Pin GPIO_PIN_13
+#define DISP_DC_GPIO_Port GPIOC
+#define DISP_CS_Pin GPIO_PIN_14
+#define DISP_CS_GPIO_Port GPIOC
 #define Audio_IN_Pin GPIO_PIN_1
 #define Audio_IN_GPIO_Port GPIOA
 #define Thresh_IN_Pin GPIO_PIN_2
@@ -92,8 +96,14 @@ bool readyToClearScreen();
 #define TunerMode_IN_GPIO_Port GPIOB
 #define UseGate_IN_Pin GPIO_PIN_7
 #define UseGate_IN_GPIO_Port GPIOC
-#define UseGate_OUT_Pin GPIO_PIN_10
+#define UseGate_OUT_Pin GPIO_PIN_9
 #define UseGate_OUT_GPIO_Port GPIOC
+#define DISP_CLK_Pin GPIO_PIN_3
+#define DISP_CLK_GPIO_Port GPIOB
+#define DISP_SDA_Pin GPIO_PIN_5
+#define DISP_SDA_GPIO_Port GPIOB
+#define DISP_RST_Pin GPIO_PIN_6
+#define DISP_RST_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

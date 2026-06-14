@@ -172,69 +172,67 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 }
 
 /**
-  * @brief I2C MSP Initialization
+  * @brief SPI MSP Initialization
   * This function configures the hardware resources used in this example
-  * @param hi2c: I2C handle pointer
+  * @param hspi: SPI handle pointer
   * @retval None
   */
-void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(hi2c->Instance==I2C1)
+  if(hspi->Instance==SPI1)
   {
-    /* USER CODE BEGIN I2C1_MspInit 0 */
+    /* USER CODE BEGIN SPI1_MspInit 0 */
 
-    /* USER CODE END I2C1_MspInit 0 */
+    /* USER CODE END SPI1_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_SPI1_CLK_ENABLE();
 
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**I2C1 GPIO Configuration
-    PB6     ------> I2C1_SCL
-    PB7     ------> I2C1_SDA
+    /**SPI1 GPIO Configuration
+    PB3     ------> SPI1_SCK
+    PB5     ------> SPI1_MOSI
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pin = DISP_CLK_Pin|DISP_SDA_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+    GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-    /* Peripheral clock enable */
-    __HAL_RCC_I2C1_CLK_ENABLE();
-    /* USER CODE BEGIN I2C1_MspInit 1 */
+    /* USER CODE BEGIN SPI1_MspInit 1 */
 
-    /* USER CODE END I2C1_MspInit 1 */
+    /* USER CODE END SPI1_MspInit 1 */
 
   }
 
 }
 
 /**
-  * @brief I2C MSP De-Initialization
+  * @brief SPI MSP De-Initialization
   * This function freeze the hardware resources used in this example
-  * @param hi2c: I2C handle pointer
+  * @param hspi: SPI handle pointer
   * @retval None
   */
-void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
+void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 {
-  if(hi2c->Instance==I2C1)
+  if(hspi->Instance==SPI1)
   {
-    /* USER CODE BEGIN I2C1_MspDeInit 0 */
+    /* USER CODE BEGIN SPI1_MspDeInit 0 */
 
-    /* USER CODE END I2C1_MspDeInit 0 */
+    /* USER CODE END SPI1_MspDeInit 0 */
     /* Peripheral clock disable */
-    __HAL_RCC_I2C1_CLK_DISABLE();
+    __HAL_RCC_SPI1_CLK_DISABLE();
 
-    /**I2C1 GPIO Configuration
-    PB6     ------> I2C1_SCL
-    PB7     ------> I2C1_SDA
+    /**SPI1 GPIO Configuration
+    PB3     ------> SPI1_SCK
+    PB5     ------> SPI1_MOSI
     */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6);
+    HAL_GPIO_DeInit(GPIOB, DISP_CLK_Pin|DISP_SDA_Pin);
 
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7);
+    /* USER CODE BEGIN SPI1_MspDeInit 1 */
 
-    /* USER CODE BEGIN I2C1_MspDeInit 1 */
-
-    /* USER CODE END I2C1_MspDeInit 1 */
+    /* USER CODE END SPI1_MspDeInit 1 */
   }
 
 }
