@@ -13,4 +13,5 @@ HandymanSchematic*/gerber
 HandymanSchematic*/*cache
 HandymanSchematic*/*.zip
 HandymanSchematic*/*.lck
+*/.history
 
