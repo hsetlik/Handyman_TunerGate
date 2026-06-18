@@ -50,7 +50,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.25
+          "min_clearance": 0.2
         }
       },
       "diff_pair_dimensions": [
@@ -60,12 +60,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "starved_thermal|10850000|4825000|4ea9f5eb-cf6f-482a-8314-0b0a7948bbbd|32f208f8-4774-40df-a41e-a1c43857c8eb|B.Cu",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -703,7 +698,7 @@
         "uuid": "bc3da82e-d0a7-49a6-b9ec-ecd2040670ff"
       }
     ],
-    "used_designators": "",
+    "used_designators": "C24",
     "variants": []
   },
   "sheets": [

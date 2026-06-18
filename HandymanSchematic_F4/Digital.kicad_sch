@@ -4992,6 +4992,12 @@
 		(uuid "3cce6668-1f57-41bb-993b-fbb5ca4d5e81")
 	)
 	(junction
+		(at 119.38 180.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "40a79bbc-f8ca-499e-a668-c2ba60e95a3b")
+	)
+	(junction
 		(at 83.82 31.75)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5374,6 +5380,16 @@
 			(type default)
 		)
 		(uuid "248811ca-bccd-4607-9a36-2efe4e2d008f")
+	)
+	(wire
+		(pts
+			(xy 131.318 170.18) (xy 119.38 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25af4c2f-d603-4f7e-82f7-eea47a29dced")
 	)
 	(wire
 		(pts
@@ -5877,6 +5893,16 @@
 	)
 	(wire
 		(pts
+			(xy 131.318 180.34) (xy 119.38 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79699f8f-c4a0-4047-befe-831221ac8d31")
+	)
+	(wire
+		(pts
 			(xy 71.12 173.99) (xy 73.66 173.99)
 		)
 		(stroke
@@ -5977,6 +6003,16 @@
 	)
 	(wire
 		(pts
+			(xy 131.318 171.45) (xy 131.318 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8603dd85-f9f7-4012-a46e-3c0e8720a5eb")
+	)
+	(wire
+		(pts
 			(xy 57.15 119.38) (xy 57.15 120.65)
 		)
 		(stroke
@@ -5984,6 +6020,16 @@
 			(type default)
 		)
 		(uuid "86344c2a-0b35-44e6-8d87-de611d945801")
+	)
+	(wire
+		(pts
+			(xy 131.318 179.07) (xy 131.318 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8653bb32-2512-4bab-95ea-2be71a55f555")
 	)
 	(wire
 		(pts
@@ -12432,6 +12478,87 @@
 			(project "HandymanSchematic_F4"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
 					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 131.318 175.26 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f1110b30-3c19-436b-be4e-3508591f7370")
+		(property "Reference" "C24"
+			(at 135.128 173.99 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10u"
+			(at 135.128 176.53 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 130.3528 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 131.318 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 131.318 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "32e0cd9f-23fd-403e-9750-484059c65067")
+		)
+		(pin "2"
+			(uuid "00ad5220-a227-4c5e-81fc-0f9eb1b8a48e")
+		)
+		(instances
+			(project "HandymanSchematic_F4"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
+					(reference "C24")
 					(unit 1)
 				)
 			)
