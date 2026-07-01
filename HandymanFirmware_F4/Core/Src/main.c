@@ -25,7 +25,6 @@
 #include "Tuning.h"
 //#include "ssd1306.h"
 //#include "ssd1306_fonts.h"
-#include "st7789.h"
 #include "NoiseGate.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_adc_ex.h"
@@ -330,8 +329,7 @@ int main(void)
   //Gate_initNoiseGate();
 
   // initialize the OLED
-  ST7789_Init();
-  ST7789_Test();
+
   // ssd1306_Init();
   // ssd1306_Fill(White);
   // ssd1306_UpdateScreen();
