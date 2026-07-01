@@ -61,6 +61,7 @@ SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim5;
 
 /* USER CODE BEGIN PV */
 // DMA fills this buffer with the ADC values
@@ -68,7 +69,7 @@ uint16_t tuningBuffer[TUNING_WINDOW_SIZE * 2];
 uint16_t noiseGateBuffer[GATE_WINDOW_SIZE * 2];
 // flags for tuner/noise gate modes
 bool inTunerMode = false;
-bool useNoiseGate = false;
+bool useNoiseGate = true;
 volatile bool tunerDmaRunning = false;
 volatile bool gateDmaRunning = false;
 volatile bool noiseGateClosed = true;
@@ -84,6 +85,7 @@ static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_SPI1_Init(void);
+static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
 // check the GPIOs to set the above `inTunerMode` and `useNoiseGate` flags
 // call this once before the main while loop and again in the ISR for TIM3
@@ -102,10 +104,10 @@ void checkModeSettings() {
   // 1. read the GPIOs to determine what state we should be in
   GPIO_PinState tuneState =
       HAL_GPIO_ReadPin(TunerMode_IN_GPIO_Port, TunerMode_IN_Pin);
-  GPIO_PinState useGateState =
-      HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
+  // GPIO_PinState useGateState =
+  //     HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
   inTunerMode = tuneState == GPIO_PIN_SET;
-  useNoiseGate = useGateState == GPIO_PIN_SET;
+  //useNoiseGate = useGateState == GPIO_PIN_SET;
   useNoiseGate = useNoiseGate && (!inTunerMode);
   // TODO: check if the display is on
   //const bool oledIsOn = ssd1306_GetDisplayOn() > 0;
@@ -273,6 +275,15 @@ void startPotADCConversion(){
     Error_Handler();
   }
 }
+
+static uint16_t gateBtnState = 0xFFFF;
+void checkGateButton() {
+  gateBtnState = (gateBtnState << 1) | HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
+  if(gateBtnState == 0xFFF0){
+    useNoiseGate = !useNoiseGate;
+  }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -309,6 +320,7 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_SPI1_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
   // calculate the skew for the error bar
   errorSkew = getErrorSkew();
@@ -332,6 +344,8 @@ int main(void)
 
   // start timer 3 for checking mode settings
   HAL_TIM_Base_Start_IT(&htim3);
+  // start timer 5 for checking the gate button
+  HAL_TIM_Base_Start(&htim5);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -507,7 +521,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -613,6 +627,51 @@ static void MX_TIM3_Init(void)
 }
 
 /**
+  * @brief TIM5 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM5_Init(void)
+{
+
+  /* USER CODE BEGIN TIM5_Init 0 */
+
+  /* USER CODE END TIM5_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM5_Init 1 */
+
+  /* USER CODE END TIM5_Init 1 */
+  htim5.Instance = TIM5;
+  htim5.Init.Prescaler = 8;
+  htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim5.Init.Period = 63999;
+  htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim5, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM5_Init 2 */
+
+  /* USER CODE END TIM5_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -647,7 +706,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, DISP_CS_Pin|DISP_BLK_Pin|GateClosed_OUT_Pin|UseGate_OUT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, DISP_CS_Pin|GateClosed_OUT_Pin|UseGate_OUT_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(DISP_BKL_GPIO_Port, DISP_BKL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, DISP_RST_Pin|DISP_DC_Pin, GPIO_PIN_RESET);
@@ -658,13 +720,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : DISP_BLK_Pin */
-  GPIO_InitStruct.Pin = DISP_BLK_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DISP_BLK_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : GateOpen_IN_Pin TunerMode_IN_Pin */
   GPIO_InitStruct.Pin = GateOpen_IN_Pin|TunerMode_IN_Pin;
@@ -677,6 +732,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(UseGate_IN_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : DISP_BKL_Pin */
+  GPIO_InitStruct.Pin = DISP_BKL_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(DISP_BKL_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DISP_RST_Pin DISP_DC_Pin */
   GPIO_InitStruct.Pin = DISP_RST_Pin|DISP_DC_Pin;
@@ -731,6 +793,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(useNoiseGate && !inTunerMode){
       Gate_requestPotReadings();
     }
+  } else if (htim == &htim5){
+    checkGateButton();
   }
 }
 

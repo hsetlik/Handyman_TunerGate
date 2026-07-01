@@ -408,14 +408,13 @@
 		)
 	)
 	(footprint "Potentiometer_THT:Potentiometer_Alpha_RD901F-40-00D_Single_Vertical_CircularHoles"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "4d2f912f-3750-4af9-ab7e-f9ad3ab80e45")
 		(at 1.925 35.425)
 		(descr "Potentiometer, vertical, 9mm, single, http://www.taiwanalpha.com.tw/downloads?target=products&id=113")
 		(tags "potentiometer vertical 9mm single")
 		(property "Reference" "RV2"
-			(at 6.45 -4.8 0)
+			(at 6.45 -4.8 180)
 			(layer "F.SilkS")
 			(uuid "d36be19e-ea7f-4f86-b718-f784b7cfe72b")
 			(effects
@@ -426,7 +425,7 @@
 			)
 		)
 		(property "Value" "10kB"
-			(at 0 10.110001 0)
+			(at 0 10.11 180)
 			(layer "F.Fab")
 			(uuid "bbfef578-5dc8-484e-8b67-9359b6b2571a")
 			(effects
@@ -449,7 +448,7 @@
 				)
 			)
 		)
-		(property "Description" "Potentiometer, US symbol"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -466,12 +465,6 @@
 		(path "/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d/2da34860-52da-4b56-a629-074eaea22efa")
 		(sheetname "/Analog/")
 		(sheetfile "Analog.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -495,7 +488,7 @@
 			(uuid "b8bc5938-e1e9-456c-8618-cd22dca0046a")
 		)
 		(fp_line
-			(start 0.88 1.710001)
+			(start 0.88 1.71)
 			(end 0.88 1.18)
 			(stroke
 				(width 0.12)
@@ -506,7 +499,7 @@
 		)
 		(fp_line
 			(start 0.88 4.16)
-			(end 0.88 3.330001)
+			(end 0.88 3.33)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -536,7 +529,7 @@
 		)
 		(fp_line
 			(start 9.41 -2.37)
-			(end 12.47 -2.370001)
+			(end 12.47 -2.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -546,7 +539,7 @@
 		)
 		(fp_line
 			(start 9.41 7.37)
-			(end 12.470001 7.37)
+			(end 12.47 7.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -555,8 +548,8 @@
 			(uuid "0ada823a-09c3-44b9-8753-cd2f11174929")
 		)
 		(fp_line
-			(start 12.470001 7.37)
-			(end 12.47 -2.370001)
+			(start 12.47 7.37)
+			(end 12.47 -2.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -655,6 +648,37 @@
 			(layer "F.Fab")
 			(uuid "e076ecf5-4139-4580-a2b8-5a5a3f480037")
 		)
+		(fp_line
+			(start 4 2.5)
+			(end 11 2.5)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "User.2")
+			(uuid "e4576794-199a-49cf-8e99-2dca74f6f3d1")
+		)
+		(fp_line
+			(start 7.5 -1)
+			(end 7.5 6)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "User.2")
+			(uuid "69ced79a-7cd2-4e0b-937e-fc05a3b0e68c")
+		)
+		(fp_circle
+			(center 7.5 2.5)
+			(end 7.5 -1)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "User.2")
+			(uuid "67984395-2fa1-4ead-9d6f-a9cbff9cc2dd")
+		)
 		(fp_text user "${REFERENCE}"
 			(at 7.62 2.54 0)
 			(layer "F.Fab")
@@ -667,20 +691,20 @@
 			)
 		)
 		(pad "" thru_hole circle
-			(at 7.499999 -2.3 90)
-			(size 3.24 3.24)
-			(drill 1.8)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(uuid "1f83c9f2-3243-41f1-a946-f3e296b7eb1c")
-		)
-		(pad "" thru_hole circle
-			(at 7.499999 7.3 90)
+			(at 7.5 -2.3 90)
 			(size 3.24 3.24)
 			(drill 1.8)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(uuid "cf0f84b9-05d0-4403-9c05-d330810dd6cd")
+		)
+		(pad "" thru_hole circle
+			(at 7.5 7.3 90)
+			(size 3.24 3.24)
+			(drill 1.8)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(uuid "1f83c9f2-3243-41f1-a946-f3e296b7eb1c")
 		)
 		(pad "1" thru_hole rect
 			(at 0 0 90)
@@ -981,14 +1005,13 @@
 		)
 	)
 	(footprint "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-102x"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "91dca4d4-d698-49d4-b6ce-197998d45ac8")
 		(at 53.125 15.65 -90)
 		(descr "Tactile switch, 6x6 mm, H5.0 mm, 6.5 mm pitch, https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3f.pdf")
 		(tags "Omron B3F-10xx SPST 1P1T")
 		(property "Reference" "SW2"
-			(at 3.275 6.25 90)
+			(at 3.025 6.125 270)
 			(layer "F.SilkS")
 			(uuid "78bf3947-2e2d-4cd6-8301-40aea1aeba5b")
 			(effects
@@ -999,7 +1022,7 @@
 			)
 		)
 		(property "Value" "BYP"
-			(at 3.25 6.5 90)
+			(at 3.25 6.5 270)
 			(layer "F.Fab")
 			(uuid "79f44a63-4e20-42e8-989f-7b56bf726051")
 			(effects
@@ -1022,7 +1045,7 @@
 				)
 			)
 		)
-		(property "Description" "Single Pole Single Throw (SPST) switch"
+		(property "Description" ""
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1038,17 +1061,11 @@
 		(path "/887caaef-7a77-44c5-aff2-1e54e61c47e4/7609d03a-9ea1-4c4c-b346-baa9be1eb429")
 		(sheetname "/Digital/")
 		(sheetfile "Digital.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 0.750001 5.37)
-			(end 5.75 5.369999)
+			(start 0.75 5.37)
+			(end 5.75 5.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -1098,8 +1115,8 @@
 			(uuid "3aef5a8c-841b-41b3-bb0e-bb503c035625")
 		)
 		(fp_line
-			(start -1.099999 5.6)
-			(end 7.600001 5.6)
+			(start -1.1 5.6)
+			(end 7.6 5.6)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -1108,7 +1125,7 @@
 			(uuid "ee2b894f-fd46-4adf-9199-0ea58702893a")
 		)
 		(fp_line
-			(start 7.600001 5.6)
+			(start 7.6 5.6)
 			(end 7.6 -1.1)
 			(stroke
 				(width 0.05)
@@ -1119,7 +1136,7 @@
 		)
 		(fp_line
 			(start -1.1 -1.1)
-			(end -1.099999 5.6)
+			(end -1.1 5.6)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -1159,7 +1176,7 @@
 		)
 		(fp_line
 			(start 0.25 -0.75)
-			(end 6.249999 -0.75)
+			(end 6.25 -0.75)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -1168,7 +1185,7 @@
 			(uuid "957fb642-3380-4f1e-b7b5-172f2e8a682a")
 		)
 		(fp_line
-			(start 6.249999 -0.75)
+			(start 6.25 -0.75)
 			(end 6.25 5.25)
 			(stroke
 				(width 0.1)
@@ -1177,8 +1194,39 @@
 			(layer "F.Fab")
 			(uuid "54308331-68cb-46d8-ae51-646d37219ac1")
 		)
+		(fp_line
+			(start 1.5 2.25)
+			(end 5 2.25)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "User.2")
+			(uuid "42582b29-efc7-42a7-af96-e97747995a0e")
+		)
+		(fp_line
+			(start 3.25 0.5)
+			(end 3.25 4)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "User.2")
+			(uuid "2afed523-1875-48e9-b49b-805dcd288029")
+		)
+		(fp_circle
+			(center 3.25 2.25)
+			(end 5 2.25)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill no)
+			(layer "User.2")
+			(uuid "7e81762a-7403-493a-8a5f-0f41590f2104")
+		)
 		(fp_text user "${REFERENCE}"
-			(at 3.25 2.25 90)
+			(at 3.25 2.25 270)
 			(layer "F.Fab")
 			(uuid "f69779e8-7201-4e00-8426-c5e04dcb94e1")
 			(effects
@@ -1212,7 +1260,7 @@
 			(uuid "2cb6a9ec-f319-48c6-84cf-49ab1414906f")
 		)
 		(pad "2" thru_hole circle
-			(at 0 4.500001 270)
+			(at 0 4.5 270)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -1223,7 +1271,7 @@
 			(uuid "727c475c-1020-4d5b-8470-423ea127bc8c")
 		)
 		(pad "2" thru_hole circle
-			(at 6.500001 4.5 270)
+			(at 6.5 4.5 270)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -1247,14 +1295,13 @@
 		)
 	)
 	(footprint "Potentiometer_THT:Potentiometer_Alpha_RD901F-40-00D_Single_Vertical_CircularHoles"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "b23e212f-5d4f-4ef2-9b93-996166de758e")
 		(at 52.925 40.425 180)
 		(descr "Potentiometer, vertical, 9mm, single, http://www.taiwanalpha.com.tw/downloads?target=products&id=113")
 		(tags "potentiometer vertical 9mm single")
 		(property "Reference" "RV1"
-			(at 7.475 10 0)
+			(at 6.45 -4.8 0)
 			(layer "F.SilkS")
 			(uuid "9ec611f5-8ee7-46f8-9121-f8882ebcf882")
 			(effects
@@ -1265,7 +1312,7 @@
 			)
 		)
 		(property "Value" "10kB"
-			(at 0 10.110001 0)
+			(at 0 10.11 0)
 			(layer "F.Fab")
 			(uuid "182285b4-82e3-452d-a89b-dc8c12e570ec")
 			(effects
@@ -1288,7 +1335,7 @@
 				)
 			)
 		)
-		(property "Description" "Potentiometer, US symbol"
+		(property "Description" ""
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1305,17 +1352,11 @@
 		(path "/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d/4d8ce3bb-89d5-4d9d-88cd-0c94a12156f9")
 		(sheetname "/Analog/")
 		(sheetfile "Analog.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 12.470001 7.37)
-			(end 12.47 -2.370001)
+			(start 12.47 7.37)
+			(end 12.47 -2.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -1325,7 +1366,7 @@
 		)
 		(fp_line
 			(start 9.41 7.37)
-			(end 12.470001 7.37)
+			(end 12.47 7.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -1335,7 +1376,7 @@
 		)
 		(fp_line
 			(start 9.41 -2.37)
-			(end 12.47 -2.370001)
+			(end 12.47 -2.37)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -1365,7 +1406,7 @@
 		)
 		(fp_line
 			(start 0.88 4.16)
-			(end 0.88 3.330001)
+			(end 0.88 3.33)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -1374,7 +1415,7 @@
 			(uuid "d17fb6be-f293-46af-ab19-be819eeecfb0")
 		)
 		(fp_line
-			(start 0.88 1.710001)
+			(start 0.88 1.71)
 			(end 0.88 1.18)
 			(stroke
 				(width 0.12)
@@ -1494,8 +1535,39 @@
 			(layer "F.Fab")
 			(uuid "a8a7a45d-e15d-4132-aa86-258b33067084")
 		)
+		(fp_line
+			(start 7.5 -1)
+			(end 7.5 6)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "User.2")
+			(uuid "1649a4d5-e5e6-4389-b340-163d72b589a0")
+		)
+		(fp_line
+			(start 4 2.5)
+			(end 11 2.5)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "User.2")
+			(uuid "e62b0348-4c69-4654-adb6-7405ff222d4b")
+		)
+		(fp_circle
+			(center 7.5 2.5)
+			(end 7.5 -1)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "User.2")
+			(uuid "f59eb748-3a70-4c51-9f16-2dba6882ab6c")
+		)
 		(fp_text user "${REFERENCE}"
-			(at 7.62 2.54 0)
+			(at 7.62 2.54 180)
 			(layer "F.Fab")
 			(uuid "fbb42cac-d0c5-4476-9aab-e58462238f8a")
 			(effects
@@ -1506,7 +1578,7 @@
 			)
 		)
 		(pad "" thru_hole circle
-			(at 7.499999 -2.3 270)
+			(at 7.5 -2.3 270)
 			(size 3.24 3.24)
 			(drill 1.8)
 			(layers "*.Cu" "*.Mask")
@@ -1514,7 +1586,7 @@
 			(uuid "6fdd58d9-6fc8-4e30-bebb-20aafb1bda89")
 		)
 		(pad "" thru_hole circle
-			(at 7.499999 7.3 270)
+			(at 7.5 7.3 270)
 			(size 3.24 3.24)
 			(drill 1.8)
 			(layers "*.Cu" "*.Mask")
@@ -1881,7 +1953,6 @@
 		)
 	)
 	(footprint "Display:TFT_ST7789_240x240_Breakout"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "d5400522-8ef1-453d-800b-77106ffef6ee")
 		(at 2.240001 28.4 90)
@@ -1938,37 +2009,62 @@
 		(path "/887caaef-7a77-44c5-aff2-1e54e61c47e4/cf7b91cb-2a71-4c32-9d66-7d31607c5f16")
 		(sheetname "/Digital/")
 		(sheetfile "Digital.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "4" "5" "6" "7" "8" "2" "1")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_poly
-			(pts
-				(xy 5.925 0.4) (xy 26.175 0.4) (xy 26.175 2.575) (xy 5.925 2.575)
-			)
+		(fp_rect
+			(start 5.925 0.4)
+			(end 26.175 2.575)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "f9fa811b-dbe6-46f7-b93e-670870b81b4c")
+			(uuid "7811612c-c94a-4909-9317-9b3e8fab1757")
 		)
-		(fp_poly
-			(pts
-				(xy 5.925 0.4) (xy 26.175 0.4) (xy 26.175 2.575) (xy 5.925 2.575)
-			)
+		(fp_rect
+			(start 5.925 0.4)
+			(end 26.175 2.575)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "6d2cb634-7142-4db8-87c6-0ded83c3c47b")
+			(uuid "2e710102-e64d-4521-b62e-feff33ae782d")
+		)
+		(fp_rect
+			(start 2.14 6.45)
+			(end 29.86 34.17)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "User.2")
+			(uuid "0893e6c8-b30c-47d0-8ce0-380c3e29bccf")
+		)
+		(fp_rect
+			(start 0 0)
+			(end 32 43.72)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "User.3")
+			(uuid "eaed1fbc-677d-4878-95ed-f40792e1d528")
+		)
+		(fp_rect
+			(start 0.24 4.31)
+			(end 31.76 39.41)
+			(stroke
+				(width 0.2)
+				(type solid)
+			)
+			(fill no)
+			(layer "User.3")
+			(uuid "18301280-be8b-41d1-9eca-793859f60d81")
 		)
 		(fp_circle
 			(center 29.5 2.5)
@@ -1978,7 +2074,7 @@
 				(type solid)
 			)
 			(fill no)
-			(layer "User.2")
+			(layer "User.3")
 			(uuid "1e27ecdb-d0a5-4970-ba43-5ddecef40b29")
 		)
 		(fp_circle
@@ -1989,66 +2085,30 @@
 				(type solid)
 			)
 			(fill no)
-			(layer "User.2")
+			(layer "User.3")
 			(uuid "69d5ca0c-ce4d-45b4-a083-b781f9edfabc")
 		)
 		(fp_circle
-			(center 29.500001 41.22)
+			(center 29.5 41.22)
 			(end 30.5 41.22)
 			(stroke
 				(width 0.2)
 				(type solid)
 			)
 			(fill no)
-			(layer "User.2")
+			(layer "User.3")
 			(uuid "5a191315-7f19-45ef-97ed-80b0f40897bc")
 		)
 		(fp_circle
-			(center 2.499999 41.22)
+			(center 2.5 41.22)
 			(end 3.5 41.22)
 			(stroke
 				(width 0.2)
 				(type solid)
 			)
 			(fill no)
-			(layer "User.2")
+			(layer "User.3")
 			(uuid "839c0657-b33c-4af5-9f09-1c407632a79d")
-		)
-		(fp_poly
-			(pts
-				(xy 0 0) (xy 32 0) (xy 32 43.719999) (xy 0 43.719999)
-			)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.2")
-			(uuid "5b48950c-ee7d-4ea1-a266-ebab5d176a3b")
-		)
-		(fp_poly
-			(pts
-				(xy 0.24 4.31) (xy 31.76 4.31) (xy 31.76 39.41) (xy 0.24 39.41)
-			)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.2")
-			(uuid "37382ccd-eae3-430e-9ce5-1fcaee22d4f5")
-		)
-		(fp_poly
-			(pts
-				(xy 2.14 6.45) (xy 29.86 6.45) (xy 29.86 34.17) (xy 2.14 34.17)
-			)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "User.2")
-			(uuid "eddf8582-1170-40de-b890-f0856d8dcd12")
 		)
 		(fp_text user "VCC"
 			(at 10.4 2.6 180)
@@ -2116,7 +2176,7 @@
 			)
 		)
 		(fp_text user "BLK"
-			(at 25.425 5.550001 180)
+			(at 25.425 5.55 180)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "db2b811a-4162-4e8c-b5cf-bc0de0ab5027")

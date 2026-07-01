@@ -80,8 +80,6 @@ bool readyToClearScreen();
 /* Private defines -----------------------------------------------------------*/
 #define DISP_CS_Pin GPIO_PIN_13
 #define DISP_CS_GPIO_Port GPIOC
-#define DISP_BLK_Pin GPIO_PIN_14
-#define DISP_BLK_GPIO_Port GPIOC
 #define Audio_IN_Pin GPIO_PIN_1
 #define Audio_IN_GPIO_Port GPIOA
 #define Thresh_IN_Pin GPIO_PIN_2
@@ -98,6 +96,8 @@ bool readyToClearScreen();
 #define UseGate_IN_GPIO_Port GPIOC
 #define UseGate_OUT_Pin GPIO_PIN_9
 #define UseGate_OUT_GPIO_Port GPIOC
+#define DISP_BKL_Pin GPIO_PIN_9
+#define DISP_BKL_GPIO_Port GPIOA
 #define DISP_CLK_Pin GPIO_PIN_3
 #define DISP_CLK_GPIO_Port GPIOB
 #define DISP_SDA_Pin GPIO_PIN_5

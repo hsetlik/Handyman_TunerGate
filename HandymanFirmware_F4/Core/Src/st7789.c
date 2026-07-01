@@ -1,4 +1,6 @@
 #include "st7789.h"
+#include "main.h"
+#include "stm32f4xx_hal_def.h"
 
 #ifdef USE_DMA
 #include <string.h>
@@ -12,6 +14,15 @@ uint16_t DMA_MIN_SIZE = 16;
 uint16_t disp_buf[ST7789_WIDTH * HOR_LEN];
 #endif
 
+
+void ST7789_BacklightOn(){
+	HAL_GPIO_WritePin(BLK_PORT, BLK_PIN, GPIO_PIN_SET);
+}
+
+void ST7789_BacklightOff(){
+	HAL_GPIO_WritePin(BLK_PORT, BLK_PIN, GPIO_PIN_RESET);
+}
+
 /**
  * @brief Write command to ST7789 controller
  * @param cmd -> command to write
@@ -21,7 +32,10 @@ static void ST7789_WriteCommand(uint8_t cmd)
 {
 	ST7789_Select();
 	ST7789_DC_Clr();
-	HAL_SPI_Transmit(&ST7789_SPI_PORT, &cmd, sizeof(cmd), HAL_MAX_DELAY);
+	HAL_StatusTypeDef cmdStatus =  HAL_SPI_Transmit(&ST7789_SPI_PORT, &cmd, sizeof(cmd), HAL_MAX_DELAY);
+	if(cmdStatus != HAL_OK){
+		Error_Handler();
+	}
 	ST7789_UnSelect();
 }
 
@@ -136,7 +150,10 @@ void ST7789_Init(void)
 	#ifdef USE_DMA
 		memset(disp_buf, 0, sizeof(disp_buf));
 	#endif
-	HAL_Delay(10);
+	ST7789_BacklightOff();
+	HAL_Delay(20);
+	ST7789_BacklightOn();
+	HAL_Delay(20);
     ST7789_RST_Clr();
     HAL_Delay(10);
     ST7789_RST_Set();
