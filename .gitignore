@@ -14,4 +14,6 @@ HandymanSchematic*/*cache
 HandymanSchematic*/*.zip
 HandymanSchematic*/*.lck
 */.history
+*.history
+*-backups
 
