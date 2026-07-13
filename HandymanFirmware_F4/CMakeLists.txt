@@ -59,6 +59,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     "${SRC_DIR}/NoiseGate.c"
     "${INC_DIR}/sh1106.h"
     "${SRC_DIR}/sh1106.c"
+    "${INC_DIR}/DisplayChars.h"
+    "${SRC_DIR}/DisplayChars.c"
     #"${INC_DIR}/st7789.h"
     #"${SRC_DIR}/st7789.c"
     #"${INC_DIR}/ssd1306_conf.h"

@@ -2,3 +2,4 @@ build
 mx.scratch
 .settings
 Drivers/STM32*
+*.ai

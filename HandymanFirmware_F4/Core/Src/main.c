@@ -24,6 +24,7 @@
 #include "BitstreamACF.h"
 #include "Tuning.h"
 #include "sh1106.h"
+#include "DisplayChars.h"
 //#include "ssd1306_fonts.h"
 #include "NoiseGate.h"
 #include "stm32f4xx_hal.h"
@@ -108,14 +109,12 @@ void checkModeSettings() {
   inTunerMode = tuneState == GPIO_PIN_SET;
   //useNoiseGate = useGateState == GPIO_PIN_SET;
   useNoiseGate = useNoiseGate && (!inTunerMode);
-  // TODO: check if the display is on
-  //const bool oledIsOn = ssd1306_GetDisplayOn() > 0;
-  const bool oledIsOn = true;
+  const bool oledIsOn = SH1106_isDisplayOn();
   if (inTunerMode != oledIsOn) {
     if(!inTunerMode)
       displayBlankTuning();
     // TODO: toggle the display on/off
-    //ssd1306_SetDisplayOn((uint8_t)inTunerMode);
+    SH1106_DisplayOn((uint8_t)inTunerMode);
   } 
   setUseGateLED(useNoiseGate);
   if(inTunerMode && !tunerDmaRunning){
@@ -139,10 +138,11 @@ void checkModeSettings() {
 char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
                              "F#", "G",  "G#", "A",  "A#", "B"};
 
+const uint8_t* noteData[12] = {DisplayChar_C, DisplayChar_CSharp, DisplayChar_D, DisplayChar_DSharp, DisplayChar_E, DisplayChar_F, DisplayChar_FSharp, DisplayChar_G, DisplayChar_GSharp, DisplayChar_A, DisplayChar_ASharp, DisplayChar_B};
 float errorSkew = 0.0f;
 #define TUNE_ERROR_MIN 0.0f
 #define TUNE_ERROR_MAX 64.0f
-#define TUNE_ERROR_CENTER 15.0f
+#define TUNE_ERROR_CENTER 40.0f
 static float getErrorSkew(){
   return logf(0.5f) / logf((TUNE_ERROR_CENTER - TUNE_ERROR_MIN) / (TUNE_ERROR_MAX - TUNE_ERROR_MIN));
 }                            
@@ -155,42 +155,43 @@ uint8_t barWidthForError(int16_t sErrorCents){
 }
 
 void displayTuningError(tuning_error_t *err) {
-  char* noteName = noteNames[err->midiNote % 12];
-  uint8_t xPos = 64 - (8 * strlen(noteName));
-  // check if we're within the tuning threshold
-  // if(abs(err->errorCents) <= IN_TUNE_THRESH){
-  // ssd1306_Fill(White);
-  // ssd1306_SetCursor(xPos, 12);
-  // ssd1306_WriteString(noteName, Font_16x26, Black);
-  // } else {
-  // ssd1306_Fill(Black);
-  // ssd1306_SetCursor(xPos, 12);
-  // ssd1306_WriteString(noteName, Font_16x26, White);
+  //char* noteName = noteNames[err->midiNote % 12];
+  const uint8_t* noteBits = noteData[err->midiNote % 12];
 
-  //   // draw the tuning error bar
-  //   const uint8_t y0 = 40;
-  //   const uint8_t y1 = 55;
-  //   // draw the center divider line
-  //   ssd1306_FillRectangle(63, y0 - 5, 65, y1 + 5, White);
-  //   uint8_t barWidth = barWidthForError(err->errorCents);
-  //   uint8_t x0, x1;
-  //   if(err->errorCents > 0){
-  //     x0 = 64;
-  //     x1 = 64 + barWidth;
-  //   } else {
-  //     x0 = 64 - barWidth;
-  //     x1 = 64;
-  //   }
-  //   ssd1306_FillRectangle(x0, y0, x1, y1, White);
-  // }
+  //check if we're within the tuning threshold
+  if(abs(err->errorCents) <= IN_TUNE_THRESH){
+    SH1106_Fill(SH1106_COLOR_WHITE);
+    SH1106_DrawBitmap(21, 11, noteBits,
+                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, false);
+  } else {
+    SH1106_Fill(SH1106_COLOR_BLACK);
+    // draw the note
+    SH1106_DrawBitmap(21, 11, noteBits,
+                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, true);
+    // draw the tuning error bar
+    const uint8_t xCenter = 64;
+    const uint8_t barY = 51;
+    const uint8_t barHeight = 8;
+    // draw the center divider line
+    SH1106_DrawRectangle(62, 48, 4, 15, SH1106_COLOR_WHITE);
+    // draw the error bar
+    uint8_t barWidth = barWidthForError(err->errorCents);
+    uint8_t x;
+    if(err->errorCents > 0){
+      x = xCenter;
+    } else {
+      x = xCenter - barWidth;
+    }
+    SH1106_DrawRectangle(x, barY, barWidth, barHeight, SH1106_COLOR_WHITE);
+  }
   // // 6. send the I2C data to update the screen
-  // ssd1306_UpdateScreen();
+  SH1106_UpdateScreen();
 }
 
 
 void displayBlankTuning(){
-  // ssd1306_Fill(Black);
-  // ssd1306_UpdateScreen();
+  SH1106_Fill(SH1106_COLOR_BLACK);
+  SH1106_UpdateScreen();
 }
 // Implementations of shared stuff from main.h---------------------------------------------------
 
@@ -326,15 +327,14 @@ int main(void)
   // Initialize the buffers for the BAC handling
   BAC_initBitArray();
   // initialize the noise gate
-  //Gate_initNoiseGate();
+  Gate_initNoiseGate();
 
   // initialize the OLED
 
   if(SH1106_Init() != HAL_OK){
     Error_Handler();
   }
-  // ssd1306_Fill(White);
-  // ssd1306_UpdateScreen();
+
   HAL_Delay(200);
 
 
@@ -345,7 +345,7 @@ int main(void)
   // start timer 3 for checking mode settings
   HAL_TIM_Base_Start_IT(&htim3);
   // start timer 5 for checking the gate button
-  HAL_TIM_Base_Start(&htim5);
+  HAL_TIM_Base_Start_IT(&htim5);
   /* USER CODE END 2 */
 
   /* Infinite loop */

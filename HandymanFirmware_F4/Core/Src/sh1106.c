@@ -1,4 +1,5 @@
 #include "sh1106.h"
+#include "stm32f4xx_hal_def.h"
 
 // SH1106 control byte: Co=0 (no more control bytes follow), D/C# = 0 -> command
 #define SH1106_CTRL_CMD  0x00
@@ -8,6 +9,7 @@
 #define SH1106_I2C_TIMEOUT 100
 
 static uint8_t s_buffer[SH1106_Width * SH1106_PAGES];
+static bool isDisplayOn = false;
 
 static HAL_StatusTypeDef SH1106_WriteCommand(uint8_t cmd)
 {
@@ -37,8 +39,13 @@ HAL_StatusTypeDef SH1106_Init(void)
     status |= SH1106_WriteCommand(0x40); // set display start line = 0
     status |= SH1106_WriteCommand(0xAD); // set DC-DC pump
     status |= SH1106_WriteCommand(0x8B);
-    status |= SH1106_WriteCommand(0xA1); // segment re-map (flip horizontal)
-    status |= SH1106_WriteCommand(0xC8); // COM output scan direction (flip vertical)
+#ifdef SH1106_ROTATION_180
+    status |= SH1106_WriteCommand(0xA0); // segment re-map: normal (rotated 180° from default)
+    status |= SH1106_WriteCommand(0xC0); // COM scan: normal (rotated 180° from default)
+#else
+    status |= SH1106_WriteCommand(0xA1); // segment re-map: SEG131→col0 (default orientation)
+    status |= SH1106_WriteCommand(0xC8); // COM scan: reverse (default orientation)
+#endif
     status |= SH1106_WriteCommand(0xDA); // set COM pins hardware config
     status |= SH1106_WriteCommand(0x12);
     status |= SH1106_WriteCommand(0x81); // set contrast control
@@ -55,6 +62,7 @@ HAL_StatusTypeDef SH1106_Init(void)
     status |= SH1106_UpdateScreen();
 
     status |= SH1106_WriteCommand(0xAF); // display on
+    isDisplayOn = true;
 
     return status;
 }
@@ -101,6 +109,21 @@ HAL_StatusTypeDef SH1106_UpdateScreen(void)
     return status;
 }
 
+void SH1106_DrawBitmap(uint8_t x, uint8_t y, const uint8_t *bitmap,
+                       uint8_t w, uint8_t h, uint8_t w_bytes, bool isWhite)
+{
+    SH1106_Color txt = isWhite ? SH1106_COLOR_WHITE : SH1106_COLOR_BLACK;
+    SH1106_Color bkgnd = isWhite ? SH1106_COLOR_BLACK : SH1106_COLOR_WHITE;
+    for (uint8_t row = 0; row < h; row++) {
+        for (uint8_t col = 0; col < w; col++) {
+            uint8_t bit_mask = 0x80 >> (col % 8);
+            SH1106_Color color = (bitmap[row * w_bytes + col / 8] & bit_mask)
+                                 ? txt : bkgnd;
+            SH1106_DrawPixel(x + col, y + row, color);
+        }
+    }
+}
+
 HAL_StatusTypeDef SH1106_SetContrast(uint8_t value)
 {
     HAL_StatusTypeDef status = SH1106_WriteCommand(0x81);
@@ -110,5 +133,21 @@ HAL_StatusTypeDef SH1106_SetContrast(uint8_t value)
 
 HAL_StatusTypeDef SH1106_DisplayOn(uint8_t on)
 {
-    return SH1106_WriteCommand(on ? 0xAF : 0xAE);
+    HAL_StatusTypeDef onStatus = SH1106_WriteCommand(on ? 0xAF : 0xAE);
+    if(onStatus == HAL_OK){
+        isDisplayOn = on > 0;
+    }
+    return onStatus;
+}
+
+void SH1106_DrawRectangle(uint8_t x0, uint8_t y0, uint8_t w, uint8_t h, SH1106_Color col){
+    for(uint8_t x = x0; x < x0 + w; ++x){
+        for(uint8_t y = y0; y < y0 + h; ++y){
+            SH1106_DrawPixel(x, y, col);
+        }
+    }
+}
+
+bool SH1106_isDisplayOn(){
+    return isDisplayOn;
 }
