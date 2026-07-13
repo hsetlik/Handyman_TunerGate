@@ -23,7 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "BitstreamACF.h"
 #include "Tuning.h"
-//#include "ssd1306.h"
+#include "sh1106.h"
 //#include "ssd1306_fonts.h"
 #include "NoiseGate.h"
 #include "stm32f4xx_hal.h"
@@ -330,7 +330,9 @@ int main(void)
 
   // initialize the OLED
 
-  // ssd1306_Init();
+  if(SH1106_Init() != HAL_OK){
+    Error_Handler();
+  }
   // ssd1306_Fill(White);
   // ssd1306_UpdateScreen();
   HAL_Delay(200);
