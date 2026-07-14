@@ -10,3 +10,10 @@ float iir_process(iir_t* filter, float input){
     filter->y1 = output;
     return output;
 }
+
+
+uint16_t iir_process_uint16(iir_t* filter, uint16_t input){
+    float output = (filter->alpha * ((float)input - filter->y1)) + filter->y1;
+    filter->y1 = output;
+    return (uint16_t)output;
+}

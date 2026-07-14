@@ -16,5 +16,6 @@ float iir_getAlpha(float fCutoff);
 
 float iir_process(iir_t* filter, float input);
 
+uint16_t iir_process_uint16(iir_t* filter, uint16_t input);
 
 #endif

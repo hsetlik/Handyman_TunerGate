@@ -66,12 +66,18 @@ static inline float getSampleMagnitude(uint16_t sample){
     return (float)val;
 }
 
+static inline void BAC_filterInputBuf(uint16_t* adcBuf){
+    for(uint16_t i = 0; i < TUNING_WINDOW_SIZE; ++i){
+        adcBuf[i] = iir_process_uint16(&filter, adcBuf[i]);
+    }
+}
+
 void BAC_loadBitstream(uint16_t* adcBuf){
     if(bitstreamLoaded && hasValidSignal){
         return;
     }
     hasValidSignal = false;
-
+#ifndef BAC_PREFILTER
     bool prev = BAC_isZeroCross(adcBuf[0]);
     float sum = iir_process(&filter, getSampleMagnitude(adcBuf[0]));
     BAC_set(0, prev);
@@ -87,6 +93,24 @@ void BAC_loadBitstream(uint16_t* adcBuf){
             prev = current;
         }
     }
+#else
+    BAC_filterInputBuf(adcBuf);
+    bool prev = BAC_isZeroCross(adcBuf[0]);
+    float sum = getSampleMagnitude(adcBuf[0]);
+    BAC_set(0, prev);
+    for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
+        bool current =  BAC_isZeroCross(adcBuf[i]);
+        sum += getSampleMagnitude(adcBuf[i]);
+        BAC_set(i, current);
+        if(!hasValidSignal){
+            if(prev != current){
+                currentRisingEdge = i;
+                hasValidSignal = true;
+            }
+            prev = current;
+        }
+    }
+#endif
     const float avgMag = sum / (float)TUNING_WINDOW_SIZE;
 
     /* only update the tuning display if we have at least one zero crossing

@@ -6,6 +6,8 @@
 #define bitval_t uint32_t
 #define TUNING_WINDOW_SIZE 2048
 #define INPUT_CUTOFF_FREQ 4500.0f
+
+#define BAC_PREFILTER
 /* This is based on Joel de Guzman's Bitstream Autocorrelation concept, explained
 in his 2018 blog post here:
 https://www.cycfi.com/2018/03/fast-and-efficient-pitch-detection-bitstream-autocorrelation/
