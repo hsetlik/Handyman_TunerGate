@@ -336,12 +336,8 @@ int main(void)
   }
 
   HAL_Delay(200);
-
-
-
   // check the GPIO inputs for the first time and start the relevant DMA streams
   checkModeSettings();
-
   // start timer 3 for checking mode settings
   HAL_TIM_Base_Start_IT(&htim3);
   // start timer 5 for checking the gate button

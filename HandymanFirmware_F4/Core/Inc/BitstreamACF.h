@@ -5,9 +5,10 @@
 // the type we'll use to store the bitstreams
 #define bitval_t uint32_t
 #define TUNING_WINDOW_SIZE 2048
-#define INPUT_CUTOFF_FREQ 4500.0f
+#define INPUT_CUTOFF_FREQ 4000.0f
 
 #define BAC_PREFILTER
+
 /* This is based on Joel de Guzman's Bitstream Autocorrelation concept, explained
 in his 2018 blog post here:
 https://www.cycfi.com/2018/03/fast-and-efficient-pitch-detection-bitstream-autocorrelation/
@@ -35,6 +36,9 @@ void BAC_autoCorrelate(uint32_t startPos);
 
 // check if we're ready to run the algorithm
 bool BAC_isBitstreamLoaded();
+
+// state-based checking for zero crossings
+bool BAC_isZeroCross(bool* prevState, float value);
 
 // check if the algorithm is currently working (for debug reasons)
 bool BAC_isWorking();
