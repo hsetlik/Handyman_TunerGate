@@ -17,6 +17,8 @@ https://github.com/cycfi/bitstream_autocorrelation
 but in C (duh) 
 */
 
+//#define BAC_FIND_EDGES
+
 
 //call this at startup
 void BAC_initBitArray();

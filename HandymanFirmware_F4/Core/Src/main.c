@@ -108,15 +108,14 @@ void checkModeSettings() {
   //     HAL_GPIO_ReadPin(UseGate_IN_GPIO_Port, UseGate_IN_Pin);
   inTunerMode = tuneState == GPIO_PIN_SET;
   //useNoiseGate = useGateState == GPIO_PIN_SET;
-  useNoiseGate = useNoiseGate && (!inTunerMode);
+  const bool gateLEDOn = useNoiseGate && (!inTunerMode);
   const bool oledIsOn = SH1106_isDisplayOn();
   if (inTunerMode != oledIsOn) {
     if(!inTunerMode)
       displayBlankTuning();
-    // TODO: toggle the display on/off
     SH1106_DisplayOn((uint8_t)inTunerMode);
   } 
-  setUseGateLED(useNoiseGate);
+  setUseGateLED(gateLEDOn);
   if(inTunerMode && !tunerDmaRunning){
     if(gateDmaRunning){
       stopNoiseGateDMA();
@@ -133,6 +132,9 @@ void checkModeSettings() {
   } else if (!useNoiseGate && gateDmaRunning){
     stopNoiseGateDMA();
   }
+  if(!useNoiseGate){
+    setNoiseGateClosed(true);
+  }
 }
 
 char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
@@ -142,7 +144,7 @@ const uint8_t* noteData[12] = {DisplayChar_C, DisplayChar_CSharp, DisplayChar_D,
 float errorSkew = 0.0f;
 #define TUNE_ERROR_MIN 0.0f
 #define TUNE_ERROR_MAX 64.0f
-#define TUNE_ERROR_CENTER 40.0f
+#define TUNE_ERROR_CENTER 20.0f
 static float getErrorSkew(){
   return logf(0.5f) / logf((TUNE_ERROR_CENTER - TUNE_ERROR_MIN) / (TUNE_ERROR_MAX - TUNE_ERROR_MIN));
 }                            
@@ -361,7 +363,6 @@ int main(void)
       }
       // 4. Unset the bitstreamLoaded flag
       BAC_finishedWithCurrentHz();
-
     }
 
     /* USER CODE END WHILE */

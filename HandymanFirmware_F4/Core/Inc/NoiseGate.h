@@ -5,7 +5,7 @@
 #define GATE_WINDOW_SIZE 128
 #define THRESH_MIN 35.0f
 #define THRESH_CENTER 140.0f
-#define THRESH_MAX 260.0f
+#define THRESH_MAX 285.0f
 #define INPUT_CUTOFF 12000.0f
 
 //#define NOISE_DEBUG

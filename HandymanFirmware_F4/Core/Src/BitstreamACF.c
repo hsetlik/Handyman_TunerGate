@@ -105,7 +105,7 @@ void BAC_loadBitstream(uint16_t* adcBuf){
     BAC_set(0, prev);
     for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
         bool current =  BAC_isZeroCross(&zeroCrossState, signalBuf[i]);
-        sum += getSampleMagnitude(signalBuf[i]);
+        sum += getSampleMagnitude(adcBuf[i]);
         BAC_set(i, current);
     }
     const float avgMag = sum / (float)TUNING_WINDOW_SIZE;
@@ -215,5 +215,30 @@ float BAC_getCurrentHz(){
             break;
         }
     }
+    // 4. Optionally, do some more refinement to find rising edges
+    #ifdef BAC_FIND_EDGES
+    const uint32_t firstIdxGuess = minIdx;
+    float prevValue = 0.0f;
+    uint32_t firstEdgeIdx = 0;
+    while(firstEdgeIdx < TUNING_WINDOW_SIZE && signalBuf[firstEdgeIdx] <= 0.0f){
+        prevValue = signalBuf[firstEdgeIdx];
+        ++firstEdgeIdx;
+    }
+    float dY = signalBuf[firstEdgeIdx] - prevValue;
+    const float dX1 = -prevValue / dY;
+
+    uint32_t nextEdgeIdx = minIdx - 1;
+    while(signalBuf[nextEdgeIdx] <= 0.0f && nextEdgeIdx < TUNING_WINDOW_SIZE){
+        prevValue = signalBuf[nextEdgeIdx];
+        ++nextEdgeIdx;
+    }
+    dY = signalBuf[nextEdgeIdx] - prevValue;
+    const float dX2 = -prevValue / dY;
+    float fMinIdx = (float)(nextEdgeIdx - firstEdgeIdx) + (dX2 - dX1);
+    uint32_t newMinIdx = (uint32_t)fMinIdx;
+    if(hasValidSignal && newMinIdx != firstIdxGuess){
+        minIdx = newMinIdx;
+    }
+    #endif
     return BAC_hzForIndex(minIdx);
 }
