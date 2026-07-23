@@ -632,12 +632,36 @@
           "label": "DNP",
           "name": "${DNP}",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Device",
+          "name": "Sim.Device",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Description",
+          "name": "Description",
+          "show": false
         }
       ],
-      "filter_string": "",
+      "filter_string": "FX",
       "group_symbols": true,
       "include_excluded_from_bom": false,
-      "name": "Grouped By Value",
+      "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
     },
@@ -698,7 +722,7 @@
         "uuid": "bc3da82e-d0a7-49a6-b9ec-ecd2040670ff"
       }
     ],
-    "used_designators": "C8,C24",
+    "used_designators": "TP4,#PWR30,#PWR36,#PWR41,#PWR56-59,J2-7,C8,C24",
     "variants": []
   },
   "sheets": [

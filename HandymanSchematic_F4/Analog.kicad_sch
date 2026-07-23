@@ -2210,8 +2210,8 @@
 		(uuid "7d7cc8f3-3241-4e10-80ce-cfe7743a67ee")
 	)
 	(rectangle
-		(start 188.595 20.574)
-		(end 260.985 77.47)
+		(start 186.69 20.574)
+		(end 264.795 77.47)
 		(stroke
 			(width 0)
 			(type default)
@@ -3652,7 +3652,7 @@
 			)
 		)
 	)
-	(global_label "TUNE_IN"
+	(global_label "TUNE_ADC"
 		(shape output)
 		(at 249.555 59.69 0)
 		(fields_autoplaced yes)
@@ -3664,7 +3664,7 @@
 		)
 		(uuid "b57b4193-8e3e-48ad-a1ce-0eb6772eae7e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 260.2207 59.69 0)
+			(at 261.914 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3676,7 +3676,7 @@
 			)
 		)
 	)
-	(global_label "FX_IN"
+	(global_label "TUNE_IN"
 		(shape input)
 		(at 198.755 62.23 180)
 		(fields_autoplaced yes)
@@ -3688,7 +3688,7 @@
 		)
 		(uuid "c36aff67-a8fe-43d1-b871-d3fac7a5332d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 190.5688 62.23 0)
+			(at 188.0893 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

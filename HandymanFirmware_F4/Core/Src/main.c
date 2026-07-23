@@ -701,6 +701,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, UseGate_OUT_Pin|GateClosed_OUT_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(Clock_Calib_GPIO_Port, Clock_Calib_Pin, GPIO_PIN_RESET);
+
   /*Configure GPIO pins : UseGate_OUT_Pin GateClosed_OUT_Pin */
   GPIO_InitStruct.Pin = UseGate_OUT_Pin|GateClosed_OUT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -719,6 +722,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(TunerMode_IN_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Clock_Calib_Pin */
+  GPIO_InitStruct.Pin = Clock_Calib_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(Clock_Calib_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

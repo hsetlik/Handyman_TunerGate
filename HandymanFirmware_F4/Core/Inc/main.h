@@ -92,6 +92,8 @@ bool readyToClearScreen();
 #define Release_IN_GPIO_Port GPIOB
 #define TunerMode_IN_Pin GPIO_PIN_13
 #define TunerMode_IN_GPIO_Port GPIOB
+#define Clock_Calib_Pin GPIO_PIN_9
+#define Clock_Calib_GPIO_Port GPIOA
 #define DISP_SCL_Pin GPIO_PIN_6
 #define DISP_SCL_GPIO_Port GPIOB
 #define DISP_SDA_Pin GPIO_PIN_7
