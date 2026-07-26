@@ -18310,6 +18310,19 @@
 			(justify left bottom mirror)
 		)
 	)
+	(gr_text "NOTE: this is the 4th revision\nwith the off-board jacks"
+		(at 4.35 3.1 0)
+		(layer "User.4")
+		(uuid "0f684deb-4873-4465-8f8e-2d7737e32a51")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
 	(segment
 		(start 49.9875 8.6)
 		(end 50.0125 8.625)
