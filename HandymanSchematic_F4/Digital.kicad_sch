@@ -892,6 +892,122 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector:GroundingSpring"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 8.89 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "GroundingSpring_0_1"
+				(circle
+					(center 0 3.81)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 3.81)
+					(radius 2.54)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 3.81)
+					(radius 3.81)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GroundingSpring_1_1"
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector:TestPoint"
 			(pin_numbers
 				(hide yes)
@@ -5387,7 +5503,7 @@
 		(uuid "6e6980a8-7c61-42d8-b219-7fa33675703a")
 	)
 	(junction
-		(at 92.71 177.546)
+		(at 82.55 176.53)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7073bc19-3357-4b08-b032-6e8172013e90")
@@ -5686,7 +5802,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 175.006) (xy 92.71 177.546)
+			(xy 82.55 173.99) (xy 82.55 176.53)
 		)
 		(stroke
 			(width 0)
@@ -6356,7 +6472,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 169.672) (xy 92.71 172.466)
+			(xy 82.55 168.656) (xy 82.55 171.45)
 		)
 		(stroke
 			(width 0)
@@ -6603,6 +6719,16 @@
 			(type default)
 		)
 		(uuid "905b725b-f122-4df2-9105-d7145b3ad005")
+	)
+	(wire
+		(pts
+			(xy 95.25 177.8) (xy 95.25 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "920b6ea5-4399-4b35-ac41-fcf80d6a6f9f")
 	)
 	(wire
 		(pts
@@ -7246,7 +7372,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 177.546) (xy 92.71 180.34)
+			(xy 82.55 176.53) (xy 82.55 179.324)
 		)
 		(stroke
 			(width 0)
@@ -8368,7 +8494,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 92.71 180.34 0)
+		(at 82.55 179.324 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8379,7 +8505,7 @@
 		(fields_autoplaced yes)
 		(uuid "12a68dc7-bccc-4d67-9989-727c2f3eef8a")
 		(property "Reference" "#PWR036"
-			(at 92.71 186.69 0)
+			(at 82.55 185.674 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8390,7 +8516,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 92.71 185.42 0)
+			(at 82.55 184.404 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8401,7 +8527,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 92.71 180.34 0)
+			(at 82.55 179.324 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8412,7 +8538,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 92.71 180.34 0)
+			(at 82.55 179.324 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8423,7 +8549,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 92.71 180.34 0)
+			(at 82.55 179.324 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8774,7 +8900,7 @@
 	)
 	(symbol
 		(lib_id "PCM_4ms_Power-symbol:+9V")
-		(at 92.71 169.672 0)
+		(at 82.55 168.656 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8785,7 +8911,7 @@
 		(fields_autoplaced yes)
 		(uuid "1b61dad2-e73f-470e-8ca0-8c0f675a0c93")
 		(property "Reference" "#PWR030"
-			(at 92.71 173.482 0)
+			(at 82.55 172.466 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8796,7 +8922,7 @@
 			)
 		)
 		(property "Value" "+9V"
-			(at 92.71 164.592 0)
+			(at 82.55 163.576 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8806,7 +8932,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 92.71 169.672 0)
+			(at 82.55 168.656 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8817,7 +8943,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 92.71 169.672 0)
+			(at 82.55 168.656 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8828,7 +8954,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+9V\""
-			(at 92.71 169.672 0)
+			(at 82.55 168.656 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10683,6 +10809,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 95.25 179.07 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5e8879b5-c139-47a8-b700-90495cf95960")
+		(property "Reference" "#PWR037"
+			(at 95.25 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 95.25 184.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 95.25 179.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 179.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 95.25 179.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "51db9cab-0c1a-4ec1-88af-a48413cdb49e")
+		)
+		(instances
+			(project "HandymanSchematic_F4"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
+					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 19.05 176.276 0)
 		(unit 1)
@@ -11695,9 +11900,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Barrel_Jack_Switch")
-		(at 85.09 175.006 0)
-		(mirror x)
+		(lib_id "Connector:GroundingSpring")
+		(at 95.25 175.26 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11705,9 +11909,21 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "7a1dc367-a7b2-4a7b-93c2-c244017b6e63")
-		(property "Reference" "J7"
-			(at 85.09 183.642 0)
+		(fields_autoplaced yes)
+		(uuid "7754f292-20f3-4194-ad64-ac7525cd0914")
+		(property "Reference" "J8"
+			(at 100.33 171.4499 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" ""
+			(at 95.25 175.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11716,18 +11932,8 @@
 				)
 			)
 		)
-		(property "Value" "PowerJack"
-			(at 85.09 181.102 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_BarrelJack:BarrelJack_Horizontal"
-			(at 86.36 173.99 0)
+		(property "Footprint" "Connector:BatteryContact_Keystone_243"
+			(at 95.25 175.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11738,7 +11944,84 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 86.36 173.99 0)
+			(at 95.25 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 95.25 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "41227bb1-8bf7-477d-ae7c-c7216982ba9e")
+		)
+		(instances
+			(project "HandymanSchematic_F4"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/887caaef-7a77-44c5-aff2-1e54e61c47e4"
+					(reference "J8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Barrel_Jack_Switch")
+		(at 74.93 173.99 0)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7a1dc367-a7b2-4a7b-93c2-c244017b6e63")
+		(property "Reference" "J7"
+			(at 74.93 182.626 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PowerJack"
+			(at 74.93 180.086 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_BarrelJack:BarrelJack_Horizontal"
+			(at 76.2 172.974 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 172.974 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11749,7 +12032,7 @@
 			)
 		)
 		(property "Description" "DC Barrel Jack with an internal switch"
-			(at 85.09 175.006 0)
+			(at 74.93 173.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11760,7 +12043,7 @@
 			)
 		)
 		(property "MPN" "NEB 21 R-C"
-			(at 85.09 175.006 0)
+			(at 74.93 173.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11771,7 +12054,7 @@
 			)
 		)
 		(property "Purchase Link" "https://www.taydaelectronics.com/hardware-tools/dc-power/neb-21-r-c-lumberg-dc-power-socket.html"
-			(at 85.09 175.006 0)
+			(at 74.93 173.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11782,7 +12065,7 @@
 			)
 		)
 		(property "KLC_S3.3" ""
-			(at 85.09 175.006 0)
+			(at 74.93 173.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11793,7 +12076,7 @@
 			)
 		)
 		(property "KLC_S4.1" ""
-			(at 85.09 175.006 0)
+			(at 74.93 173.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
