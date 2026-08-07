@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """Regenerate Core/Src/DisplayChars.c from the PNGs in this directory.
 
-Expects one PNG per note, named after the C identifier suffix used in
-DisplayChars.h/.c (A.png, ASharp.png, B.png, C.png, CSharp.png, D.png,
-DSharp.png, E.png, F.png, FSharp.png, G.png, GSharp.png). Source PNGs
-are tightly cropped to each glyph's own bounding box (naturals are
-narrow/tall, sharps are wide/short) so each is scaled to fit inside a
-DISPLAY_CHAR_W x DISPLAY_CHAR_H box, preserving aspect ratio, and
-centered on a transparent canvas of that size before packing.
+Expects two PNGs per note, named after the C identifier suffix used in
+DisplayChars.h/.c:
+  - horizontal: A.png, ASharp.png, B.png, ... GSharp.png
+  - vertical:   A_vertical.png, ASharp_vertical.png, ... GSharp_vertical.png
+Source PNGs are tightly cropped to each glyph's own bounding box, so each
+is scaled to fit inside its target canvas (DISPLAY_CHAR_W/H_HORIZONTAL for
+the plain names, DISPLAY_CHAR_W/H_VERTICAL for the "_vertical" ones),
+preserving aspect ratio, and centered on a transparent canvas of that size
+before packing. Vertical PNGs are packed into arrays named with a
+"_Vertical" suffix (DisplayChar_A_Vertical, etc).
 
 Opaque pixels (alpha >= WHITE_THRESHOLD) become set bits; transparent
 pixels become 0, matching the "White pixels in the source PNG are 1;
@@ -15,6 +18,7 @@ transparent pixels are 0" convention documented in DisplayChars.h.
 
 Requires Pillow: pip install pillow
 """
+import math
 import sys
 from pathlib import Path
 
@@ -23,9 +27,13 @@ try:
 except ImportError:
     sys.exit("Pillow is required: pip install pillow")
 
-DISPLAY_CHAR_W = 86
-DISPLAY_CHAR_H = 42
-DISPLAY_CHAR_STRIDE = 11  # bytes per row = ceil(86 / 8)
+DISPLAY_CHAR_W_HORIZONTAL = 86
+DISPLAY_CHAR_H_HORIZONTAL = 42
+DISPLAY_CHAR_STRIDE_HORIZONTAL = 11  # bytes per row = ceil(86 / 8)
+
+DISPLAY_CHAR_W_VERTICAL = 49
+DISPLAY_CHAR_H_VERTICAL = 42
+DISPLAY_CHAR_STRIDE_VERTICAL = math.ceil(DISPLAY_CHAR_W_VERTICAL / 8)  # 7
 
 NOTE_NAMES = [
     "A", "ASharp", "B", "C", "CSharp", "D",
@@ -39,30 +47,30 @@ REPO_ROOT = SCRIPT_DIR.parent  # HandymanFirmware_F4/
 SOURCE_PATH = REPO_ROOT / "Core" / "Src" / "DisplayChars.c"
 
 
-def fit_to_canvas(img: Image.Image) -> Image.Image:
-    """Scale img to fit within DISPLAY_CHAR_W x DISPLAY_CHAR_H (aspect preserved)
-    and center it on a transparent canvas of exactly that size."""
+def fit_to_canvas(img: Image.Image, canvas_w: int, canvas_h: int) -> Image.Image:
+    """Scale img to fit within canvas_w x canvas_h (aspect preserved) and
+    center it on a transparent canvas of exactly that size."""
     img = img.convert("RGBA")
-    scale = min(DISPLAY_CHAR_W / img.width, DISPLAY_CHAR_H / img.height)
+    scale = min(canvas_w / img.width, canvas_h / img.height)
     new_w = max(1, round(img.width * scale))
     new_h = max(1, round(img.height * scale))
     resized = img.resize((new_w, new_h), Image.LANCZOS)
 
-    canvas = Image.new("RGBA", (DISPLAY_CHAR_W, DISPLAY_CHAR_H), (0, 0, 0, 0))
-    offset = ((DISPLAY_CHAR_W - new_w) // 2, (DISPLAY_CHAR_H - new_h) // 2)
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (0, 0, 0, 0))
+    offset = ((canvas_w - new_w) // 2, (canvas_h - new_h) // 2)
     canvas.alpha_composite(resized, offset)
     return canvas
 
 
-def pack_bitmap(img: Image.Image) -> bytes:
-    img = fit_to_canvas(img)
-    out = bytearray(DISPLAY_CHAR_STRIDE * DISPLAY_CHAR_H)
+def pack_bitmap(img: Image.Image, w: int, h: int, stride: int) -> bytes:
+    img = fit_to_canvas(img, w, h)
+    out = bytearray(stride * h)
 
-    for y in range(DISPLAY_CHAR_H):
-        for x in range(DISPLAY_CHAR_W):
+    for y in range(h):
+        for x in range(w):
             _, _, _, a = img.getpixel((x, y))
             if a >= WHITE_THRESHOLD:
-                byte_idx = y * DISPLAY_CHAR_STRIDE + x // 8
+                byte_idx = y * stride + x // 8
                 out[byte_idx] |= 0x80 >> (x % 8)
 
     return bytes(out)
@@ -86,9 +94,25 @@ def main() -> int:
         if not png_path.exists():
             missing.append(png_path.name)
             continue
-        data = pack_bitmap(Image.open(png_path))
+        data = pack_bitmap(
+            Image.open(png_path),
+            DISPLAY_CHAR_W_HORIZONTAL, DISPLAY_CHAR_H_HORIZONTAL, DISPLAY_CHAR_STRIDE_HORIZONTAL,
+        )
         arrays.append(format_c_array(name, data))
         print(f"packed {png_path.name} -> DisplayChar_{name} ({len(data)} bytes)")
+
+    for name in NOTE_NAMES:
+        png_path = SCRIPT_DIR / f"{name}_vertical.png"
+        if not png_path.exists():
+            missing.append(png_path.name)
+            continue
+        data = pack_bitmap(
+            Image.open(png_path),
+            DISPLAY_CHAR_W_VERTICAL, DISPLAY_CHAR_H_VERTICAL, DISPLAY_CHAR_STRIDE_VERTICAL,
+        )
+        vert_name = f"{name}_Vertical"
+        arrays.append(format_c_array(vert_name, data))
+        print(f"packed {png_path.name} -> DisplayChar_{vert_name} ({len(data)} bytes)")
 
     if missing:
         print(

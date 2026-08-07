@@ -46,6 +46,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define IN_TUNE_THRESH 4
+
+#define DISPLAY_VERTICAL
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -140,7 +142,8 @@ void checkModeSettings() {
 char *noteNames[12] = {"C",  "C#", "D",  "D#", "E",  "F",
                              "F#", "G",  "G#", "A",  "A#", "B"};
 
-const uint8_t* noteData[12] = {DisplayChar_C, DisplayChar_CSharp, DisplayChar_D, DisplayChar_DSharp, DisplayChar_E, DisplayChar_F, DisplayChar_FSharp, DisplayChar_G, DisplayChar_GSharp, DisplayChar_A, DisplayChar_ASharp, DisplayChar_B};
+const uint8_t* noteDataHorizontal[12] = {DisplayChar_C, DisplayChar_CSharp, DisplayChar_D, DisplayChar_DSharp, DisplayChar_E, DisplayChar_F, DisplayChar_FSharp, DisplayChar_G, DisplayChar_GSharp, DisplayChar_A, DisplayChar_ASharp, DisplayChar_B};
+const uint8_t* noteDataVertical[12] = {DisplayChar_C_Vertical, DisplayChar_CSharp_Vertical, DisplayChar_D_Vertical, DisplayChar_DSharp_Vertical, DisplayChar_E_Vertical, DisplayChar_F_Vertical, DisplayChar_FSharp_Vertical, DisplayChar_G_Vertical, DisplayChar_GSharp_Vertical, DisplayChar_A_Vertical, DisplayChar_ASharp_Vertical, DisplayChar_B_Vertical};
 float errorSkew = 0.0f;
 #define TUNE_ERROR_MIN 0.0f
 #define TUNE_ERROR_MAX 64.0f
@@ -158,27 +161,29 @@ uint8_t barWidthForError(int16_t sErrorCents){
 
 void displayTuningError(tuning_error_t *err) {
   //char* noteName = noteNames[err->midiNote % 12];
-  const uint8_t* noteBits = noteData[err->midiNote % 12];
-
   SH1106_Fill(SH1106_COLOR_BLACK);
   //check if we're within the tuning threshold
   if(abs(err->errorCents) <= IN_TUNE_THRESH){
 #ifndef DISPLAY_VERTICAL
+    const uint8_t* noteBits = noteDataHorizontal[err->midiNote % 12];
     SH1106_Fill(SH1106_COLOR_WHITE);
     SH1106_DrawBitmap(21, 11, noteBits,
-                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, false);
+                  DISPLAY_CHAR_W_HORIZONTAL, DISPLAY_CHAR_H_HORIZONTAL, DISPLAY_CHAR_STRIDE_HORIZONTAL, false);
 #else
-    //SH1106_Fill(SH1106_COLOR_WHITE);
-    SH1106_DrawRectangle(11, 21, DISPLAY_CHAR_W, DISPLAY_CHAR_STRIDE, SH1106_COLOR_WHITE);
-    SH1106_DrawBitmapRotatedCW90(11, 21, noteBits,
-                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, false);
+
+    const uint8_t* noteBits = noteDataVertical[err->midiNote % 12];
+    SH1106_Fill(SH1106_COLOR_WHITE);
+    //SH1106_DrawRectangle(43, 2, DISPLAY_CHAR_W_VERTICAL, DISPLAY_CHAR_STRIDE_VERTICAL, SH1106_COLOR_WHITE);
+    SH1106_DrawBitmapRotatedCW90(43, 2, noteBits,
+             DISPLAY_CHAR_W_VERTICAL,DISPLAY_CHAR_H_VERTICAL, DISPLAY_CHAR_STRIDE_VERTICAL, false);
 #endif
   } else {
 #ifndef DISPLAY_VERTICAL
+    const uint8_t* noteBits = noteDataHorizontal[err->midiNote % 12];
     SH1106_Fill(SH1106_COLOR_BLACK);
     // draw the note
     SH1106_DrawBitmap(21, 11, noteBits,
-                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, true);
+                  DISPLAY_CHAR_W_HORIZONTAL, DISPLAY_CHAR_H_HORIZONTAL, DISPLAY_CHAR_STRIDE_HORIZONTAL, true);
     // draw the tuning error bar
     const uint8_t xCenter = 64;
     const uint8_t barY = 51;
@@ -195,10 +200,21 @@ void displayTuningError(tuning_error_t *err) {
     }
     SH1106_DrawRectangle(x, barY, barWidth, barHeight, SH1106_COLOR_WHITE);
 #else
-
-    SH1106_DrawRectangle(11, 21, DISPLAY_CHAR_W, DISPLAY_CHAR_STRIDE, SH1106_COLOR_BLACK);
-    SH1106_DrawBitmapRotatedCW90(11, 21, noteBits,
-                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, true);
+    const uint8_t* noteBits = noteDataVertical[err->midiNote % 12];
+    SH1106_Fill(SH1106_COLOR_BLACK);
+    SH1106_DrawBitmapRotatedCW90(43, 2, noteBits,
+                  DISPLAY_CHAR_W_VERTICAL, DISPLAY_CHAR_H_VERTICAL, DISPLAY_CHAR_STRIDE_VERTICAL, true);
+    // draw the center of the error bar
+    SH1106_DrawRectangle(62, 53, 4, 10, SH1106_COLOR_WHITE);
+    uint8_t barWidth = barWidthForError(err->errorCents);
+    uint8_t x;
+    const uint8_t xCenter = 64;
+    if(err->errorCents > 0){
+      x = xCenter - barWidth;
+    } else {
+      x = xCenter;
+    }
+    SH1106_DrawRectangle(x, 54, barWidth, 8, SH1106_COLOR_WHITE);
 
 #endif
   }
