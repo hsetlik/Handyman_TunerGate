@@ -160,12 +160,21 @@ void displayTuningError(tuning_error_t *err) {
   //char* noteName = noteNames[err->midiNote % 12];
   const uint8_t* noteBits = noteData[err->midiNote % 12];
 
+  SH1106_Fill(SH1106_COLOR_BLACK);
   //check if we're within the tuning threshold
   if(abs(err->errorCents) <= IN_TUNE_THRESH){
+#ifndef DISPLAY_VERTICAL
     SH1106_Fill(SH1106_COLOR_WHITE);
     SH1106_DrawBitmap(21, 11, noteBits,
                   DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, false);
+#else
+    //SH1106_Fill(SH1106_COLOR_WHITE);
+    SH1106_DrawRectangle(11, 21, DISPLAY_CHAR_W, DISPLAY_CHAR_STRIDE, SH1106_COLOR_WHITE);
+    SH1106_DrawBitmapRotatedCW90(11, 21, noteBits,
+                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, false);
+#endif
   } else {
+#ifndef DISPLAY_VERTICAL
     SH1106_Fill(SH1106_COLOR_BLACK);
     // draw the note
     SH1106_DrawBitmap(21, 11, noteBits,
@@ -185,6 +194,13 @@ void displayTuningError(tuning_error_t *err) {
       x = xCenter - barWidth;
     }
     SH1106_DrawRectangle(x, barY, barWidth, barHeight, SH1106_COLOR_WHITE);
+#else
+
+    SH1106_DrawRectangle(11, 21, DISPLAY_CHAR_W, DISPLAY_CHAR_STRIDE, SH1106_COLOR_BLACK);
+    SH1106_DrawBitmapRotatedCW90(11, 21, noteBits,
+                  DISPLAY_CHAR_W, DISPLAY_CHAR_H, DISPLAY_CHAR_STRIDE, true);
+
+#endif
   }
   // // 6. send the I2C data to update the screen
   SH1106_UpdateScreen();

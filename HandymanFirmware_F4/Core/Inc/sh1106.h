@@ -39,6 +39,11 @@ bool SH1106_isDisplayOn();
 // w_bytes is the stride (bytes per row). Pixels outside the display are clipped.
 void SH1106_DrawBitmap(uint8_t x, uint8_t y, const uint8_t *bitmap,
                        uint8_t w, uint8_t h, uint8_t w_bytes, bool isWhite);
+// Same as SH1106_DrawBitmap, but draws the source bitmap rotated 90 degrees
+// clockwise. w/h/w_bytes still describe the SOURCE bitmap (unrotated);
+// the drawn footprint on screen is h wide x w tall, anchored at (x, y).
+void SH1106_DrawBitmapRotatedCW90(uint8_t x, uint8_t y, const uint8_t *bitmap,
+                       uint8_t w, uint8_t h, uint8_t w_bytes, bool isWhite);
 // Take a wild guess what this does
 void SH1106_DrawRectangle(uint8_t x, uint8_t y, uint8_t w, uint8_t h, SH1106_Color col);
 #endif

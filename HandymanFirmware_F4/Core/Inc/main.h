@@ -46,7 +46,7 @@ extern I2C_HandleTypeDef hi2c1;
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+#define DISPLAY_VERTICAL
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

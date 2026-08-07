@@ -124,6 +124,24 @@ void SH1106_DrawBitmap(uint8_t x, uint8_t y, const uint8_t *bitmap,
     }
 }
 
+void SH1106_DrawBitmapRotatedCW90(uint8_t x, uint8_t y, const uint8_t *bitmap,
+                       uint8_t w, uint8_t h, uint8_t w_bytes, bool isWhite)
+{
+    SH1106_Color txt = isWhite ? SH1106_COLOR_WHITE : SH1106_COLOR_BLACK;
+    SH1106_Color bkgnd = isWhite ? SH1106_COLOR_BLACK : SH1106_COLOR_WHITE;
+    for (uint8_t dy = 0; dy < w; dy++) {
+        uint8_t srcX = dy;
+        uint8_t bit_mask = 0x80 >> (srcX % 8);
+        uint8_t srcByteCol = srcX / 8;
+        for (uint8_t dx = 0; dx < h; dx++) {
+            uint8_t srcY = h - 1 - dx;
+            SH1106_Color color = (bitmap[srcY * w_bytes + srcByteCol] & bit_mask)
+                                 ? txt : bkgnd;
+            SH1106_DrawPixel(x + dx, y + dy, color);
+        }
+    }
+}
+
 HAL_StatusTypeDef SH1106_SetContrast(uint8_t value)
 {
     HAL_StatusTypeDef status = SH1106_WriteCommand(0x81);
