@@ -134,8 +134,8 @@ void checkModeSettings() {
   } else if (!useNoiseGate && gateDmaRunning){
     stopNoiseGateDMA();
   }
-  if(!useNoiseGate){
-    setNoiseGateClosed(true);
+  if(!useNoiseGate && !inTunerMode){
+    setNoiseGateClosed(false);
   }
 }
 
@@ -210,11 +210,11 @@ void displayTuningError(tuning_error_t *err) {
     uint8_t x;
     const uint8_t xCenter = 64;
     if(err->errorCents > 0){
-      x = xCenter - barWidth;
-    } else {
       x = xCenter;
+    } else {
+      x = xCenter - barWidth;
     }
-    SH1106_DrawRectangle(x, 54, barWidth, 8, SH1106_COLOR_WHITE);
+    SH1106_DrawRectangle(x, 55, barWidth, 6, SH1106_COLOR_WHITE);
 
 #endif
   }
