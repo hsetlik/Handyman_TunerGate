@@ -77,26 +77,26 @@ bool readyToClearScreen();
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define UseGate_OUT_Pin GPIO_PIN_1
-#define UseGate_OUT_GPIO_Port GPIOC
-#define UseGate_IN_Pin GPIO_PIN_3
-#define UseGate_IN_GPIO_Port GPIOC
+#define Release_IN_Pin GPIO_PIN_0
+#define Release_IN_GPIO_Port GPIOC
+#define Audio_IN_Pin GPIO_PIN_1
+#define Audio_IN_GPIO_Port GPIOA
 #define Threshold_IN_Pin GPIO_PIN_3
 #define Threshold_IN_GPIO_Port GPIOA
-#define Audio_IN_Pin GPIO_PIN_6
-#define Audio_IN_GPIO_Port GPIOA
+#define UseGate_IN_Pin GPIO_PIN_6
+#define UseGate_IN_GPIO_Port GPIOA
 #define GateClosed_OUT_Pin GPIO_PIN_4
 #define GateClosed_OUT_GPIO_Port GPIOC
-#define Release_IN_Pin GPIO_PIN_1
-#define Release_IN_GPIO_Port GPIOB
+#define UseGate_OUT_Pin GPIO_PIN_1
+#define UseGate_OUT_GPIO_Port GPIOB
 #define TunerMode_IN_Pin GPIO_PIN_13
 #define TunerMode_IN_GPIO_Port GPIOB
-#define Clock_Calib_Pin GPIO_PIN_9
+#define DISP_SDA_Pin GPIO_PIN_9
+#define DISP_SDA_GPIO_Port GPIOC
+#define DISP_SCL_Pin GPIO_PIN_8
+#define DISP_SCL_GPIO_Port GPIOA
+#define Clock_Calib_Pin GPIO_PIN_11
 #define Clock_Calib_GPIO_Port GPIOA
-#define DISP_SCL_Pin GPIO_PIN_6
-#define DISP_SCL_GPIO_Port GPIOB
-#define DISP_SDA_Pin GPIO_PIN_7
-#define DISP_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
