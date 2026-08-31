@@ -47,7 +47,7 @@
 /* USER CODE BEGIN PD */
 #define IN_TUNE_THRESH 4
 
-#define DISPLAY_VERTICAL
+//#define DISPLAY_VERTICAL
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/

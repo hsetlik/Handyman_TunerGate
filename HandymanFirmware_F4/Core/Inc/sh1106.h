@@ -7,12 +7,12 @@
 #define SH1106_Addr 0x3C
 #define SH1106_Width 128
 #define SH1106_Height 64
-#define SH1106_I2C hi2c1
+#define SH1106_I2C hi2c3
 
 // SH1106 has 132x64 SRAM but only 128 columns are wired to the panel,
 // centered with a 2px offset on most 1.3" boards
 // Uncomment if you need the display flipped 180 degrees
-#define SH1106_ROTATION_180
+//#define SH1106_ROTATION_180
 
 #define SH1106_COL_OFFSET 2
 
