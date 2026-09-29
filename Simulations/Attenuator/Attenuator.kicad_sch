@@ -2189,6 +2189,16 @@
 	)
 	(wire
 		(pts
+			(xy 144.78 76.2) (xy 144.78 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ac30792-22b5-4bad-8267-89d1e6c95f01")
+	)
+	(wire
+		(pts
 			(xy 113.03 63.5) (xy 113.03 66.04)
 		)
 		(stroke
@@ -2299,7 +2309,7 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 116.84) (xy 144.78 116.84)
+			(xy 214.63 137.16) (xy 144.78 137.16)
 		)
 		(stroke
 			(width 0)
@@ -2409,7 +2419,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 66.04) (xy 144.78 77.47)
+			(xy 144.78 66.04) (xy 144.78 68.58)
 		)
 		(stroke
 			(width 0)
@@ -2449,6 +2459,16 @@
 	)
 	(wire
 		(pts
+			(xy 144.78 121.92) (xy 144.78 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9e56c99-b798-481e-82de-71bfa1c27e42")
+	)
+	(wire
+		(pts
 			(xy 134.62 87.63) (xy 134.62 97.79)
 		)
 		(stroke
@@ -2469,7 +2489,7 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 68.58) (xy 214.63 116.84)
+			(xy 214.63 68.58) (xy 214.63 137.16)
 		)
 		(stroke
 			(width 0)
@@ -2516,6 +2536,16 @@
 			(type default)
 		)
 		(uuid "d170b69b-26ba-43c1-bceb-5df041bc8322")
+	)
+	(wire
+		(pts
+			(xy 144.78 137.16) (xy 144.78 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d94ee878-0630-4a33-9f12-e448f9a015fa")
 	)
 	(wire
 		(pts
@@ -2648,7 +2678,7 @@
 		(uuid "2df85b9c-250d-4c8c-a8c2-4e4342b833b3")
 	)
 	(label "AmpAnode"
-		(at 157.48 116.84 180)
+		(at 157.48 137.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2718,6 +2748,16 @@
 			(justify left bottom)
 		)
 		(uuid "a343f212-224a-427a-a430-7a1ac6cf9c38")
+	)
+	(label "Vgate"
+		(at 52.07 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3b036fa-77c6-4717-9bca-d21425efda4d")
 	)
 	(label "Vbase"
 		(at 69.85 68.58 0)
@@ -3746,46 +3786,46 @@
 			)
 		)
 		(pin "7"
-			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678b9")
+			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678ba")
 		)
 		(pin "8"
-			(uuid "4527e401-7983-4502-8609-f92a2987896c")
+			(uuid "4527e401-7983-4502-8609-f92a2987896d")
 		)
 		(pin "6"
-			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ea")
+			(uuid "df6e5bad-538f-4459-8d09-e3b143a567eb")
 		)
 		(pin "5"
-			(uuid "6602a475-068c-445c-b9c1-2cea3bcb645d")
+			(uuid "6602a475-068c-445c-b9c1-2cea3bcb645e")
 		)
 		(pin "2"
-			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa09")
+			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa0a")
 		)
 		(pin "3"
-			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337bf")
+			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337c0")
 		)
 		(pin "11"
-			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a4")
+			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a5")
 		)
 		(pin "4"
-			(uuid "7ba722aa-a6f2-4939-a5d5-9169002547fd")
+			(uuid "7ba722aa-a6f2-4939-a5d5-9169002547fe")
 		)
 		(pin "1"
-			(uuid "659d2a1f-e698-4673-975f-4deb2b206f68")
+			(uuid "659d2a1f-e698-4673-975f-4deb2b206f69")
 		)
 		(pin "14"
-			(uuid "e998de39-a6ae-427c-b000-455ee14f1b6f")
+			(uuid "e998de39-a6ae-427c-b000-455ee14f1b70")
 		)
 		(pin "13"
-			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5c")
+			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5d")
 		)
 		(pin "12"
-			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9e7")
+			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9e8")
 		)
 		(pin "10"
-			(uuid "eff7f16a-633d-496c-9241-621a7079bb4b")
+			(uuid "eff7f16a-633d-496c-9241-621a7079bb4c")
 		)
 		(pin "9"
-			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b16e")
+			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b16f")
 		)
 		(instances
 			(project "Attenuator"
@@ -4172,7 +4212,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47n"
+		(property "Value" "10n"
 			(at 104.775 73.6599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4369,6 +4409,88 @@
 			(project "Attenuator"
 				(path "/896e8929-6be2-4dd7-af77-210e443a477f"
 					(reference "Q1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 144.78 72.39 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "51548da0-c8fe-4454-88fd-485fa6ff60d8")
+		(property "Reference" "R15"
+			(at 147.32 71.1199 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "220"
+			(at 147.32 73.6599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 145.796 72.644 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.78 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 144.78 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "2c5b449b-525b-4b4b-bd2f-4fce85b950d8")
+		)
+		(pin "1"
+			(uuid "14c13edd-4957-41b5-a2e4-d9f6c211cfb2")
+		)
+		(instances
+			(project "Attenuator"
+				(path "/896e8929-6be2-4dd7-af77-210e443a477f"
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -5034,46 +5156,46 @@
 			)
 		)
 		(pin "7"
-			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678b9")
+			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678bb")
 		)
 		(pin "8"
-			(uuid "4527e401-7983-4502-8609-f92a2987896c")
+			(uuid "4527e401-7983-4502-8609-f92a2987896e")
 		)
 		(pin "6"
-			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ea")
+			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ec")
 		)
 		(pin "5"
-			(uuid "6602a475-068c-445c-b9c1-2cea3bcb645d")
+			(uuid "6602a475-068c-445c-b9c1-2cea3bcb645f")
 		)
 		(pin "2"
-			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa09")
+			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa0b")
 		)
 		(pin "3"
-			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337bf")
+			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337c1")
 		)
 		(pin "11"
-			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a4")
+			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a6")
 		)
 		(pin "4"
-			(uuid "7ba722aa-a6f2-4939-a5d5-9169002547fd")
+			(uuid "7ba722aa-a6f2-4939-a5d5-9169002547ff")
 		)
 		(pin "1"
-			(uuid "659d2a1f-e698-4673-975f-4deb2b206f68")
+			(uuid "659d2a1f-e698-4673-975f-4deb2b206f6a")
 		)
 		(pin "14"
-			(uuid "e998de39-a6ae-427c-b000-455ee14f1b6f")
+			(uuid "e998de39-a6ae-427c-b000-455ee14f1b71")
 		)
 		(pin "13"
-			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5c")
+			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5e")
 		)
 		(pin "12"
-			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9e7")
+			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9e9")
 		)
 		(pin "10"
-			(uuid "eff7f16a-633d-496c-9241-621a7079bb4b")
+			(uuid "eff7f16a-633d-496c-9241-621a7079bb4d")
 		)
 		(pin "9"
-			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b16e")
+			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b170")
 		)
 		(instances
 			(project "Attenuator"
@@ -5700,46 +5822,46 @@
 			)
 		)
 		(pin "7"
-			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678b9")
+			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678bc")
 		)
 		(pin "8"
-			(uuid "4527e401-7983-4502-8609-f92a2987896c")
+			(uuid "4527e401-7983-4502-8609-f92a2987896f")
 		)
 		(pin "6"
-			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ea")
+			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ed")
 		)
 		(pin "5"
-			(uuid "6602a475-068c-445c-b9c1-2cea3bcb645d")
+			(uuid "6602a475-068c-445c-b9c1-2cea3bcb6460")
 		)
 		(pin "2"
-			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa09")
+			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa0c")
 		)
 		(pin "3"
-			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337bf")
+			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337c2")
 		)
 		(pin "11"
-			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a4")
+			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a7")
 		)
 		(pin "4"
-			(uuid "7ba722aa-a6f2-4939-a5d5-9169002547fd")
+			(uuid "7ba722aa-a6f2-4939-a5d5-916900254800")
 		)
 		(pin "1"
-			(uuid "659d2a1f-e698-4673-975f-4deb2b206f68")
+			(uuid "659d2a1f-e698-4673-975f-4deb2b206f6b")
 		)
 		(pin "14"
-			(uuid "e998de39-a6ae-427c-b000-455ee14f1b6f")
+			(uuid "e998de39-a6ae-427c-b000-455ee14f1b72")
 		)
 		(pin "13"
-			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5c")
+			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5f")
 		)
 		(pin "12"
-			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9e7")
+			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9ea")
 		)
 		(pin "10"
-			(uuid "eff7f16a-633d-496c-9241-621a7079bb4b")
+			(uuid "eff7f16a-633d-496c-9241-621a7079bb4e")
 		)
 		(pin "9"
-			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b16e")
+			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b171")
 		)
 		(instances
 			(project "Attenuator"
@@ -5931,8 +6053,9 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0"
+		(property "Value" "${SIM.PARAMS}"
 			(at 55.88 77.3401 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5986,7 +6109,7 @@
 				)
 			)
 		)
-		(property "Sim.Type" "DC"
+		(property "Sim.Type" "PULSE"
 			(at 52.07 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -6007,6 +6130,17 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+		(property "Sim.Params" "y1=0 y2=3.3 td=85m tr=0 tf=0 tw=50m per=70m np=1"
+			(at 52.07 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -6233,6 +6367,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_US")
+		(at 144.78 125.73 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dda2f4e0-b0f8-4f71-b243-74de7f3be274")
+		(property "Reference" "R16"
+			(at 147.32 124.4599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "220"
+			(at 147.32 126.9999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 145.796 125.984 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.78 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 144.78 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "21bd7869-3d37-4329-a71c-868a486c7ed3")
+		)
+		(pin "1"
+			(uuid "db13a590-9575-4be3-accc-e6f2e446e112")
+		)
+		(instances
+			(project "Attenuator"
+				(path "/896e8929-6be2-4dd7-af77-210e443a477f"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Amplifier_Operational:TL074")
 		(at 177.8 68.58 0)
 		(mirror x)
@@ -6343,46 +6559,46 @@
 			)
 		)
 		(pin "7"
-			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678b9")
+			(uuid "0b2201da-7b4c-4ebc-ba75-363bd20678bd")
 		)
 		(pin "8"
-			(uuid "4527e401-7983-4502-8609-f92a2987896c")
+			(uuid "4527e401-7983-4502-8609-f92a29878970")
 		)
 		(pin "6"
-			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ea")
+			(uuid "df6e5bad-538f-4459-8d09-e3b143a567ee")
 		)
 		(pin "5"
-			(uuid "6602a475-068c-445c-b9c1-2cea3bcb645d")
+			(uuid "6602a475-068c-445c-b9c1-2cea3bcb6461")
 		)
 		(pin "2"
-			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa09")
+			(uuid "6f2e46f4-c596-4b4b-b368-789d4953fa0d")
 		)
 		(pin "3"
-			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337bf")
+			(uuid "bc83141d-8721-4965-a9c3-63c9f6f337c3")
 		)
 		(pin "11"
-			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a4")
+			(uuid "a7d00e91-21c0-452f-bf49-15d8166e60a8")
 		)
 		(pin "4"
-			(uuid "7ba722aa-a6f2-4939-a5d5-9169002547fd")
+			(uuid "7ba722aa-a6f2-4939-a5d5-916900254801")
 		)
 		(pin "1"
-			(uuid "659d2a1f-e698-4673-975f-4deb2b206f68")
+			(uuid "659d2a1f-e698-4673-975f-4deb2b206f6c")
 		)
 		(pin "14"
-			(uuid "e998de39-a6ae-427c-b000-455ee14f1b6f")
+			(uuid "e998de39-a6ae-427c-b000-455ee14f1b73")
 		)
 		(pin "13"
-			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c5c")
+			(uuid "97d0ad03-cec5-4d2b-95bb-116517729c60")
 		)
 		(pin "12"
-			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9e7")
+			(uuid "5c9cc54a-c8e0-4ef9-90cc-908481aeb9eb")
 		)
 		(pin "10"
-			(uuid "eff7f16a-633d-496c-9241-621a7079bb4b")
+			(uuid "eff7f16a-633d-496c-9241-621a7079bb4f")
 		)
 		(pin "9"
-			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b16e")
+			(uuid "4ac70159-8f88-4726-9eb4-03b4ce34b172")
 		)
 		(instances
 			(project "Attenuator"

@@ -48,18 +48,8 @@
       "showGrid": true,
       "traces": [
         {
-          "color": "rgb(255, 127, 0)",
-          "signal": "V(/Amp1)",
-          "trace_type": 257
-        },
-        {
-          "color": "rgb(77, 175, 74)",
-          "signal": "V(/AmpAnode)",
-          "trace_type": 257
-        },
-        {
-          "color": "rgb(55, 126, 184)",
-          "signal": "V(/AmpCathode)",
+          "color": "rgb(247, 129, 191)",
+          "signal": "V(/Vgate)",
           "trace_type": 257
         },
         {
