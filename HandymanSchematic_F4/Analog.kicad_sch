@@ -1783,7 +1783,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Transistor_BJT:BC847"
+		(symbol "Transistor_FET:2N7002"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -1804,7 +1804,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "BC847"
+			(property "Value" "2N7002"
 				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1828,8 +1828,8 @@
 					(justify left)
 				)
 			)
-			(property "Datasheet" "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657"
-				(at 0 0 0)
+			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
+				(at 5.08 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -1840,7 +1840,7 @@
 					(justify left)
 				)
 			)
-			(property "Description" "0.1A Ic, 45V Vce, NPN Transistor, SOT-23"
+			(property "Description" "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1851,7 +1851,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "NPN Small Signal Transistor"
+			(property "ki_keywords" "N-Channel Switching MOSFET"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1873,46 +1873,11 @@
 					)
 				)
 			)
-			(symbol "BC847_0_1"
+			(symbol "2N7002_0_1"
 				(polyline
 					(pts
-						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
+						(xy 0.254 1.905) (xy 0.254 -1.905)
 					)
-					(stroke
-						(width 0.508)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 0.635) (xy 2.54 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 -0.635) (xy 2.54 -2.54) (xy 2.54 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 1.27 0)
-					(radius 2.8194)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -1923,7 +1888,67 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -1.778) (xy 1.778 -1.27) (xy 2.286 -2.286) (xy 1.27 -1.778) (xy 1.27 -1.778)
+						(xy 0.254 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508) (xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27) (xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
 					)
 					(stroke
 						(width 0)
@@ -1933,12 +1958,93 @@
 						(type outline)
 					)
 				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.921 0.381) (xy 3.683 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 			)
-			(symbol "BC847_1_1"
+			(symbol "2N7002_1_1"
 				(pin input line
 					(at -5.08 0 0)
-					(length 5.715)
-					(name "B"
+					(length 2.54)
+					(name "G"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1956,7 +2062,7 @@
 				(pin passive line
 					(at 2.54 -5.08 90)
 					(length 2.54)
-					(name "E"
+					(name "S"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1974,7 +2080,7 @@
 				(pin passive line
 					(at 2.54 5.08 270)
 					(length 2.54)
-					(name "C"
+					(name "D"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2602,12 +2708,6 @@
 		(uuid "772ce675-0f6d-4659-b713-671496c5456e")
 	)
 	(junction
-		(at 49.53 105.41)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0b9a5746-0ae6-4b8e-9e7d-cdd68a32d329")
-	)
-	(junction
 		(at 121.92 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2636,12 +2736,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "23a802dd-1143-4b62-a603-ee9296ee7648")
-	)
-	(junction
-		(at 62.23 100.33)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "540bfcd1-2789-46a1-b359-06f7b44ddb44")
 	)
 	(junction
 		(at 219.71 54.61)
@@ -2716,6 +2810,12 @@
 		(uuid "c6d3ee08-de0e-4867-bdd6-b3fd71da0ca1")
 	)
 	(junction
+		(at 62.23 100.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cd3420fa-3ded-48bb-92b5-2661b39aecac")
+	)
+	(junction
 		(at 102.87 100.33)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2738,6 +2838,16 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fea9a56b-3c76-4950-9400-09e7e18a3a68")
+	)
+	(wire
+		(pts
+			(xy 44.45 105.41) (xy 54.61 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00ceab4f-1911-48eb-a4f7-5bec32ab1297")
 	)
 	(wire
 		(pts
@@ -2778,16 +2888,6 @@
 			(type default)
 		)
 		(uuid "0a162a92-5702-46dd-93b1-9b5a0c450c6a")
-	)
-	(wire
-		(pts
-			(xy 49.53 105.41) (xy 49.53 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0becb951-aa52-4df5-802f-017c0f639c45")
 	)
 	(wire
 		(pts
@@ -2978,16 +3078,6 @@
 			(type default)
 		)
 		(uuid "2ad57a5f-fd3b-453b-88a8-ef0942729994")
-	)
-	(wire
-		(pts
-			(xy 49.53 105.41) (xy 54.61 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2e22a4f0-5e2d-48e1-bec9-0a2ec998648a")
 	)
 	(wire
 		(pts
@@ -3331,16 +3421,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 105.41) (xy 49.53 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74e9d821-a96b-421f-9af4-9cd7a9316094")
-	)
-	(wire
-		(pts
 			(xy 111.76 134.62) (xy 113.03 134.62)
 		)
 		(stroke
@@ -3628,16 +3708,6 @@
 			(type default)
 		)
 		(uuid "b309164b-ac78-48dc-afef-b88aaaff7b22")
-	)
-	(wire
-		(pts
-			(xy 49.53 114.3) (xy 49.53 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b450654e-84e4-4836-b7b4-f963a4706d89")
 	)
 	(wire
 		(pts
@@ -3951,16 +4021,6 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 105.41) (xy 36.83 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f5d71b08-e9de-40ee-82d6-108b3a05943a")
-	)
-	(wire
-		(pts
 			(xy 92.71 124.46) (xy 92.71 132.08)
 		)
 		(stroke
@@ -4165,7 +4225,7 @@
 	)
 	(global_label "CLOSED_OUT"
 		(shape input)
-		(at 35.56 105.41 180)
+		(at 44.45 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4175,7 +4235,7 @@
 		)
 		(uuid "8a2ed758-7410-47d8-9c3c-cd60fbecb837")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 22.8986 105.41 0)
+			(at 31.7886 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5327,138 +5387,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 49.53 110.49 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "17c42cc2-b2ab-44a7-8e3e-122fd217c4fd")
-		(property "Reference" "C4"
-			(at 53.34 109.2199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100n"
-			(at 53.34 111.7599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 50.4952 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 49.53 110.49 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 49.53 110.49 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN" "KGF21BR71H104KT"
-			(at 49.53 110.49 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Purchase Link" "https://www.mouser.com/en/ProductDetail/KYOCERA-AVX/KGF21BR71H104KT?qs=sGAEpiMZZMsh%252B1woXyUXj17cMikWvs6%2FSTHcdbJmX4U%3D"
-			(at 49.53 110.49 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S3.3" ""
-			(at 49.53 110.49 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S4.1" ""
-			(at 49.53 110.49 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "901716ab-37fe-44d2-9152-6157de62b85e")
-		)
-		(pin "2"
-			(uuid "59e8b78f-59bc-4921-815b-8812ecf0af2e")
-		)
-		(instances
-			(project "HandymanSchematic_F4"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "C4")
-					(unit 1)
-				)
-			)
-			(project "Analog"
-				(path "/d1e2a625-8f99-459b-9c6d-b6439a985a59"
-					(reference "C?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 86.36 46.99 0)
 		(unit 1)
@@ -6124,136 +6052,6 @@
 			(project "HandymanSchematic_F4"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
 					(reference "R8")
-					(unit 1)
-				)
-			)
-			(project "Analog"
-				(path "/d1e2a625-8f99-459b-9c6d-b6439a985a59"
-					(reference "R?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 40.64 105.41 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2497de2c-07d4-4be1-816a-00505acf9759")
-		(property "Reference" "R3"
-			(at 40.64 99.06 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 40.64 101.6 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 40.894 104.394 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 40.64 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 40.64 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN" "AC0805JR-0710KL"
-			(at 40.64 105.41 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Purchase Link" "https://www.mouser.com/en/ProductDetail/YAGEO/AC0805JR-0710KL?qs=sGAEpiMZZMtlubZbdhIBIG07xJe44c5An%2FO6AHeCdSo%3D"
-			(at 40.64 105.41 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S3.3" ""
-			(at 40.64 105.41 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S4.1" ""
-			(at 40.64 105.41 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3031f7c0-0c34-42c3-8ca0-8162e0e50efc")
-		)
-		(pin "2"
-			(uuid "6a39aae5-7b46-4be5-90e9-be4380727ac0")
-		)
-		(instances
-			(project "HandymanSchematic_F4"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -12203,144 +12001,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:BC847")
-		(at 59.69 105.41 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ed5d1ce4-4086-49ec-8545-5c9a7df0e677")
-		(property "Reference" "Q1"
-			(at 64.77 104.1399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "BC847"
-			(at 64.77 106.6799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 64.77 107.315 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-			)
-		)
-		(property "Datasheet" "http://www.infineon.com/dgdl/Infineon-BC847SERIES_BC848SERIES_BC849SERIES_BC850SERIES-DS-v01_01-en.pdf?fileId=db3a304314dca389011541d4630a1657"
-			(at 59.69 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Description" "0.1A Ic, 45V Vce, NPN Transistor, SOT-23"
-			(at 59.69 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN" "BC847C-C"
-			(at 59.69 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Purchase Link" "https://www.mouser.com/en/ProductDetail/Diotec-Semiconductor/BC847C-C?qs=Znm5pLBrcAKceAHBwYIJdg%3D%3D"
-			(at 59.69 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S3.3" ""
-			(at 59.69 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S4.1" ""
-			(at 59.69 105.41 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "272358ea-d47c-400d-87af-4ccdc22cb105")
-		)
-		(pin "2"
-			(uuid "f5ca7ccf-7a75-4a36-aefd-df1931ebddb3")
-		)
-		(pin "3"
-			(uuid "3593738b-5f5d-4261-af66-d935215ab50a")
-		)
-		(instances
-			(project "HandymanSchematic_F4"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "Q1")
-					(unit 1)
-				)
-			)
-			(project "Analog"
-				(path "/d1e2a625-8f99-459b-9c6d-b6439a985a59"
-					(reference "Q?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 165.1 68.58 0)
 		(unit 1)
@@ -12414,6 +12074,94 @@
 			(project "HandymanSchematic_F4"
 				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
 					(reference "#PWR017")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:2N7002")
+		(at 59.69 105.41 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "efb35814-3eec-46db-9776-3b34892aeeb7")
+		(property "Reference" "Q1"
+			(at 66.04 104.1399 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "2N7002"
+			(at 66.04 106.6799 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 64.77 107.315 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
+			(at 64.77 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"
+			(at 59.69 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ccae73fb-ea58-4c93-925c-687b0b66959e")
+		)
+		(pin "3"
+			(uuid "4a2d1221-a3f0-4b06-8425-2651545b7962")
+		)
+		(pin "2"
+			(uuid "7f3e8c9e-58c2-4013-8856-40a763f44479")
+		)
+		(instances
+			(project "HandymanSchematic_F4"
+				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -12544,91 +12292,6 @@
 			(project "Analog"
 				(path "/d1e2a625-8f99-459b-9c6d-b6439a985a59"
 					(reference "R?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 49.53 118.11 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f74d5ac4-ece2-4a20-a6cf-0959cac73385")
-		(property "Reference" "#PWR07"
-			(at 49.53 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 49.53 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 49.53 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 49.53 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 49.53 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e214b381-258d-46ed-b217-d0585ea66f7b")
-		)
-		(instances
-			(project "HandymanSchematic_F4"
-				(path "/bc3da82e-d0a7-49a6-b9ec-ecd2040670ff/3aa5a90d-1712-4ed6-8a31-c8d55dd0f37d"
-					(reference "#PWR07")
-					(unit 1)
-				)
-			)
-			(project "Analog"
-				(path "/d1e2a625-8f99-459b-9c6d-b6439a985a59"
-					(reference "#PWR?")
 					(unit 1)
 				)
 			)
