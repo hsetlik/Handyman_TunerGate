@@ -145,11 +145,11 @@ bool BAC_isWorking(){
     return bacRunning;
 }
 
-static void BAC_clearCorBuf(){
-    for(uint32_t i = 0; i < (TUNING_WINDOW_SIZE / 2); ++i){
-        corBuffer[i] = 0;
-    }
-}
+// static void BAC_clearCorBuf(){
+//     for(uint32_t i = 0; i < (TUNING_WINDOW_SIZE / 2); ++i){
+//         corBuffer[i] = 0;
+//     }
+// }
 
 void BAC_autoCorrelate(uint32_t startPos){
     bacRunning = true;
