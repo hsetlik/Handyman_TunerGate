@@ -381,7 +381,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
-    if (inTunerMode && BAC_isBitstreamLoaded()) {
+    if (inTunerMode && BAC_isBitstreamReady()) {
+      BAC_run();
       if(BAC_hasTuningSignal()){
         // 1. run the BAC algorithm
         const float currentHz = BAC_getCurrentHz();
@@ -783,7 +784,10 @@ static void MX_GPIO_Init(void)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the second half of the buffer
   if (inTunerMode) {
-  uint16_t* startPtr = &tuningBuffer[TUNING_WINDOW_SIZE];
+    // if(BAC_isWorking()){
+    //   Error_Handler();
+    // }
+    uint16_t* startPtr = &tuningBuffer[TUNING_WINDOW_SIZE];
     BAC_loadBitstream(startPtr);
     HAL_StatusTypeDef dmaStatus = HAL_ADC_Start_DMA(&hadc1, (uint32_t *)tuningBuffer, TUNING_WINDOW_SIZE * 2);
     if(dmaStatus != HAL_OK){
@@ -806,6 +810,9 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
   // compute the first half of the buffer
   if(inTunerMode){
+    // if(BAC_isWorking()){
+    //   Error_Handler();
+    // }
     BAC_loadBitstream(tuningBuffer);
   } else if (useNoiseGate) {
     Gate_processWindow(noiseGateBuffer, GATE_WINDOW_SIZE);

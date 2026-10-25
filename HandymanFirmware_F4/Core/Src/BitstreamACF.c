@@ -8,6 +8,7 @@ static const float BAC_sampleRate = 48000.0f;
 static const float BAC_maxFreq = 1460.0f;
 //static const float BAC_minFreq = 32.7f;
 static const uint32_t minPeriod = (uint32_t)(BAC_sampleRate/ BAC_maxFreq);
+static const uint32_t endBin = (TUNING_WINDOW_SIZE / 2) - 1;
 #define BAC_numBits 32
 static const bitval_t BAC_arraySize = TUNING_WINDOW_SIZE / BAC_numBits;
 volatile bool bacRunning = false;
@@ -23,11 +24,12 @@ bitval_t corBuffer[TUNING_WINDOW_SIZE / 2];
 float signalBuf[TUNING_WINDOW_SIZE];
 // input filter
 static iir_t filter;
-
+float currentAvgMag = 0.0f;
+float currentZeroFloor = 0.0f;
 // hold the min/max values and min index
-uint32_t minDifference = 0xFFFF;
-uint32_t maxDifference = 0;
-uint32_t minIdx = 0;
+static uint32_t minDifference = 0xFFFF;
+static uint32_t maxDifference = 0;
+static uint32_t minIdx = 0;
 
 
 void BAC_initBitArray(){
@@ -67,7 +69,7 @@ void BAC_set(uint32_t i, bool val){
 }
 
 bool BAC_isZeroCross(bool* prevState, float value){
-    if(value < -0.1f){
+    if(value <= currentZeroFloor){
         *prevState = false;
     } else if (value > 0.0f){
         *prevState = true;
@@ -91,12 +93,15 @@ static void BAC_findMinMaxCorrelations(uint32_t startBin, uint32_t endBin){
     }
 }
 
-static inline float getSampleMagnitude(float sample){
-    return fabsf(sample);
+static inline float getSampleMagnitude(uint16_t sample){
+    const uint16_t absVal = sample < 2048 ? 2048 - sample : sample - 2048;
+    return (float)absVal;
 }
 
 static inline void BAC_fillSignalBuf(uint16_t* adcBuf){
+    float sum = 0.0f;
     for(uint16_t i = 0; i < TUNING_WINDOW_SIZE; ++i){
+        sum += getSampleMagnitude(adcBuf[i]);
         float fVal = (float)(adcBuf[i] - 2048) / 2048.0f;
         #ifdef BAC_PREFILTER
         signalBuf[i] = iir_process(&filter, fVal);
@@ -104,6 +109,8 @@ static inline void BAC_fillSignalBuf(uint16_t* adcBuf){
         signalBuf[i] = fVal;
         #endif
     }
+    currentAvgMag = sum / (float)TUNING_WINDOW_SIZE;
+    currentZeroFloor = -0.03f * (currentAvgMag / 2048.0f);
 }
 
 void BAC_loadBitstream(uint16_t* adcBuf){
@@ -112,32 +119,22 @@ void BAC_loadBitstream(uint16_t* adcBuf){
     }
     hasValidSignal = false;
     BAC_fillSignalBuf(adcBuf);
-    bool prev = BAC_isZeroCross(&zeroCrossState, signalBuf[0]);
-    float sum = getSampleMagnitude(adcBuf[0]);
-    BAC_set(0, prev);
-    for(uint32_t i = 1; i < TUNING_WINDOW_SIZE; ++i){
+    for(uint32_t i = 0; i < TUNING_WINDOW_SIZE; ++i){
         bool current =  BAC_isZeroCross(&zeroCrossState, signalBuf[i]);
-        sum += getSampleMagnitude(adcBuf[i]);
         BAC_set(i, current);
     }
-    const float avgMag = (sum * 2048.0f) / (float)TUNING_WINDOW_SIZE;
-    static const uint32_t endBin = (TUNING_WINDOW_SIZE / 2) - 1;
-    // 1. run the main autocorrelation function
-    BAC_autoCorrelate(minPeriod);
-    // 2. calculate the min & max correlations
-    BAC_findMinMaxCorrelations(minPeriod, endBin);
 
     /* only update the tuning display if we have at least one zero crossing
      AND the magnitude of this chunk is above some threshold (60 seems about right for the 
      pickups/guitars I've tested this with)
     */ 
-    hasValidSignal = (avgMag >= 60.0f) && (maxDifference - minDifference > 10);
+    hasValidSignal = currentAvgMag >= 60.0f;
     bitstreamLoaded = true;
 }
 
 
 
-bool BAC_isBitstreamLoaded(){
+bool BAC_isBitstreamReady(){
     return bitstreamLoaded;
 }
 
@@ -151,8 +148,8 @@ bool BAC_isWorking(){
 //     }
 // }
 
-void BAC_autoCorrelate(uint32_t startPos){
-    bacRunning = true;
+
+static void BAC_runAutoCorrelation(uint32_t startPos){
     //BAC_clearCorBuf();
     const uint32_t midArray = (BAC_arraySize / 2) - 1;
     const uint32_t midPoint = TUNING_WINDOW_SIZE / 2;
@@ -186,13 +183,25 @@ void BAC_autoCorrelate(uint32_t startPos){
 
 }
 
+void BAC_run(){
+    // 1. run the main autocorrelation function
+    bacRunning = true;
+    BAC_runAutoCorrelation(minPeriod);
+    // 2. calculate the min & max correlations
+    BAC_findMinMaxCorrelations(minPeriod, endBin);
+    bacRunning = false;
+}
+
+
+
 // convert the correlation bin index to a frequency in hertz
 static float BAC_hzForIndex(uint32_t index){
     return BAC_sampleRate / (float)index;
 }
 
 float BAC_getCurrentHz(){
-    // 1. adjust the minimum index to account for any harmonics
+
+    // 3. adjust the minimum index to account for any harmonics
     const uint32_t subThresh = (uint32_t)((float)maxDifference * 0.15f);
     const uint32_t maxDiv = minIdx / minPeriod;
     for(uint32_t div = maxDiv; div > 0; --div){
@@ -210,7 +219,7 @@ float BAC_getCurrentHz(){
             break;
         }
     }
-    // 2. Optionally, do some more refinement to find rising edges
+    // 4. Optionally, do some more refinement to find rising edges
     #ifdef BAC_FIND_EDGES
     const uint32_t firstIdxGuess = minIdx;
     float prevValue = 0.0f;
@@ -235,7 +244,6 @@ float BAC_getCurrentHz(){
         minIdx = newMinIdx;
     }
     #endif
-    bacRunning = false;
     bitstreamLoaded = false;
     return BAC_hzForIndex(minIdx);
 }

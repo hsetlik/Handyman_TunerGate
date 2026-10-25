@@ -7,7 +7,7 @@
 #define TUNING_WINDOW_SIZE 2048
 #define INPUT_CUTOFF_FREQ 4000.0f
 
-#define BAC_PREFILTER
+//#define BAC_PREFILTER
 
 /* This is based on Joel de Guzman's Bitstream Autocorrelation concept, explained
 in his 2018 blog post here:
@@ -34,10 +34,10 @@ void BAC_loadBitstream(uint16_t* adcBuf);
 bool BAC_hasTuningSignal();
 
 // the actual autocorellation happens here. the input is a buffer of half the window size
-void BAC_autoCorrelate(uint32_t startPos);
+void BAC_run();
 
 // check if we're ready to run the algorithm
-bool BAC_isBitstreamLoaded();
+bool BAC_isBitstreamReady();
 
 // state-based checking for zero crossings
 bool BAC_isZeroCross(bool* prevState, float value);
