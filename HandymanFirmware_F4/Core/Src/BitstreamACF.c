@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 static const float BAC_sampleRate = 48000.0f;
-static const float BAC_maxFreq = 1460.0f;
+static const float BAC_maxFreq = 900.0f;
 //static const float BAC_minFreq = 32.7f;
 static const uint32_t minPeriod = (uint32_t)(BAC_sampleRate/ BAC_maxFreq);
 static const uint32_t endBin = (TUNING_WINDOW_SIZE / 2) - 1;
@@ -110,7 +110,7 @@ static inline void BAC_fillSignalBuf(uint16_t* adcBuf){
         #endif
     }
     currentAvgMag = sum / (float)TUNING_WINDOW_SIZE;
-    currentZeroFloor = -0.03f * (currentAvgMag / 2048.0f);
+    currentZeroFloor = -0.06f * (currentAvgMag / 2048.0f);
 }
 
 void BAC_loadBitstream(uint16_t* adcBuf){

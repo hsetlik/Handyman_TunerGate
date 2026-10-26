@@ -5,9 +5,9 @@
 // the type we'll use to store the bitstreams
 #define bitval_t uint32_t
 #define TUNING_WINDOW_SIZE 2048
-#define INPUT_CUTOFF_FREQ 4000.0f
+#define INPUT_CUTOFF_FREQ 2500.0f
 
-//#define BAC_PREFILTER
+#define BAC_PREFILTER
 
 /* This is based on Joel de Guzman's Bitstream Autocorrelation concept, explained
 in his 2018 blog post here:
