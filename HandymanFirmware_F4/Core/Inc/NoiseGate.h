@@ -6,6 +6,9 @@
 #define THRESH_MIN 35.0f
 #define THRESH_CENTER 140.0f
 #define THRESH_MAX 285.0f
+// 285 = ~0.086Vpp -> 0.3018 mv/count
+// 35 = ~0.012Vpp -> 0.343 mv/count
+// let's call it 0.3224 mv/count
 #define INPUT_CUTOFF 12000.0f
 
 //#define NOISE_DEBUG

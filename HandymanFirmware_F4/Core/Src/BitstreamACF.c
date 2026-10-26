@@ -114,7 +114,7 @@ static inline void BAC_fillSignalBuf(uint16_t* adcBuf){
 }
 
 void BAC_loadBitstream(uint16_t* adcBuf){
-    if(bitstreamLoaded && hasValidSignal){
+    if(bitstreamLoaded){
         return;
     }
     hasValidSignal = false;
